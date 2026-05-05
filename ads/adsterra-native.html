@@ -22,5 +22,27 @@ body > div, body > iframe{position:relative;z-index:2;}
 </a>
 <script async="async" data-cfasync="false" src="//pl29343175.profitablecpmratenetwork.com/47a7896b87c371c4d9256b8f7e4d522a/invoke.js"></script>
 <div id="container-47a7896b87c371c4d9256b8f7e4d522a"></div>
+
+<script>
+(function(){
+  function check() {
+    var els = document.body.querySelectorAll('iframe, ins, img, embed');
+    var hasReal = false;
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      if (el.classList && el.classList.contains('fallback-cta')) continue;
+      var rect = el.getBoundingClientRect();
+      if (rect.width > 50 && rect.height > 25) { hasReal = true; break; }
+    }
+    if (hasReal) {
+      var fb = document.querySelector('.fallback-cta');
+      if (fb) fb.style.display = 'none';
+    }
+  }
+  setTimeout(check, 1500);
+  setTimeout(check, 3500);
+  setTimeout(check, 6000);
+})();
+</script>
 </body>
 </html>

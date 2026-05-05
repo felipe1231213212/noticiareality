@@ -22,5 +22,27 @@ body > iframe{position:relative;z-index:2;}
   atOptions = { 'key' : 'bd23c288939a20b3f55a022887a6c1d6', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
 </script>
 <script type="text/javascript" src="//www.highperformanceformat.com/bd23c288939a20b3f55a022887a6c1d6/invoke.js"></script>
+
+<script>
+(function(){
+  function check() {
+    var els = document.body.querySelectorAll('iframe, ins, img, embed');
+    var hasReal = false;
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      if (el.classList && el.classList.contains('fallback-cta')) continue;
+      var rect = el.getBoundingClientRect();
+      if (rect.width > 50 && rect.height > 25) { hasReal = true; break; }
+    }
+    if (hasReal) {
+      var fb = document.querySelector('.fallback-cta');
+      if (fb) fb.style.display = 'none';
+    }
+  }
+  setTimeout(check, 1500);
+  setTimeout(check, 3500);
+  setTimeout(check, 6000);
+})();
+</script>
 </body>
 </html>
