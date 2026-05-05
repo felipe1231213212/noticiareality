@@ -580,8 +580,11 @@ POST_TEMPLATE = '''<!DOCTYPE html>
 '''
 
 
+MAX_LATEST = 5
+
+
 def update_homepage(slug, title, tag, color_card, date_short):
-    """Insere o post no topo da secao 'Ultima hora' do index.html (novo formato G1)."""
+    """Insere post no topo da Ultima hora + remove os excedentes (mantem 5 max)."""
     if not INDEX_FILE.exists():
         return False
     with open(INDEX_FILE, 'r', encoding='utf-8') as f:
@@ -589,33 +592,51 @@ def update_homepage(slug, title, tag, color_card, date_short):
 
     short_title = title[:90] + ('...' if len(title) > 90 else '')
     img_text = title.split()[0][:10].upper() if title else 'NEW'
+    img_text = img_text.replace('!', '').replace('?', '').replace('¡', '').replace('¿', '')
 
     color_map = {'red': 'img-red', 'blue': 'img-blue', 'purple': 'img-purple',
                  'orange': 'img-orange', 'gold': 'img-gold', 'green': 'img-green'}
     img_cls = color_map.get(color_card, 'img-red')
 
-    # Novo formato G1: <a class="feed-card"> com fc-thumb + fc-body
     new_card = '''<a href="posts/{slug}.html" class="feed-card">
           <div class="fc-thumb"><div class="post-card-img {img_cls}"><span class="img-headline" style="font-size:1.1rem;">{img_text}</span></div></div>
           <div class="fc-body">
             <span class="fc-editoria">{tag}</span>
             <h4>{short_title}</h4>
             <p>Lee la nota completa con todos los detalles del momento que sacudio al reality.</p>
-            <span class="meta" style="font-size:0.78rem;color:var(--gray-500);margin-top:6px;display:block;">{date_short} &bull; 4 min de lectura</span>
+            <span class="meta" style="font-size:0.78rem;color:var(--gray-500);margin-top:6px;display:block;">{date_short} &bull; URGENTE</span>
           </div>
         </a>'''.format(
         slug=slug, img_cls=img_cls, img_text=html.escape(img_text), tag=html.escape(tag),
         short_title=html.escape(short_title), date_short=date_short
     )
 
-    # Insere logo apos a div section-title id="latest" (e seu fechamento)
-    pattern = r'(<div class="section-title" id="latest">.*?</div>\s*\n\s*)'
-    new_idx, n = re.subn(pattern, r'\1' + new_card + '\n\n        ', idx, count=1, flags=re.DOTALL)
-    if n > 0:
-        with open(INDEX_FILE, 'w', encoding='utf-8', newline='') as f:
-            f.write(new_idx)
-        return True
-    return False
+    # Procura o bloco entre LATEST_START e LATEST_END
+    block_pattern = r'(<!-- LATEST_START -->\s*)(.*?)(\s*<!-- LATEST_END -->)'
+    m = re.search(block_pattern, idx, re.DOTALL)
+    if not m:
+        # Fallback: insere logo apos section-title id=latest
+        pattern = r'(<div class="section-title" id="latest">.*?</div>\s*\n\s*)'
+        new_idx, n = re.subn(pattern, r'\1' + new_card + '\n\n        ', idx, count=1, flags=re.DOTALL)
+        if n > 0:
+            with open(INDEX_FILE, 'w', encoding='utf-8', newline='') as f:
+                f.write(new_idx)
+            return True
+        return False
+
+    # Adiciona o novo card no topo do bloco
+    inner = m.group(2)
+    # Conta cards existentes (separados por linha em branco)
+    existing_cards = re.findall(r'<a href="[^"]*"\s+class="feed-card">.*?</a>', inner, re.DOTALL)
+    # Mantem MAX_LATEST - 1 dos antigos (descartando o mais antigo)
+    kept = existing_cards[:MAX_LATEST - 1]
+    new_inner = '\n        ' + new_card + '\n\n        ' + '\n\n        '.join(kept) + '\n        '
+    new_block = m.group(1) + new_inner.strip('\n') + '\n        ' + m.group(3)
+    new_idx = idx[:m.start()] + new_block + idx[m.end():]
+
+    with open(INDEX_FILE, 'w', encoding='utf-8', newline='') as f:
+        f.write(new_idx)
+    return True
 
 
 def main():
