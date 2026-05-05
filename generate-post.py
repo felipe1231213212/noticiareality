@@ -581,35 +581,36 @@ POST_TEMPLATE = '''<!DOCTYPE html>
 
 
 def update_homepage(slug, title, tag, color_card, date_short):
-    """Insere o post no topo da secao 'Ultima hora' do index.html."""
+    """Insere o post no topo da secao 'Ultima hora' do index.html (novo formato G1)."""
     if not INDEX_FILE.exists():
         return False
     with open(INDEX_FILE, 'r', encoding='utf-8') as f:
         idx = f.read()
 
-    short_title = title[:80] + ('...' if len(title) > 80 else '')
-    img_text = title.split()[0][:8].upper() if title else 'NEW'
+    short_title = title[:90] + ('...' if len(title) > 90 else '')
+    img_text = title.split()[0][:10].upper() if title else 'NEW'
 
     color_map = {'red': 'img-red', 'blue': 'img-blue', 'purple': 'img-purple',
                  'orange': 'img-orange', 'gold': 'img-gold', 'green': 'img-green'}
     img_cls = color_map.get(color_card, 'img-red')
 
-    new_card = '''<a href="posts/{slug}.html" class="latest-item">
-            <div class="latest-item-img post-card-img {img_cls}">
-              <span class="img-headline" style="font-size:0.9rem;">{img_text}</span>
-            </div>
-            <div class="latest-item-body">
-              <span class="category">{tag}</span>
-              <h4>{short_title}</h4>
-              <span class="meta">{date_short} &bull; 4 min</span>
-            </div>
-          </a>'''.format(
+    # Novo formato G1: <a class="feed-card"> com fc-thumb + fc-body
+    new_card = '''<a href="posts/{slug}.html" class="feed-card">
+          <div class="fc-thumb"><div class="post-card-img {img_cls}"><span class="img-headline" style="font-size:1.1rem;">{img_text}</span></div></div>
+          <div class="fc-body">
+            <span class="fc-editoria">{tag}</span>
+            <h4>{short_title}</h4>
+            <p>Lee la nota completa con todos los detalles del momento que sacudio al reality.</p>
+            <span class="meta" style="font-size:0.78rem;color:var(--gray-500);margin-top:6px;display:block;">{date_short} &bull; 4 min de lectura</span>
+          </div>
+        </a>'''.format(
         slug=slug, img_cls=img_cls, img_text=html.escape(img_text), tag=html.escape(tag),
         short_title=html.escape(short_title), date_short=date_short
     )
 
-    # Insere logo apos <div class="latest-list">
-    new_idx, n = re.subn(r'(<div class="latest-list">\s*\n\s*)', r'\1          ' + new_card + '\n          ', idx, count=1)
+    # Insere logo apos a div section-title id="latest" (e seu fechamento)
+    pattern = r'(<div class="section-title" id="latest">.*?</div>\s*\n\s*)'
+    new_idx, n = re.subn(pattern, r'\1' + new_card + '\n\n        ', idx, count=1, flags=re.DOTALL)
     if n > 0:
         with open(INDEX_FILE, 'w', encoding='utf-8', newline='') as f:
             f.write(new_idx)
