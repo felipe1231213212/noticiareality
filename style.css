@@ -1415,6 +1415,74 @@ footer {
   #sticky-ad-mobile { display: none; }
 }
 
+/* In-content ad (between H2 sections in post) */
+.ad-inline {
+  margin: 36px auto;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.ad-inline::before {
+  content: 'PUBLICIDAD';
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--gray-500);
+  background: var(--bg);
+  padding: 0 8px;
+}
+
+/* Floating side banners (only on wide screens) */
+#side-ad-left,
+#side-ad-right {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 90;
+  animation: slideInSide 0.5s ease;
+}
+
+#side-ad-left { left: 14px; }
+#side-ad-right { right: 14px; }
+
+@keyframes slideInSide {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.side-ad-close {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--black);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: transform 0.15s;
+}
+
+.side-ad-close:hover { transform: scale(1.1) rotate(90deg); }
+
+@media (max-width: 1499px) {
+  #side-ad-left,
+  #side-ad-right { display: none; }
+}
+
 /* CTA buttons for direct links (smartlink / direct link) */
 .cta-link {
   display: block;

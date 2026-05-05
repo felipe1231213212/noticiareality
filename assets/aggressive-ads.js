@@ -174,6 +174,49 @@
     // social.appendChild(makeIframe('/ads/adsterra-social.html', '100%', 80, SANDBOX));
     // document.body.appendChild(social);
 
+    // ============== IN-CONTENT ADS (300x250 entre topicos do post) ==============
+    var article = document.querySelector('article.post-content');
+    if (article) {
+      var headings = article.querySelectorAll('h2');
+      headings.forEach(function (h, i) {
+        // Insere banner antes do 2º, 4º, 6º <h2> (a cada 2 topicos)
+        if (i >= 1 && i % 2 === 1) {
+          var slot = document.createElement('div');
+          slot.className = 'ad-banner ad-inline';
+          slot.appendChild(makeIframe('/ads/300x250.html', 300, 250, SANDBOX));
+          h.parentNode.insertBefore(slot, h);
+        }
+      });
+    }
+
+    // ============== FLOATING SIDE BANNERS (160x600 em telas largas) ==============
+    if (window.innerWidth >= 1500) {
+      // Lateral DIREITA
+      if (!sessionStorage.getItem('nr_side_r_closed')) {
+        var sr = document.createElement('div');
+        sr.id = 'side-ad-right';
+        sr.innerHTML = '<button class="side-ad-close" aria-label="Cerrar">&times;</button>';
+        sr.appendChild(makeIframe('/ads/160x600.html', 160, 600, SANDBOX));
+        document.body.appendChild(sr);
+        sr.querySelector('.side-ad-close').addEventListener('click', function () {
+          sr.remove();
+          sessionStorage.setItem('nr_side_r_closed', '1');
+        });
+      }
+      // Lateral ESQUERDA (160x300 - mais discreto)
+      if (!sessionStorage.getItem('nr_side_l_closed')) {
+        var sl = document.createElement('div');
+        sl.id = 'side-ad-left';
+        sl.innerHTML = '<button class="side-ad-close" aria-label="Cerrar">&times;</button>';
+        sl.appendChild(makeIframe('/ads/160x300.html', 160, 300, SANDBOX));
+        document.body.appendChild(sl);
+        sl.querySelector('.side-ad-close').addEventListener('click', function () {
+          sl.remove();
+          sessionStorage.setItem('nr_side_l_closed', '1');
+        });
+      }
+    }
+
     // Roda auto-hide depois pra esconder slots vazios
     setTimeout(hideEmptyAdSlots, 4000);
     setTimeout(hideEmptyAdSlots, 10000);
