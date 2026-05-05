@@ -5,23 +5,20 @@
 <style>
 html,body{margin:0;padding:0;background:transparent;overflow:hidden;}
 body{display:flex;align-items:center;justify-content:center;width:160;height:300;position:relative;font-family:-apple-system,Arial,sans-serif;}
-.fallback-cta{display:none;position:absolute;inset:0;z-index:1;color:white;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;font-weight:900;text-align:center;padding:8px;line-height:1.2;cursor:pointer;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);}
-.fallback-cta::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20800%20400%22%3E%3Cg%20fill%3D%22%23fff%22%20opacity%3D%22.4%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%226%22/%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22120%22%20r%3D%224%22/%3E%3Ccircle%20cx%3D%22280%22%20cy%3D%2260%22%20r%3D%228%22/%3E%3Ccircle%20cx%3D%22400%22%20cy%3D%22180%22%20r%3D%225%22/%3E%3Ccircle%20cx%3D%22550%22%20cy%3D%2280%22%20r%3D%227%22/%3E%3Ccircle%20cx%3D%22700%22%20cy%3D%22180%22%20r%3D%224%22/%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%22280%22%20r%3D%226%22/%3E%3Ccircle%20cx%3D%22250%22%20cy%3D%22340%22%20r%3D%224%22/%3E%3Ccircle%20cx%3D%22450%22%20cy%3D%22320%22%20r%3D%228%22/%3E%3Ccircle%20cx%3D%22620%22%20cy%3D%22280%22%20r%3D%225%22/%3E%3Ccircle%20cx%3D%22350%22%20cy%3D%22240%22%20r%3D%227%22/%3E%3Ccircle%20cx%3D%22750%22%20cy%3D%22320%22%20r%3D%226%22/%3E%3C/g%3E%3C/svg%3E");background-size:cover;background-position:center;opacity:.85;mix-blend-mode:screen;pointer-events:none;}
-.fallback-cta.show{display:flex;animation:fade .3s;}
-@keyframes fade{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
-.fallback-cta:hover{filter:brightness(1.18);transform:scale(1.01);transition:.15s;}
-.fallback-cta .h{font-size:20px;letter-spacing:0.8px;text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,.55);position:relative;z-index:2;}
-.fallback-cta .s{font-size:13px;font-weight:600;margin-top:5px;opacity:0.95;text-shadow:0 1px 4px rgba(0,0,0,.5);position:relative;z-index:2;max-width:90%;}
-.fallback-cta .badge{position:absolute;top:6px;left:6px;background:rgba(255,255,255,.25);padding:2px 7px;border-radius:3px;font-size:8px;font-weight:700;letter-spacing:1.2px;backdrop-filter:blur(4px);z-index:2;}
-.fallback-cta::after{content:'PUBLICIDAD';position:absolute;top:6px;right:6px;font-size:8px;opacity:.6;letter-spacing:1.2px;font-weight:700;z-index:2;}
+.fb{display:none;position:absolute;inset:0;z-index:1;color:white;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;font-weight:900;text-align:center;padding:8px;line-height:1.2;cursor:pointer;background:linear-gradient(180deg,#0f172a,#1e293b);}
+.fb.show{display:flex;animation:fade .3s;}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.fb:hover{filter:brightness(1.15);}
+.fb .h{font-size:19px;letter-spacing:0.5px;text-transform:uppercase;text-shadow:0 2px 4px rgba(0,0,0,.4);}
+.fb .s{font-size:12px;font-weight:600;margin-top:4px;opacity:0.95;}
+.fb::after{content:'PUBLICIDAD';position:absolute;top:3px;right:5px;font-size:8px;opacity:.65;letter-spacing:1px;font-weight:700;}
 body > iframe,body > ins,body > img:not([class]){position:relative;z-index:2;}
 </style>
 </head>
 <body>
-<a href="https://omg10.com/4/10967488" target="_blank" rel="noopener nofollow sponsored" class="fallback-cta" id="fb">
-  <span class="badge">EXCLUSIVO</span>
+<a href="https://omg10.com/4/10967488" target="_blank" rel="noopener nofollow sponsored" class="fb" id="fb">
   <span class="h">PREMIUM</span>
-  <span class="s">Acceso VIP - Ver mas</span>
+  <span class="s">Acceso VIP</span>
 </a>
 <script type="text/javascript">
   atOptions = { 'key' : 'd40ca2f6d1cca6650834f941cf6865b9', 'format' : 'iframe', 'height' : 300, 'width' : 160, 'params' : {} };
