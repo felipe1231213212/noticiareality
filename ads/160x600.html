@@ -4,21 +4,24 @@
 <meta charset="UTF-8">
 <style>
 html,body{margin:0;padding:0;background:transparent;overflow:hidden;}
-body{display:flex;align-items:center;justify-content:center;width:160;height:600;position:relative;font-family:Arial,sans-serif;}
-.fallback-cta{display:none;position:absolute;inset:0;z-index:1;color:white;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;font-weight:800;text-align:center;padding:6px;line-height:1.2;cursor:pointer;background-image:linear-gradient(135deg,rgba(0,0,0,0.45),rgba(0,0,0,0.7)),linear-gradient(135deg,#7c3aed,#4c1d95),url("https://image.pollinations.ai/prompt/reality%20show%20house%20living%20room%20contestants%20dramatic%20lighting?width=160&height=600&seed=7936&nologo=true"),url("https://picsum.photos/seed/oferta3/160/600");background-size:cover;background-blend-mode:overlay,multiply,normal,normal;background-position:center;}
+body{display:flex;align-items:center;justify-content:center;width:160;height:600;position:relative;font-family:-apple-system,Arial,sans-serif;}
+.fallback-cta{display:none;position:absolute;inset:0;z-index:1;color:white;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;font-weight:900;text-align:center;padding:8px;line-height:1.2;cursor:pointer;background:linear-gradient(135deg,#7c3aed 0%,#3b0764 100%);}
+.fallback-cta::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20800%20400%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22s%22%20cx%3D%2250%25%22%20cy%3D%220%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%22.7%22/%3E%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%23fff%22%20stop-opacity%3D%220%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Cellipse%20cx%3D%22400%22%20cy%3D%22-50%22%20rx%3D%22500%22%20ry%3D%22300%22%20fill%3D%22url%28%23s%29%22/%3E%3Cellipse%20cx%3D%22200%22%20cy%3D%22350%22%20rx%3D%22200%22%20ry%3D%22100%22%20fill%3D%22url%28%23s%29%22%20opacity%3D%22.5%22/%3E%3Cellipse%20cx%3D%22650%22%20cy%3D%22380%22%20rx%3D%22200%22%20ry%3D%2280%22%20fill%3D%22url%28%23s%29%22%20opacity%3D%22.4%22/%3E%3C/svg%3E");background-size:cover;background-position:center;opacity:.85;mix-blend-mode:screen;pointer-events:none;}
 .fallback-cta.show{display:flex;animation:fade .3s;}
-@keyframes fade{from{opacity:0}to{opacity:1}}
-.fallback-cta:hover{filter:brightness(1.15);}
-.fallback-cta .h{font-size:18px;letter-spacing:0.5px;text-transform:uppercase;text-shadow:0 2px 6px rgba(0,0,0,0.7);}
-.fallback-cta .s{font-size:13px;font-weight:600;margin-top:4px;opacity:0.95;text-shadow:0 1px 3px rgba(0,0,0,0.6);}
-.fallback-cta::after{content:'PUBLICIDAD';position:absolute;top:2px;right:4px;font-size:8px;opacity:0.7;letter-spacing:1px;}
+@keyframes fade{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+.fallback-cta:hover{filter:brightness(1.18);transform:scale(1.01);transition:.15s;}
+.fallback-cta .h{font-size:20px;letter-spacing:0.8px;text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,.55);position:relative;z-index:2;}
+.fallback-cta .s{font-size:13px;font-weight:600;margin-top:5px;opacity:0.95;text-shadow:0 1px 4px rgba(0,0,0,.5);position:relative;z-index:2;max-width:90%;}
+.fallback-cta .badge{position:absolute;top:6px;left:6px;background:rgba(255,255,255,.25);padding:2px 7px;border-radius:3px;font-size:8px;font-weight:700;letter-spacing:1.2px;backdrop-filter:blur(4px);z-index:2;}
+.fallback-cta::after{content:'PUBLICIDAD';position:absolute;top:6px;right:6px;font-size:8px;opacity:.6;letter-spacing:1.2px;font-weight:700;z-index:2;}
 body > iframe,body > ins,body > img:not([class]){position:relative;z-index:2;}
 </style>
 </head>
 <body>
 <a href="https://motionless-bus.com/bF3/Vy0.PQ3tp-v/b/m/VsJpZPDf0/3CMLDBEp5TN/jzMm3mL/T/cawkM/TjkL2aNKDgET" target="_blank" rel="noopener nofollow sponsored" class="fallback-cta" id="fb">
-  <span class="h">PROMO HOY</span>
-  <span class="s">Solo por hoy</span>
+  <span class="badge">EXCLUSIVO</span>
+  <span class="h">MEGA DESCUENTO</span>
+  <span class="s">Ofertas que no veras de nuevo</span>
 </a>
 <script type="text/javascript">
   atOptions = { 'key' : 'eeacb475fd03764d05ec25946d8a60f7', 'format' : 'iframe', 'height' : 600, 'width' : 160, 'params' : {} };

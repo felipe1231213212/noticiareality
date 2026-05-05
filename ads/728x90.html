@@ -4,21 +4,23 @@
 <meta charset="UTF-8">
 <style>
 html,body{margin:0;padding:0;background:transparent;overflow:hidden;}
-body{display:flex;align-items:center;justify-content:center;width:728;height:90;position:relative;font-family:Arial,sans-serif;}
-.fallback-cta{display:none;position:absolute;inset:0;z-index:1;color:white;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;font-weight:800;text-align:center;padding:6px;line-height:1.2;cursor:pointer;background-image:linear-gradient(135deg,rgba(0,0,0,0.45),rgba(0,0,0,0.7)),linear-gradient(135deg,#d97706,#92400e),url("https://image.pollinations.ai/prompt/celebrity%20entertainment%20news%20magazine%20bright%20lights%20tv%20studio?width=728&height=90&seed=5436&nologo=true"),url("https://picsum.photos/seed/oferta2/728/90");background-size:cover;background-blend-mode:overlay,multiply,normal,normal;background-position:center;}
+body{display:flex;align-items:center;justify-content:center;width:728;height:90;position:relative;font-family:-apple-system,Arial,sans-serif;}
+.fallback-cta{display:none;position:absolute;inset:0;z-index:1;color:white;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;font-weight:900;text-align:center;padding:8px;line-height:1.2;cursor:pointer;background:linear-gradient(135deg,#d97706 0%,#78350f 100%);}
+.fallback-cta::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20800%20400%22%3E%3Cg%20fill%3D%22%23fff%22%20opacity%3D%22.55%22%3E%3Cpolygon%20points%3D%22100%2C30%20110%2C60%20140%2C60%20115%2C80%20125%2C110%20100%2C90%2075%2C110%2085%2C80%2060%2C60%2090%2C60%22/%3E%3Cpolygon%20points%3D%22700%2C80%20707%2C100%20728%2C100%20711%2C113%20718%2C133%20700%2C121%20682%2C133%20689%2C113%20672%2C100%20693%2C100%22/%3E%3Cpolygon%20points%3D%22200%2C300%20207%2C320%20228%2C320%20211%2C333%20218%2C353%20200%2C341%20182%2C353%20189%2C333%20172%2C320%20193%2C320%22/%3E%3Cpolygon%20points%3D%22600%2C250%20612%2C285%20648%2C285%20619%2C307%20631%2C343%20600%2C321%20569%2C343%20581%2C307%20552%2C285%20588%2C285%22%20opacity%3D%22.4%22/%3E%3Cpolygon%20points%3D%22450%2C150%20457%2C170%20478%2C170%20461%2C183%20468%2C203%20450%2C191%20432%2C203%20439%2C183%20422%2C170%20443%2C170%22/%3E%3C/g%3E%3C/svg%3E");background-size:cover;background-position:center;opacity:.85;mix-blend-mode:screen;pointer-events:none;}
 .fallback-cta.show{display:flex;animation:fade .3s;}
-@keyframes fade{from{opacity:0}to{opacity:1}}
-.fallback-cta:hover{filter:brightness(1.15);}
-.fallback-cta .h{font-size:14px;letter-spacing:0.5px;text-transform:uppercase;text-shadow:0 2px 6px rgba(0,0,0,0.7);}
-.fallback-cta .s{font-size:11px;font-weight:600;margin-top:4px;opacity:0.95;text-shadow:0 1px 3px rgba(0,0,0,0.6);}
-.fallback-cta::after{content:'PUBLICIDAD';position:absolute;top:2px;right:4px;font-size:8px;opacity:0.7;letter-spacing:1px;}
+@keyframes fade{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+.fallback-cta:hover{filter:brightness(1.18);transform:scale(1.01);transition:.15s;}
+.fallback-cta .h{font-size:15px;letter-spacing:0.8px;text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,.55);position:relative;z-index:2;}
+.fallback-cta .s{font-size:11px;font-weight:600;margin-top:5px;opacity:0.95;text-shadow:0 1px 4px rgba(0,0,0,.5);position:relative;z-index:2;max-width:90%;}
+.fallback-cta .badge{position:absolute;top:6px;left:6px;background:rgba(255,255,255,.25);padding:2px 7px;border-radius:3px;font-size:8px;font-weight:700;letter-spacing:1.2px;backdrop-filter:blur(4px);z-index:2;}
+.fallback-cta::after{content:'PUBLICIDAD';position:absolute;top:6px;right:6px;font-size:8px;opacity:.6;letter-spacing:1.2px;font-weight:700;z-index:2;}
 body > iframe,body > ins,body > img:not([class]){position:relative;z-index:2;}
 </style>
 </head>
 <body>
 <a href="https://www.profitablecpmratenetwork.com/dd06dn3nu?key=bb878784d262344eb40ff3dd6b2981b3" target="_blank" rel="noopener nofollow sponsored" class="fallback-cta" id="fb">
-  <span class="h">OFERTA EXCLUSIVA</span>
-  <span class="s">Click aqui . Ver ahora</span>
+  <span class="h">PROMO EXCLUSIVA - SOLO HOY</span>
+  <span class="s">Descuentos brutales por tiempo limitado</span>
 </a>
 <script type="text/javascript">
   atOptions = { 'key' : '174ed04218520564d5cabc34f9089b01', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };

@@ -4,21 +4,23 @@
 <meta charset="UTF-8">
 <style>
 html,body{margin:0;padding:0;background:transparent;overflow:hidden;}
-body{display:flex;align-items:center;justify-content:center;width:468;height:60;position:relative;font-family:Arial,sans-serif;}
-.fallback-cta{display:none;position:absolute;inset:0;z-index:1;color:white;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;font-weight:800;text-align:center;padding:6px;line-height:1.2;cursor:pointer;background-image:linear-gradient(135deg,rgba(0,0,0,0.45),rgba(0,0,0,0.7)),linear-gradient(135deg,#d97706,#92400e),url("https://image.pollinations.ai/prompt/tv%20studio%20audience%20reality%20show%20lights%20cinematic%20stage?width=468&height=60&seed=7157&nologo=true"),url("https://picsum.photos/seed/oferta6/468/60");background-size:cover;background-blend-mode:overlay,multiply,normal,normal;background-position:center;}
+body{display:flex;align-items:center;justify-content:center;width:468;height:60;position:relative;font-family:-apple-system,Arial,sans-serif;}
+.fallback-cta{display:none;position:absolute;inset:0;z-index:1;color:white;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;font-weight:900;text-align:center;padding:8px;line-height:1.2;cursor:pointer;background:linear-gradient(135deg,#059669 0%,#064e3b 100%);}
+.fallback-cta::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20800%20400%22%3E%3Cg%20opacity%3D%22.55%22%3E%3Crect%20x%3D%2280%22%20y%3D%2280%22%20width%3D%2214%22%20height%3D%226%22%20fill%3D%22%23fff%22%20transform%3D%22rotate%2835%2087%2083%29%22/%3E%3Crect%20x%3D%22200%22%20y%3D%22180%22%20width%3D%2210%22%20height%3D%2210%22%20fill%3D%22%23fff%22%20transform%3D%22rotate%2845%20205%20185%29%22/%3E%3Crect%20x%3D%22350%22%20y%3D%2260%22%20width%3D%2216%22%20height%3D%226%22%20fill%3D%22%23fff%22%20transform%3D%22rotate%28-20%20358%2063%29%22/%3E%3Crect%20x%3D%22500%22%20y%3D%22220%22%20width%3D%2212%22%20height%3D%2212%22%20fill%3D%22%23fff%22%20transform%3D%22rotate%2860%20506%20226%29%22/%3E%3Crect%20x%3D%22650%22%20y%3D%22100%22%20width%3D%2214%22%20height%3D%228%22%20fill%3D%22%23fff%22%20transform%3D%22rotate%2815%20657%20104%29%22/%3E%3Crect%20x%3D%22120%22%20y%3D%22320%22%20width%3D%2212%22%20height%3D%226%22%20fill%3D%22%23fff%22%20transform%3D%22rotate%2850%20126%20323%29%22/%3E%3Crect%20x%3D%22450%22%20y%3D%22350%22%20width%3D%2210%22%20height%3D%2210%22%20fill%3D%22%23fff%22%20transform%3D%22rotate%28-10%20455%20355%29%22/%3E%3Crect%20x%3D%22700%22%20y%3D%22320%22%20width%3D%2214%22%20height%3D%226%22%20fill%3D%22%23fff%22%20transform%3D%22rotate%2840%20707%20323%29%22/%3E%3C/g%3E%3C/svg%3E");background-size:cover;background-position:center;opacity:.85;mix-blend-mode:screen;pointer-events:none;}
 .fallback-cta.show{display:flex;animation:fade .3s;}
-@keyframes fade{from{opacity:0}to{opacity:1}}
-.fallback-cta:hover{filter:brightness(1.15);}
-.fallback-cta .h{font-size:11px;letter-spacing:0.5px;text-transform:uppercase;text-shadow:0 2px 6px rgba(0,0,0,0.7);}
-.fallback-cta .s{font-size:9px;font-weight:600;margin-top:4px;opacity:0.95;text-shadow:0 1px 3px rgba(0,0,0,0.6);}
-.fallback-cta::after{content:'PUBLICIDAD';position:absolute;top:2px;right:4px;font-size:8px;opacity:0.7;letter-spacing:1px;}
+@keyframes fade{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+.fallback-cta:hover{filter:brightness(1.18);transform:scale(1.01);transition:.15s;}
+.fallback-cta .h{font-size:12px;letter-spacing:0.8px;text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,.55);position:relative;z-index:2;}
+.fallback-cta .s{font-size:9px;font-weight:600;margin-top:5px;opacity:0.95;text-shadow:0 1px 4px rgba(0,0,0,.5);position:relative;z-index:2;max-width:90%;}
+.fallback-cta .badge{position:absolute;top:6px;left:6px;background:rgba(255,255,255,.25);padding:2px 7px;border-radius:3px;font-size:8px;font-weight:700;letter-spacing:1.2px;backdrop-filter:blur(4px);z-index:2;}
+.fallback-cta::after{content:'PUBLICIDAD';position:absolute;top:6px;right:6px;font-size:8px;opacity:.6;letter-spacing:1.2px;font-weight:700;z-index:2;}
 body > iframe,body > ins,body > img:not([class]){position:relative;z-index:2;}
 </style>
 </head>
 <body>
 <a href="https://motionless-bus.com/bF3/Vy0.PQ3tp-v/b/m/VsJpZPDf0/3CMLDBEp5TN/jzMm3mL/T/cawkM/TjkL2aNKDgET" target="_blank" rel="noopener nofollow sponsored" class="fallback-cta" id="fb">
-  <span class="h">OFERTA EXCLUSIVA</span>
-  <span class="s">Click . Ver ofertas</span>
+  <span class="h">ULTIMAS UNIDADES - APROVECHA</span>
+  <span class="s">Liquidacion total esta semana</span>
 </a>
 <script type="text/javascript">
   atOptions = { 'key' : 'fcc585bf82af574239d36b6be624487b', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
