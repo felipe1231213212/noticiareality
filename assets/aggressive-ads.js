@@ -58,25 +58,10 @@
     }
   });
 
-  // ============== AUTO-HIDE de slots vazios ==============
-  function hideEmptyAdSlots() {
-    var iframes = document.querySelectorAll('iframe.ad-iframe');
-    iframes.forEach(function (iframe) {
-      try {
-        var doc = iframe.contentDocument;
-        if (doc && doc.body && doc.body.children.length <= 1) {
-          var hasVisible = false;
-          doc.body.querySelectorAll('iframe, img, ins, div').forEach(function (el) {
-            var r = el.getBoundingClientRect();
-            if (r.width > 10 && r.height > 10) hasVisible = true;
-          });
-          if (!hasVisible && iframe.parentElement) {
-            iframe.parentElement.style.display = 'none';
-          }
-        }
-      } catch (err) { /* cross-origin: deixa visivel */ }
-    });
-  }
+  // ============== AUTO-HIDE DESABILITADO ==============
+  // Cada /ads/XYZ.html ja tem seu proprio CTA fallback que aparece apos 4s
+  // se ad real nao carregar. Nao precisa esconder slots aqui.
+  function hideEmptyAdSlots() { /* no-op */ }
 
   function ready(fn) {
     if (document.readyState !== 'loading') fn();
@@ -218,10 +203,6 @@
         });
       }
     }
-
-    // Roda auto-hide depois pra esconder slots vazios
-    setTimeout(hideEmptyAdSlots, 4000);
-    setTimeout(hideEmptyAdSlots, 10000);
 
   });
 })();
