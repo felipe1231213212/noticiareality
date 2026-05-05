@@ -1,6 +1,49 @@
 (function () {
   var SANDBOX = "allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation";
 
+  // ============== AD GUARD: bloqueia redirect agressivo da pagina principal ==============
+  var lastUserClick = 0;
+  document.addEventListener('click', function () { lastUserClick = Date.now(); }, true);
+  document.addEventListener('keydown', function () { lastUserClick = Date.now(); }, true);
+
+  window.addEventListener('beforeunload', function (e) {
+    var sinceClick = Date.now() - lastUserClick;
+    var nav = (performance.getEntriesByType && performance.getEntriesByType('navigation')[0]) || {};
+    var sinceLoad = Date.now() - (nav.startTime || 0);
+    // Se o user nao clicou nos ultimos 2s E a pagina ja carregou ha pelo menos 1s,
+    // significa que algum script tentou redirect sem interacao do usuario.
+    if (sinceClick > 2000 && sinceLoad > 1000) {
+      console.warn('[AD GUARD] Redirect bloqueado (sem interacao do usuario)');
+      e.preventDefault();
+      e.returnValue = '';
+      return '';
+    }
+  });
+
+  // ============== AUTO-HIDE de slots vazios ==============
+  function hideEmptyAdSlots() {
+    var iframes = document.querySelectorAll('iframe.ad-iframe');
+    iframes.forEach(function (iframe) {
+      try {
+        var doc = iframe.contentDocument;
+        // Se o iframe carregou mas esta visualmente vazio, esconde o container
+        if (doc && doc.body && doc.body.children.length <= 1) {
+          var hasVisibleContent = false;
+          var children = doc.body.querySelectorAll('iframe, img, ins, div[id*="placement"]');
+          children.forEach(function (el) {
+            var rect = el.getBoundingClientRect();
+            if (rect.width > 10 && rect.height > 10) hasVisibleContent = true;
+          });
+          if (!hasVisibleContent && iframe.parentElement) {
+            iframe.parentElement.style.display = 'none';
+          }
+        }
+      } catch (err) {
+        // Cross-origin: nao da pra inspecionar, deixa visivel mesmo
+      }
+    });
+  }
+
   function ready(fn) {
     if (document.readyState !== 'loading') fn();
     else document.addEventListener('DOMContentLoaded', fn);
@@ -43,6 +86,10 @@
         sessionStorage.setItem('nr_modal_shown', '1');
       }, 5000);
     }
+
+    // Roda o auto-hide depois de 4s pra dar tempo dos ads carregarem
+    setTimeout(hideEmptyAdSlots, 4000);
+    setTimeout(hideEmptyAdSlots, 10000);
 
   });
 })();
