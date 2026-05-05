@@ -5,43 +5,37 @@
 <style>
 html,body{margin:0;padding:0;background:transparent;overflow:hidden;}
 body{display:flex;align-items:center;justify-content:center;width:320px;height:50px;position:relative;font-family:Arial,sans-serif;}
-.fallback-cta{position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,#dc2626,#991b1b);color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;font-weight:800;text-align:center;padding:6px;line-height:1.2;cursor:pointer;}
-.fallback-cta:hover{filter:brightness(1.1);}
-.fallback-cta .h{font-size:11px;letter-spacing:0.5px;text-transform:uppercase;text-shadow:0 2px 4px rgba(0,0,0,0.3);}
-.fallback-cta .s{font-size:9px;font-weight:600;margin-top:4px;opacity:0.95;}
-.fallback-cta::after{content:'PUBLICIDAD';position:absolute;top:2px;right:4px;font-size:8px;opacity:0.6;letter-spacing:1px;}
-body > iframe{position:relative;z-index:2;}
+.fallback-cta{display:none;position:absolute;inset:0;z-index:1;color:white;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;font-weight:800;text-align:center;padding:6px;line-height:1.2;cursor:pointer;background-image:linear-gradient(135deg,rgba(0,0,0,0.55),rgba(0,0,0,0.75)),linear-gradient(135deg,#dc2626,#991b1b),url("https://picsum.photos/seed/oferta4/320/50");background-size:cover;background-blend-mode:overlay,multiply,normal;background-position:center;}
+.fallback-cta.show{display:flex;animation:fade .3s;}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.fallback-cta:hover{filter:brightness(1.15);}
+.fallback-cta .h{font-size:11px;letter-spacing:0.5px;text-transform:uppercase;text-shadow:0 2px 6px rgba(0,0,0,0.6);}
+.fallback-cta .s{font-size:9px;font-weight:600;margin-top:4px;opacity:0.95;text-shadow:0 1px 3px rgba(0,0,0,0.6);}
+.fallback-cta::after{content:'PUBLICIDAD';position:absolute;top:2px;right:4px;font-size:8px;opacity:0.7;letter-spacing:1px;}
+body > iframe,body > ins,body > img:not([class]){position:relative;z-index:2;}
 </style>
 </head>
 <body>
-<a href="https://www.profitablecpmratenetwork.com/dd06dn3nu?key=bb878784d262344eb40ff3dd6b2981b3" target="_blank" rel="noopener nofollow sponsored" class="fallback-cta">
-  <span class="h">OFERTA</span>
-  <span class="s">Click</span>
+<a href="https://www.profitablecpmratenetwork.com/dd06dn3nu?key=bb878784d262344eb40ff3dd6b2981b3" target="_blank" rel="noopener nofollow sponsored" class="fallback-cta" id="fb">
+  <span class="h">OFERTA HOY</span>
+  <span class="s">Click aqui</span>
 </a>
 <script type="text/javascript">
   atOptions = { 'key' : 'bd23c288939a20b3f55a022887a6c1d6', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
 </script>
 <script type="text/javascript" src="//www.highperformanceformat.com/bd23c288939a20b3f55a022887a6c1d6/invoke.js"></script>
-
 <script>
 (function(){
-  function check() {
-    var els = document.body.querySelectorAll('iframe, ins, img, embed');
+  function checkAndShowFallback() {
+    var els = document.body.querySelectorAll('iframe, ins, img:not([class])');
     var hasReal = false;
     for (var i = 0; i < els.length; i++) {
-      var el = els[i];
-      if (el.classList && el.classList.contains('fallback-cta')) continue;
-      var rect = el.getBoundingClientRect();
-      if (rect.width > 50 && rect.height > 25) { hasReal = true; break; }
+      var r = els[i].getBoundingClientRect();
+      if (r.width > 50 && r.height > 25) { hasReal = true; break; }
     }
-    if (hasReal) {
-      var fb = document.querySelector('.fallback-cta');
-      if (fb) fb.style.display = 'none';
-    }
+    if (!hasReal) document.getElementById('fb').classList.add('show');
   }
-  setTimeout(check, 1500);
-  setTimeout(check, 3500);
-  setTimeout(check, 6000);
+  setTimeout(checkAndShowFallback, 4000);
 })();
 </script>
 </body>

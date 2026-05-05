@@ -5,43 +5,39 @@
 <style>
 html,body{margin:0;padding:0;background:transparent;font-family:Arial,sans-serif;overflow:hidden;}
 body{position:relative;min-height:280px;}
-.fallback-cta{position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,#dc2626,#991b1b);color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;font-weight:800;text-align:center;padding:20px;}
-.fallback-cta:hover{filter:brightness(1.1);}
-.fallback-cta .h{font-size:24px;letter-spacing:0.5px;text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,0.3);margin-bottom:10px;}
-.fallback-cta .s{font-size:15px;font-weight:600;opacity:0.95;margin-bottom:14px;}
-.fallback-cta .btn{background:white;color:#dc2626;padding:8px 18px;border-radius:4px;font-weight:800;font-size:13px;text-transform:uppercase;}
+.fallback-cta{display:none;position:absolute;inset:0;z-index:1;color:white;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;font-weight:800;text-align:center;padding:20px;background-image:linear-gradient(135deg,rgba(0,0,0,0.55),rgba(0,0,0,0.75)),linear-gradient(135deg,#dc2626,#991b1b),url("https://picsum.photos/seed/native1/680/280");background-size:cover;background-blend-mode:overlay,multiply,normal;background-position:center;}
+.fallback-cta.show{display:flex;animation:fade .3s;}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.fallback-cta:hover{filter:brightness(1.15);}
+.fallback-cta .h{font-size:24px;letter-spacing:0.5px;text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,0.7);margin-bottom:10px;}
+.fallback-cta .s{font-size:15px;font-weight:600;opacity:0.95;margin-bottom:14px;text-shadow:0 1px 4px rgba(0,0,0,0.6);}
+.fallback-cta .btn{background:white;color:#dc2626;padding:10px 20px;border-radius:4px;font-weight:800;font-size:13px;text-transform:uppercase;}
 .fallback-cta::after{content:'PUBLICIDAD';position:absolute;top:6px;right:8px;font-size:10px;opacity:0.7;letter-spacing:1px;}
-body > div, body > iframe{position:relative;z-index:2;}
+body > div, body > iframe, body > ins{position:relative;z-index:2;}
 </style>
 </head>
 <body>
-<a href="https://omg10.com/4/10967488" target="_blank" rel="noopener nofollow sponsored" class="fallback-cta">
+<a href="https://omg10.com/4/10967488" target="_blank" rel="noopener nofollow sponsored" class="fallback-cta" id="fb">
   <span class="h">Ofertas exclusivas hoy</span>
   <span class="s">Las mejores promociones seleccionadas</span>
   <span class="btn">Ver ahora &rarr;</span>
 </a>
 <script async="async" data-cfasync="false" src="//pl29343175.profitablecpmratenetwork.com/47a7896b87c371c4d9256b8f7e4d522a/invoke.js"></script>
 <div id="container-47a7896b87c371c4d9256b8f7e4d522a"></div>
-
 <script>
 (function(){
   function check() {
-    var els = document.body.querySelectorAll('iframe, ins, img, embed');
+    var c = document.getElementById('container-47a7896b87c371c4d9256b8f7e4d522a');
     var hasReal = false;
-    for (var i = 0; i < els.length; i++) {
-      var el = els[i];
-      if (el.classList && el.classList.contains('fallback-cta')) continue;
-      var rect = el.getBoundingClientRect();
-      if (rect.width > 50 && rect.height > 25) { hasReal = true; break; }
+    if (c && (c.children.length > 0 || c.offsetHeight > 50)) hasReal = true;
+    var others = document.body.querySelectorAll('iframe, ins');
+    for (var i=0; i<others.length; i++) {
+      var r = others[i].getBoundingClientRect();
+      if (r.width > 100 && r.height > 50) hasReal = true;
     }
-    if (hasReal) {
-      var fb = document.querySelector('.fallback-cta');
-      if (fb) fb.style.display = 'none';
-    }
+    if (!hasReal) document.getElementById('fb').classList.add('show');
   }
-  setTimeout(check, 1500);
-  setTimeout(check, 3500);
-  setTimeout(check, 6000);
+  setTimeout(check, 4000);
 })();
 </script>
 </body>
