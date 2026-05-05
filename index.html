@@ -7,77 +7,286 @@
   <meta name="description" content="Las mejores noticias, polemicas y chismes de La Casa de los Famosos, Gran Hermano y todos los reality shows de Latinoamerica.">
   <meta name="keywords" content="La Casa de los Famosos, Gran Hermano, reality show, chismes, celebridades, farandula, entretenimiento latino">
   <meta property="og:title" content="Noticia Reality - Todo sobre Reality Shows Latinos">
-  <meta property="og:description" content="Las mejores noticias, polemicas y chismes de La Casa de los Famosos, Gran Hermano y todos los reality shows latinos.">
+  <meta property="og:description" content="Noticias, polemicas y chismes de La Casa de los Famosos, Gran Hermano y reality shows latinos.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://noticiareality.blog/">
   <link rel="canonical" href="https://noticiareality.blog/">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
     <div class="container">
-      <h1><a href="/">Noticia Reality</a></h1>
-      <nav>
-        <a href="/">Inicio</a>
+      <span id="current-date"></span>
+      <div>
         <a href="/sobre.html">Nosotros</a>
         <a href="/contato.html">Contacto</a>
         <a href="/privacidade.html">Privacidad</a>
-      </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <a href="/" class="logo">NOTICIA<span>REALITY</span></a>
     </div>
   </header>
 
-  <main class="container">
-    <h2>Ultimas Noticias</h2>
+  <!-- NAVIGATION -->
+  <nav class="main-nav">
+    <div class="container">
+      <a href="/" class="active">Inicio</a>
+      <a href="#lcdlf">La Casa de los Famosos</a>
+      <a href="#gh">Gran Hermano</a>
+      <a href="#farandula">Farandula</a>
+      <a href="#videos">Videos</a>
+    </div>
+  </nav>
 
-    <article class="post-card">
-      <h3><a href="posts/la-casa-de-los-famosos-2026.html">La Casa de los Famosos 2026: todo lo que se sabe de la nueva temporada</a></h3>
-      <p class="meta">04 de mayo de 2026 <span class="tag">LCDLF</span></p>
-      <p>La nueva temporada de La Casa de los Famosos promete ser la mas explosiva hasta ahora. Nombres confirmados, rumores de participantes y las sorpresas que prepara la produccion para esta edicion...</p>
-      <a href="posts/la-casa-de-los-famosos-2026.html" class="leia-mais">Leer mas &rarr;</a>
-    </article>
+  <!-- BREAKING NEWS -->
+  <div class="breaking">
+    <div class="container">
+      <span class="breaking-label">EN VIVO</span>
+      <span class="breaking-text">La Casa de los Famosos 2026 confirma fecha de estreno - Gran Hermano revela nuevos participantes - Escandalo en la farandula latina</span>
+    </div>
+  </div>
 
-    <article class="post-card">
-      <h3><a href="posts/gran-hermano-polemicas.html">Gran Hermano 2026: las polemicas que sacudieron la casa</a></h3>
-      <p class="meta">04 de mayo de 2026 <span class="tag">Gran Hermano</span></p>
-      <p>Peleas en vivo, romances inesperados y eliminaciones que nadie vio venir. Repasamos los momentos mas polemicos de Gran Hermano que hicieron explotar las redes sociales...</p>
-      <a href="posts/gran-hermano-polemicas.html" class="leia-mais">Leer mas &rarr;</a>
-    </article>
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-grid">
+        <a href="posts/la-casa-de-los-famosos-2026.html" class="hero-main">
+          <div class="hero-bg"></div>
+          <div class="hero-content">
+            <span class="hero-tag">La Casa de los Famosos</span>
+            <h2>La Casa de los Famosos 2026: todo lo que se sabe de la nueva temporada</h2>
+            <p>Nombres confirmados, rumores de participantes y las sorpresas que prepara la produccion para la edicion mas explosiva.</p>
+          </div>
+        </a>
+        <div class="hero-sidebar">
+          <a href="posts/gran-hermano-polemicas.html" class="hero-small">
+            <span class="hero-tag">Gran Hermano</span>
+            <h3>Gran Hermano 2026: las polemicas que sacudieron la casa</h3>
+            <p class="meta">04 de mayo de 2026</p>
+          </a>
+          <a href="posts/chismes-farandula-semana.html" class="hero-small">
+            <span class="hero-tag">Farandula</span>
+            <h3>Chismes de la semana: lo que paso en la farandula latina</h3>
+            <p class="meta">04 de mayo de 2026</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <article class="post-card">
-      <h3><a href="posts/chismes-farandula-semana.html">Chismes de la semana: lo que paso en la farandula latina</a></h3>
-      <p class="meta">04 de mayo de 2026 <span class="tag">Farandula</span></p>
-      <p>Separaciones, nuevos romances, escándalos y mucho drama. El resumen completo de lo que agito el mundo de las celebridades latinas esta semana...</p>
-      <a href="posts/chismes-farandula-semana.html" class="leia-mais">Leer mas &rarr;</a>
-    </article>
+  <!-- AD SPACE -->
+  <div class="container">
+    <div class="ad-space" id="ad-top">
+      <!-- ADSTERRA: banner horizontal aqui -->
+    </div>
+  </div>
 
-    <article class="post-card">
-      <h3><a href="posts/top-10-momentos-reality-2026.html">Top 10: los momentos mas epicos de los realities latinos en 2026</a></h3>
-      <p class="meta">04 de mayo de 2026 <span class="tag">Top 10</span></p>
-      <p>De confesiones impactantes a traiciones en vivo, estos son los momentos que marcaron los reality shows de Latinoamerica este ano. El numero 1 te va a sorprender...</p>
-      <a href="posts/top-10-momentos-reality-2026.html" class="leia-mais">Leer mas &rarr;</a>
-    </article>
+  <!-- MAIN CONTENT + SIDEBAR -->
+  <div class="container">
+    <div class="content-with-sidebar">
 
-    <article class="post-card">
-      <h3><a href="posts/bienvenidos.html">Bienvenidos a Noticia Reality</a></h3>
-      <p class="meta">04 de mayo de 2026 <span class="tag">General</span></p>
-      <p>Tu fuente numero uno de noticias, chismes y polemicas de los reality shows mas vistos de Latinoamerica. Conoce nuestro blog y quedate al dia con todo...</p>
-      <a href="posts/bienvenidos.html" class="leia-mais">Leer mas &rarr;</a>
-    </article>
-  </main>
+      <!-- MAIN CONTENT -->
+      <div class="main-content">
 
+        <!-- ULTIMAS NOTICIAS -->
+        <div class="section-title" id="lcdlf">
+          <h2>Ultimas <span class="accent">Noticias</span></h2>
+        </div>
+
+        <div class="post-grid" style="grid-template-columns: repeat(2, 1fr);">
+          <a href="posts/la-casa-de-los-famosos-2026.html" class="post-card">
+            <div class="post-card-img img-red">
+              <span class="card-tag">LCDLF</span>
+            </div>
+            <div class="post-card-body">
+              <h3>La Casa de los Famosos 2026: todo lo que se sabe</h3>
+              <p>La nueva temporada promete ser la mas explosiva con participantes de toda Latinoamerica...</p>
+            </div>
+            <div class="post-card-footer">
+              <span>04 mayo 2026</span>
+              <span class="read-more">Leer mas</span>
+            </div>
+          </a>
+
+          <a href="posts/gran-hermano-polemicas.html" class="post-card">
+            <div class="post-card-img img-blue">
+              <span class="card-tag">Gran Hermano</span>
+            </div>
+            <div class="post-card-body">
+              <h3>Gran Hermano 2026: las polemicas que sacudieron la casa</h3>
+              <p>Peleas en vivo, romances inesperados y eliminaciones que nadie vio venir...</p>
+            </div>
+            <div class="post-card-footer">
+              <span>04 mayo 2026</span>
+              <span class="read-more">Leer mas</span>
+            </div>
+          </a>
+
+          <a href="posts/chismes-farandula-semana.html" class="post-card">
+            <div class="post-card-img img-purple">
+              <span class="card-tag">Farandula</span>
+            </div>
+            <div class="post-card-body">
+              <h3>Chismes de la semana: lo que paso en la farandula latina</h3>
+              <p>Separaciones, romances, escandalos y mucho drama en el mundo de los famosos...</p>
+            </div>
+            <div class="post-card-footer">
+              <span>04 mayo 2026</span>
+              <span class="read-more">Leer mas</span>
+            </div>
+          </a>
+
+          <a href="posts/top-10-momentos-reality-2026.html" class="post-card">
+            <div class="post-card-img img-orange">
+              <span class="card-tag">Top 10</span>
+            </div>
+            <div class="post-card-body">
+              <h3>Top 10: los momentos mas epicos de los realities en 2026</h3>
+              <p>De confesiones impactantes a traiciones en vivo, el ranking definitivo del ano...</p>
+            </div>
+            <div class="post-card-footer">
+              <span>04 mayo 2026</span>
+              <span class="read-more">Leer mas</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- VIDEO SECTION -->
+        <div class="section-title" id="videos">
+          <h2><span class="accent">Videos</span> Destacados</h2>
+        </div>
+
+        <div class="video-card">
+          <div class="video-container">
+            <!-- EJEMPLO: cambia el src por la URL de tu video de YouTube -->
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video destacado" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-card-body">
+            <h3>Los mejores momentos de La Casa de los Famosos</h3>
+            <p>04 de mayo de 2026 - Recopilacion de los momentos mas epicos del reality.</p>
+          </div>
+        </div>
+
+        <!-- AD SPACE MID -->
+        <div class="ad-space" id="ad-mid">
+          <!-- ADSTERRA: banner mid-content aqui -->
+        </div>
+
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+
+        <!-- AD SPACE SIDEBAR -->
+        <div class="ad-space" id="ad-sidebar">
+          <!-- ADSTERRA: banner sidebar aqui -->
+        </div>
+
+        <!-- TRENDING -->
+        <div class="widget">
+          <h3>Mas Leidos</h3>
+          <div class="trending-item">
+            <span class="trending-num">1</span>
+            <div>
+              <h4><a href="posts/la-casa-de-los-famosos-2026.html">LCDLF 2026: confirmados los primeros nombres</a></h4>
+              <p class="meta">04 mayo 2026</p>
+            </div>
+          </div>
+          <div class="trending-item">
+            <span class="trending-num">2</span>
+            <div>
+              <h4><a href="posts/gran-hermano-polemicas.html">La pelea que paralizo las redes en Gran Hermano</a></h4>
+              <p class="meta">04 mayo 2026</p>
+            </div>
+          </div>
+          <div class="trending-item">
+            <span class="trending-num">3</span>
+            <div>
+              <h4><a href="posts/chismes-farandula-semana.html">Separacion bomba sacude la farandula</a></h4>
+              <p class="meta">04 mayo 2026</p>
+            </div>
+          </div>
+          <div class="trending-item">
+            <span class="trending-num">4</span>
+            <div>
+              <h4><a href="posts/top-10-momentos-reality-2026.html">El final mas inesperado del ano</a></h4>
+              <p class="meta">04 mayo 2026</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CATEGORIES -->
+        <div class="widget">
+          <h3>Categorias</h3>
+          <div class="tag-cloud">
+            <a href="#lcdlf">La Casa de los Famosos</a>
+            <a href="#gh">Gran Hermano</a>
+            <a href="#farandula">Farandula</a>
+            <a href="#">Survivor</a>
+            <a href="#">Chismes</a>
+            <a href="#">Polemicas</a>
+            <a href="#">Top 10</a>
+            <a href="#">Eliminaciones</a>
+            <a href="#">Romances</a>
+          </div>
+        </div>
+
+        <!-- AD SPACE SIDEBAR 2 -->
+        <div class="ad-space" id="ad-sidebar-2">
+          <!-- ADSTERRA: banner sidebar 2 aqui -->
+        </div>
+
+      </aside>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
   <footer>
     <div class="container">
-      <p>&copy; 2026 Noticia Reality - Todos los derechos reservados</p>
-      <p>
-        <a href="/sobre.html">Nosotros</a> &middot;
-        <a href="/contato.html">Contacto</a> &middot;
-        <a href="/privacidade.html">Privacidad</a> &middot;
-        <a href="/termos.html">Terminos</a>
-      </p>
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>Noticia Reality</h3>
+          <p>Tu fuente numero uno de noticias, chismes y polemicas de los reality shows mas vistos de Latinoamerica. La Casa de los Famosos, Gran Hermano, Survivor y mucho mas.</p>
+        </div>
+        <div class="footer-col">
+          <h3>Secciones</h3>
+          <a href="/">Inicio</a>
+          <a href="#lcdlf">La Casa de los Famosos</a>
+          <a href="#gh">Gran Hermano</a>
+          <a href="#farandula">Farandula</a>
+          <a href="#videos">Videos</a>
+        </div>
+        <div class="footer-col">
+          <h3>Legal</h3>
+          <a href="/sobre.html">Nosotros</a>
+          <a href="/contato.html">Contacto</a>
+          <a href="/privacidade.html">Politica de Privacidad</a>
+          <a href="/termos.html">Terminos de Uso</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Noticia Reality - Todos los derechos reservados</p>
+      </div>
     </div>
   </footer>
 
-  <!-- ADSTERRA: Pega tu codigo Popunder/Social Bar aqui -->
+  <!-- DATE SCRIPT -->
+  <script>
+    const dias = ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'];
+    const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+    const hoy = new Date();
+    document.getElementById('current-date').textContent =
+      dias[hoy.getDay()] + ', ' + hoy.getDate() + ' de ' + meses[hoy.getMonth()] + ' de ' + hoy.getFullYear();
+  </script>
+
+  <!-- ADSTERRA: Popunder / Social Bar script aqui -->
   <!-- <script src="//codigo-adsterra-aqui.js"></script> -->
 </body>
 </html>
