@@ -1,17 +1,33 @@
 (function () {
-  var SANDBOX = "allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation";
+  'use strict';
 
-  // ============== AD GUARD: bloqueia redirect agressivo da pagina principal ==============
+  var SANDBOX     = "allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation";
+  var SANDBOX_POP = "allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"; // sem top-navigation
+  var GUARD_WINDOW = 1500; // ms apos clique para considerar interacao do user
+
+  // ============== AD GUARD ==============
   var lastUserClick = 0;
-  document.addEventListener('click', function () { lastUserClick = Date.now(); }, true);
+  document.addEventListener('mousedown', function () { lastUserClick = Date.now(); }, true);
+  document.addEventListener('touchstart', function () { lastUserClick = Date.now(); }, true);
   document.addEventListener('keydown', function () { lastUserClick = Date.now(); }, true);
 
+  // Bloquia window.open sem clique recente do user
+  var origOpen = window.open;
+  window.open = function () {
+    var sinceClick = Date.now() - lastUserClick;
+    if (sinceClick > GUARD_WINDOW) {
+      console.warn('[AD GUARD] window.open bloqueado (sem interacao do usuario, ' + sinceClick + 'ms desde ultimo clique)');
+      return null;
+    }
+    try { return origOpen.apply(this, arguments); }
+    catch (e) { return null; }
+  };
+
+  // Bloqueia redirect via top.location sem clique
   window.addEventListener('beforeunload', function (e) {
     var sinceClick = Date.now() - lastUserClick;
     var nav = (performance.getEntriesByType && performance.getEntriesByType('navigation')[0]) || {};
     var sinceLoad = Date.now() - (nav.startTime || 0);
-    // Se o user nao clicou nos ultimos 2s E a pagina ja carregou ha pelo menos 1s,
-    // significa que algum script tentou redirect sem interacao do usuario.
     if (sinceClick > 2000 && sinceLoad > 1000) {
       console.warn('[AD GUARD] Redirect bloqueado (sem interacao do usuario)');
       e.preventDefault();
@@ -26,21 +42,17 @@
     iframes.forEach(function (iframe) {
       try {
         var doc = iframe.contentDocument;
-        // Se o iframe carregou mas esta visualmente vazio, esconde o container
         if (doc && doc.body && doc.body.children.length <= 1) {
-          var hasVisibleContent = false;
-          var children = doc.body.querySelectorAll('iframe, img, ins, div[id*="placement"]');
-          children.forEach(function (el) {
-            var rect = el.getBoundingClientRect();
-            if (rect.width > 10 && rect.height > 10) hasVisibleContent = true;
+          var hasVisible = false;
+          doc.body.querySelectorAll('iframe, img, ins, div').forEach(function (el) {
+            var r = el.getBoundingClientRect();
+            if (r.width > 10 && r.height > 10) hasVisible = true;
           });
-          if (!hasVisibleContent && iframe.parentElement) {
+          if (!hasVisible && iframe.parentElement) {
             iframe.parentElement.style.display = 'none';
           }
         }
-      } catch (err) {
-        // Cross-origin: nao da pra inspecionar, deixa visivel mesmo
-      }
+      } catch (err) { /* cross-origin: deixa visivel */ }
     });
   }
 
@@ -49,15 +61,26 @@
     else document.addEventListener('DOMContentLoaded', fn);
   }
 
+  function makeIframe(src, w, h, sandbox) {
+    var ifr = document.createElement('iframe');
+    ifr.src = src;
+    ifr.width = w;
+    ifr.height = h;
+    ifr.scrolling = 'no';
+    ifr.loading = 'lazy';
+    ifr.className = 'ad-iframe';
+    ifr.setAttribute('sandbox', sandbox || SANDBOX);
+    return ifr;
+  }
+
   ready(function () {
 
     // ============== STICKY BOTTOM BAR (728x90 desktop only) ==============
     if (window.innerWidth > 768 && !sessionStorage.getItem('nr_sticky_closed')) {
       var sticky = document.createElement('div');
       sticky.id = 'sticky-ad';
-      sticky.innerHTML =
-        '<button class="sticky-ad-close" aria-label="Cerrar">&times;</button>' +
-        '<iframe src="/ads/728x90.html" width="728" height="90" scrolling="no" loading="lazy" class="ad-iframe" sandbox="' + SANDBOX + '"></iframe>';
+      sticky.innerHTML = '<button class="sticky-ad-close" aria-label="Cerrar">&times;</button>';
+      sticky.appendChild(makeIframe('/ads/728x90.html', 728, 90, SANDBOX));
       document.body.appendChild(sticky);
       sticky.querySelector('.sticky-ad-close').addEventListener('click', function () {
         sticky.remove();
@@ -65,7 +88,20 @@
       });
     }
 
-    // ============== MODAL POPUP (after 5s, once per session) ==============
+    // ============== STICKY BOTTOM MOBILE (320x50) ==============
+    if (window.innerWidth <= 768 && !sessionStorage.getItem('nr_sticky_mob_closed')) {
+      var stickyM = document.createElement('div');
+      stickyM.id = 'sticky-ad-mobile';
+      stickyM.innerHTML = '<button class="sticky-ad-close" aria-label="Cerrar">&times;</button>';
+      stickyM.appendChild(makeIframe('/ads/320x50.html', 320, 50, SANDBOX));
+      document.body.appendChild(stickyM);
+      stickyM.querySelector('.sticky-ad-close').addEventListener('click', function () {
+        stickyM.remove();
+        sessionStorage.setItem('nr_sticky_mob_closed', '1');
+      });
+    }
+
+    // ============== MODAL POPUP (after 6s, once per session) ==============
     if (!sessionStorage.getItem('nr_modal_shown')) {
       setTimeout(function () {
         var modal = document.createElement('div');
@@ -74,20 +110,49 @@
           '<div class="modal-ad-inner">' +
             '<button class="modal-ad-close" aria-label="Cerrar">&times;</button>' +
             '<span class="modal-ad-label">Publicidad</span>' +
-            '<iframe src="/ads/300x250.html" width="300" height="250" scrolling="no" loading="lazy" class="ad-iframe" sandbox="' + SANDBOX + '"></iframe>' +
           '</div>';
+        modal.querySelector('.modal-ad-inner').appendChild(makeIframe('/ads/300x250.html', 300, 250, SANDBOX));
         document.body.appendChild(modal);
-        modal.querySelector('.modal-ad-close').addEventListener('click', function () {
-          modal.remove();
-        });
-        modal.addEventListener('click', function (e) {
-          if (e.target === modal) modal.remove();
-        });
+        modal.querySelector('.modal-ad-close').addEventListener('click', function () { modal.remove(); });
+        modal.addEventListener('click', function (e) { if (e.target === modal) modal.remove(); });
         sessionStorage.setItem('nr_modal_shown', '1');
-      }, 5000);
+      }, 6000);
     }
 
-    // Roda o auto-hide depois de 4s pra dar tempo dos ads carregarem
+    // ============== HIDDEN POPUNDER + ONCLICK (em iframe sandbox sem top-navigation) ==============
+    // Esses ad units vao tentar redirecionar mas sao bloqueados pelo sandbox.
+    // Eles ainda registram impressoes e podem abrir popup quando user clicar.
+    var hiddenWrap = document.createElement('div');
+    hiddenWrap.style.cssText = 'position:absolute;width:1px;height:1px;overflow:hidden;left:-9999px;top:-9999px;';
+    hiddenWrap.appendChild(makeIframe('/ads/adsterra-pop.html', 1, 1, SANDBOX));
+    hiddenWrap.appendChild(makeIframe('/ads/monetag-onclick.html', 1, 1, SANDBOX));
+    document.body.appendChild(hiddenWrap);
+
+    // ============== MONETAG VIGNETTE + IN-PAGE PUSH (direto na pagina, protegidos pelo Ad Guard) ==============
+    // Vignette = overlay fullscreen com X de fechar (Monetag faz isso sozinho)
+    // In-Page Push = card de notificacao no canto da tela
+    // Eles precisam injetar overlays na pagina principal pra funcionar.
+    setTimeout(function () {
+      var s1 = document.createElement('script');
+      s1.dataset.zone = '10967495';
+      s1.src = 'https://n6wxm.com/vignette.min.js';
+      document.body.appendChild(s1);
+
+      var s2 = document.createElement('script');
+      s2.dataset.zone = '10967496';
+      s2.src = 'https://nap5k.com/tag.min.js';
+      document.body.appendChild(s2);
+    }, 3000);
+
+    // ============== ADSTERRA SOCIAL BAR (em iframe sandbox como sticky) ==============
+    // Movido pra um wrap fixo e reduzido para nao quebrar layout.
+    // Comentado porque ja temos o Sticky Bar customizado. Deixa um exemplo aqui caso queira.
+    // var social = document.createElement('div');
+    // social.id = 'social-bar';
+    // social.appendChild(makeIframe('/ads/adsterra-social.html', '100%', 80, SANDBOX));
+    // document.body.appendChild(social);
+
+    // Roda auto-hide depois pra esconder slots vazios
     setTimeout(hideEmptyAdSlots, 4000);
     setTimeout(hideEmptyAdSlots, 10000);
 

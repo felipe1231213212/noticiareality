@@ -1371,9 +1371,101 @@ footer {
 
 .modal-ad-close:hover { transform: scale(1.1) rotate(90deg); }
 
+/* Mobile sticky bar (320x50) */
+#sticky-ad-mobile {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg);
+  border-top: 1px solid var(--gray-200);
+  z-index: 9998;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 36px 6px 6px;
+  box-shadow: 0 -6px 18px rgba(0,0,0,0.12);
+  animation: slideUp 0.4s ease;
+}
+
+#sticky-ad-mobile .sticky-ad-close {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--black);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media (max-width: 768px) {
   #sticky-ad { display: none; }
   .modal-ad-inner { padding: 24px 18px 20px; }
+}
+
+@media (min-width: 769px) {
+  #sticky-ad-mobile { display: none; }
+}
+
+/* CTA buttons for direct links (smartlink / direct link) */
+.cta-link {
+  display: block;
+  background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
+  color: white;
+  padding: 18px 22px;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 22px 0;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 6px 20px rgba(220,38,38,0.35);
+}
+
+.cta-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(220,38,38,0.5);
+  color: white;
+}
+
+.cta-link::before {
+  content: 'PATROCINADO';
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  opacity: 0.7;
+}
+
+.cta-link .cta-eyebrow {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  opacity: 0.85;
+  margin-bottom: 4px;
+  letter-spacing: 1.2px;
+}
+
+.cta-link .cta-title {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  text-transform: none;
+  letter-spacing: -0.3px;
 }
 
 /* ===== ADSTERRA AD SLOTS (sandboxed iframes) ===== */
