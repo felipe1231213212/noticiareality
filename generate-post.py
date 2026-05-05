@@ -165,46 +165,31 @@ def make_summary(blocks):
 
 
 def render_blocks(blocks):
-    """Renderiza blocos em HTML, intercalando ads (G1-style scroll depth)."""
+    """Renderiza blocos em HTML, intercalando ads (G1-style scroll depth).
+
+    A cada 3 paragrafos, insere um ad alternando entre Native, 300x250, 728x90.
+    Antes de cada H2, garante que tem ad recente.
+    """
     out = []
     paragraph_count = 0
     ad_inserted = 0
     AD_EVERY_N_PARAS = 3
 
-    AD_INLINE_HTML = (
-        '          <div class="ad-separator">Continua despues de la publicidad</div>\n'
-        '          <div class="ad-banner ad-inline">\n'
-        '            <iframe src="/ads/300x250.html" width="300" height="250" scrolling="no" loading="lazy" class="ad-iframe"\n'
-        '              sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>\n'
-        '          </div>\n'
-        '          <div class="ad-separator ad-separator-bottom"></div>'
-    )
-
-    AD_INLINE_LARGE = (
-        '          <div class="ad-separator">Continua despues de la publicidad</div>\n'
-        '          <div class="ad-banner ad-inline">\n'
-        '            <iframe src="/ads/728x90.html" width="728" height="90" scrolling="no" loading="lazy" class="ad-iframe"\n'
-        '              sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>\n'
-        '          </div>\n'
-        '          <div class="ad-separator ad-separator-bottom"></div>'
-    )
-
     for kind, text in blocks:
         esc = html.escape(text, quote=False)
         esc = bold_names(esc)
         if kind == 'h2':
-            # Se ja tem N paragrafos, insere ad ANTES do h2
-            if paragraph_count >= AD_EVERY_N_PARAS:
-                out.append(AD_INLINE_HTML if ad_inserted % 2 == 0 else AD_INLINE_LARGE)
+            # Antes de h2 insere ad se ja teve paragrafos suficientes
+            if paragraph_count >= 2:
+                out.append(AD_CYCLE[ad_inserted % len(AD_CYCLE)])
                 ad_inserted += 1
                 paragraph_count = 0
             out.append('          <h2>{}</h2>'.format(esc))
         else:
             out.append('          <p>{}</p>'.format(esc))
             paragraph_count += 1
-            # A cada N paragrafos seguidos sem h2, tambem insere ad
             if paragraph_count >= AD_EVERY_N_PARAS:
-                out.append(AD_INLINE_HTML if ad_inserted % 2 == 0 else AD_INLINE_LARGE)
+                out.append(AD_CYCLE[ad_inserted % len(AD_CYCLE)])
                 ad_inserted += 1
                 paragraph_count = 0
 
@@ -235,7 +220,34 @@ def format_date_short(dt=None):
     return '{:02d} {} {}'.format(d.day, MESES_ABBR[d.month-1], d.year)
 
 
-# ========== TEMPLATE ==========
+# ========== TEMPLATE G1-style long-form com 12 slots de ads ==========
+
+# Ad snippets reutilizaveis
+AD_NATIVE = '''          <div class="ad-separator">Continua despues de la publicidad</div>
+          <div class="ad-banner ad-inline">
+            <iframe src="/ads/adsterra-native.html" width="100%" height="280" scrolling="no" loading="lazy" class="ad-iframe" style="max-width:680px;"
+              sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
+          </div>
+          <div class="ad-separator ad-separator-bottom"></div>'''
+
+AD_300x250 = '''          <div class="ad-separator">Continua despues de la publicidad</div>
+          <div class="ad-banner ad-inline">
+            <iframe src="/ads/300x250.html" width="300" height="250" scrolling="no" loading="lazy" class="ad-iframe"
+              sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
+          </div>
+          <div class="ad-separator ad-separator-bottom"></div>'''
+
+AD_728x90 = '''          <div class="ad-separator">Continua despues de la publicidad</div>
+          <div class="ad-banner ad-inline">
+            <iframe src="/ads/728x90.html" width="728" height="90" scrolling="no" loading="lazy" class="ad-iframe"
+              sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
+          </div>
+          <div class="ad-separator ad-separator-bottom"></div>'''
+
+# Ciclo de ads in-content (G1-style: alterna tipos pra maximizar fill)
+AD_CYCLE = [AD_NATIVE, AD_300x250, AD_728x90, AD_NATIVE, AD_728x90]
+
+
 POST_TEMPLATE = '''<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -248,57 +260,97 @@ POST_TEMPLATE = '''<!DOCTYPE html>
   <meta property="og:description" content="{description}">
   <meta property="og:type" content="article">
   <link rel="stylesheet" href="../style.css">
+  <script type="application/ld+json">
+  {{
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": "{title}",
+    "description": "{description}",
+    "datePublished": "{date_iso}",
+    "author": {{ "@type": "Organization", "name": "Noticia Reality" }},
+    "publisher": {{ "@type": "Organization", "name": "Noticia Reality" }}
+  }}
+  </script>
 </head>
 <body>
   <div class="top-bar"><div class="container"><span>Noticia Reality</span><div><a href="/sobre.html">Nosotros</a><a href="/contato.html">Contacto</a><a href="/privacidade.html">Privacidad</a></div></div></div>
-  <header><div class="container"><a href="/" class="logo">NOTICIA<span>REALITY</span></a></div></header>
+  <header><div class="container"><a href="/" class="logo">NOTICIA<span>REALITY</span></a><span class="tagline">Reality shows latinos al dia</span></div></header>
   <nav class="main-nav"><div class="container"><a href="/">Inicio</a><a href="/#lcdlf">La Casa de los Famosos</a><a href="/#gh">Gran Hermano</a><a href="/#farandula">Farandula</a><a href="/#videos">Videos</a></div></nav>
 
   <div class="container">
-    <div class="content-with-sidebar" style="padding-top:24px;">
+    <div class="content-with-sidebar" style="padding-top:14px;">
       <div>
+
+        <!-- BREADCRUMB -->
+        <nav class="breadcrumb">
+          <a href="/">Inicio</a> &rsaquo; <a href="/#{cat_anchor}">{tag}</a>
+        </nav>
+
         <a href="/" class="back-link">&larr; Volver al inicio</a>
+
         <article class="post-content">
-          <div class="post-hero post-hero-{color}">
-            <span class="post-hero-tag">{tag}</span>
-            <span class="post-hero-eyebrow">{eyebrow}</span>
-          </div>
+
+          <!-- TITULO + SUBTITULO + META -->
           <h1>{title}</h1>
+          <p class="article-sub">{subtitle}</p>
           <div class="post-meta">
+            <span>Por <strong>Noticia Reality</strong></span>
+            <span>&bull;</span>
             <span>{date}</span>
+            <span>&bull;</span>
+            <span>{reading_time} min de lectura</span>
             <span class="tag" style="margin:0;">{tag}</span>
           </div>
 
+          <!-- SHARE BAR TOP -->
+          <div class="share-bar-top">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://noticiareality.blog/posts/{slug}.html" target="_blank" rel="noopener" class="share-btn fb">f Facebook</a>
+            <a href="https://api.whatsapp.com/send?text={title_url}%20https://noticiareality.blog/posts/{slug}.html" target="_blank" rel="noopener" class="share-btn wa">WhatsApp</a>
+            <a href="https://twitter.com/intent/tweet?text={title_url}&url=https://noticiareality.blog/posts/{slug}.html" target="_blank" rel="noopener" class="share-btn tw">X / Twitter</a>
+          </div>
+
+          <!-- RESUMO COLAPSAVEL -->
 {summary}
 
+          <!-- HERO BANNER (mídia principal) -->
+          <div class="article-hero post-hero-{color}">
+            <span class="article-hero-text">{hero_text}</span>
+          </div>
+          <p class="caption">{tag} &bull; {date} &bull; Imagen ilustrativa</p>
+
+          <!-- CORPO DO ARTIGO COM ADS INTERCALADOS -->
 {body}
 
+          <!-- CTA Smartlink -->
+          <a href="https://www.profitablecpmratenetwork.com/dd06dn3nu?key=bb878784d262344eb40ff3dd6b2981b3" target="_blank" rel="noopener nofollow sponsored" class="cta-link">
+            <span class="cta-eyebrow">Oferta exclusiva</span>
+            <span class="cta-title">Mira las mejores promociones de la semana</span>
+          </a>
+
+          <!-- TAGS -->
           <div class="article-tags">
             <a href="/#{cat_anchor}">{tag}</a>
             <a href="/">Reality shows</a>
             <a href="/">2026</a>
             <a href="/">Farandula latina</a>
+            <a href="/">Chismes</a>
+            <a href="/">Polemicas</a>
           </div>
 
-          <!-- ADSTERRA: Banner 468x60 antes share-bar (sandboxed) -->
-          <div class="ad-banner ad-after-content">
-            <iframe src="/ads/468x60.html" width="468" height="60" scrolling="no" loading="lazy" class="ad-iframe"
-              sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
-          </div>
-
+          <!-- SHARE BAR BOTTOM -->
           <div class="share-bar">
             <span>Compartir:</span>
-            <a href="#" class="share-btn fb">Facebook</a>
-            <a href="#" class="share-btn tw">Twitter</a>
-            <a href="#" class="share-btn wa">WhatsApp</a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://noticiareality.blog/posts/{slug}.html" target="_blank" rel="noopener" class="share-btn fb">Facebook</a>
+            <a href="https://twitter.com/intent/tweet?text={title_url}&url=https://noticiareality.blog/posts/{slug}.html" target="_blank" rel="noopener" class="share-btn tw">Twitter</a>
+            <a href="https://api.whatsapp.com/send?text={title_url}%20https://noticiareality.blog/posts/{slug}.html" target="_blank" rel="noopener" class="share-btn wa">WhatsApp</a>
           </div>
 
           <!-- NEWSLETTER CTA -->
           <div class="newsletter" style="margin: 32px 0;">
             <div class="newsletter-content">
               <span class="newsletter-eyebrow">Newsletter diaria</span>
-              <h3>No te pierdas ningun chisme</h3>
-              <p>Recibe los eliminados, peleas y momentos virales en tu correo.</p>
+              <h3>No te pierdas ningun chisme del reality</h3>
+              <p>Recibe las eliminaciones, peleas y momentos virales en tu correo.</p>
               <form class="newsletter-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='&#10003; Suscrito';">
                 <input type="email" placeholder="tu@correo.com" required>
                 <button type="submit">Suscribirme</button>
@@ -306,82 +358,188 @@ POST_TEMPLATE = '''<!DOCTYPE html>
             </div>
           </div>
 
-          <!-- MAS LEIDAS POS-ARTIGO -->
+          <!-- ADSTERRA: Banner 728x90 pos-newsletter -->
+          <div class="ad-separator">Continua despues de la publicidad</div>
+          <div class="ad-banner ad-after-content">
+            <iframe src="/ads/728x90.html" width="728" height="90" scrolling="no" loading="lazy" class="ad-iframe"
+              sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
+          </div>
+          <div class="ad-separator ad-separator-bottom"></div>
+
+          <!-- MAS LEIDAS -->
           <section class="related-section">
             <h3>Mas <span class="accent">leidas</span></h3>
-            <div class="more-portal-list">
-              <a href="nazareno-eliminado-gran-hermano.html" class="feed-stream-item">
-                <div class="feed-img"><div class="post-card-img img-blue"><span class="img-headline">NAZARENO</span></div></div>
-                <div class="feed-body">
-                  <span class="feed-eyebrow">Gran Hermano</span>
-                  <h3>Nazareno eliminado tras pelea con Pincoya</h3>
-                  <span class="feed-meta">05 mayo 2026</span>
-                </div>
-              </a>
-              <a href="josh-lider-lcdlf-semana-11.html" class="feed-stream-item">
-                <div class="feed-img"><div class="post-card-img img-red"><span class="img-headline">JOSH</span></div></div>
-                <div class="feed-body">
-                  <span class="feed-eyebrow">LCDLF 6</span>
-                  <h3>Josh es el nuevo lider de LCDLF 6</h3>
-                  <span class="feed-meta">05 mayo 2026</span>
-                </div>
-              </a>
-              <a href="laura-g-eliminada-lcdlf.html" class="feed-stream-item">
-                <div class="feed-img"><div class="post-card-img img-purple"><span class="img-headline">LAURA G</span></div></div>
-                <div class="feed-body">
-                  <span class="feed-eyebrow">LCDLF 6</span>
-                  <h3>Laura G, novena eliminada de LCDLF 6</h3>
-                  <span class="feed-meta">21 abril 2026</span>
-                </div>
-              </a>
-              <a href="tamara-paganini-lider-gh.html" class="feed-stream-item">
-                <div class="feed-img"><div class="post-card-img img-gold"><span class="img-headline">TAMARA</span></div></div>
-                <div class="feed-body">
-                  <span class="feed-eyebrow">Gran Hermano</span>
-                  <h3>Tamara Paganini, lider de la semana 10</h3>
-                  <span class="feed-meta">28 abril 2026</span>
-                </div>
-              </a>
-            </div>
+            <a href="nazareno-eliminado-gran-hermano.html" class="feed-card">
+              <div class="fc-thumb"><div class="post-card-img img-blue"><span class="img-headline" style="font-size:1rem;">NAZARENO</span></div></div>
+              <div class="fc-body">
+                <span class="fc-editoria">Gran Hermano</span>
+                <h4>Nazareno Pompei eliminado de Gran Hermano 2026 tras pelea con Pincoya</h4>
+                <p>Cayo en el versus contra Danelik. La salida llega despues del violento episodio que indigno al publico argentino.</p>
+              </div>
+            </a>
+            <a href="josh-lider-lcdlf-semana-11.html" class="feed-card">
+              <div class="fc-thumb"><div class="post-card-img img-red"><span class="img-headline" style="font-size:1rem;">JOSH</span></div></div>
+              <div class="fc-body">
+                <span class="fc-editoria">LCDLF 6</span>
+                <h4>Josh es el nuevo lider de LCDLF 6: nueve nominados a placa</h4>
+                <p>Solo Josh y Caeli se libraron de las nominaciones. Fabio Agostini lidera con 22 por ciento.</p>
+              </div>
+            </a>
+            <a href="triangulo-amoroso-destruye-la-casa.html" class="feed-card">
+              <div class="fc-thumb"><div class="post-card-img img-purple"><span class="img-headline" style="font-size:1rem;">JENI vs<br>SANDRA</span></div></div>
+              <div class="fc-body">
+                <span class="fc-editoria">LCDLF 6</span>
+                <h4>Jeni y Sandra se pelean por Josh: triangulo brutal en la casa</h4>
+                <p>Gritos, vasos rotos y traiciones que cambian las alianzas para siempre.</p>
+              </div>
+            </a>
+            <a href="laura-g-eliminada-lcdlf.html" class="feed-card">
+              <div class="fc-thumb"><div class="post-card-img img-purple"><span class="img-headline" style="font-size:1rem;">LAURA G</span></div></div>
+              <div class="fc-body">
+                <span class="fc-editoria">LCDLF 6</span>
+                <h4>Laura G es la novena eliminada de LCDLF 6</h4>
+                <p>Quinta mujer consecutiva en abandonar el reality. El cuarto Tierra, sacudido.</p>
+              </div>
+            </a>
           </section>
+
+          <!-- ADSTERRA: Native Banner pos-mas-leidas -->
+          <div class="ad-separator">Continua despues de la publicidad</div>
+          <div class="ad-banner ad-after-content">
+            <iframe src="/ads/adsterra-native.html" width="100%" height="280" scrolling="no" loading="lazy" class="ad-iframe" style="max-width:680px;"
+              sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
+          </div>
+          <div class="ad-separator ad-separator-bottom"></div>
+
+          <!-- MAS DEL PORTAL (com Native ad intercalado) -->
+          <section class="related-section">
+            <h3>Mas del <span class="accent">portal</span></h3>
+            <a href="tamara-paganini-lider-gh.html" class="feed-card">
+              <div class="fc-thumb"><div class="post-card-img img-gold"><span class="img-headline" style="font-size:1rem;">TAMARA</span></div></div>
+              <div class="fc-body">
+                <span class="fc-editoria">Gran Hermano</span>
+                <h4>Tamara Paganini, lider de la semana 10: toda la casa a placa</h4>
+                <p>La historica jugadora gana la prueba mas potente. Pincoya anuncia reconciliacion en pleno directo.</p>
+              </div>
+            </a>
+            <a href="brian-sarmiento-eliminado-gh.html" class="feed-card">
+              <div class="fc-thumb"><div class="post-card-img img-blue"><span class="img-headline" style="font-size:1rem;">BRIAN</span></div></div>
+              <div class="fc-body">
+                <span class="fc-editoria">Gran Hermano</span>
+                <h4>Brian Sarmiento eliminado de Gran Hermano tras caer contra Yipio</h4>
+                <p>El exfutbolista perdio el mano a mano definitivo y abandono el reality.</p>
+              </div>
+            </a>
+            <a href="pelea-alejandro-eidevin-lcdlf.html" class="feed-card">
+              <div class="fc-thumb"><div class="post-card-img img-orange"><span class="img-headline" style="font-size:1rem;">ESCANDALO</span></div></div>
+              <div class="fc-body">
+                <span class="fc-editoria">Polemica</span>
+                <h4>La pelea entre Alejandro Estrada y Eidevin que sacudio LCDLF 6</h4>
+                <p>El cruce que casi termino en expulsion disciplinaria. El video se viralizo.</p>
+              </div>
+            </a>
+            <!-- NATIVE AD no feed -->
+            <a href="https://omg10.com/4/10967488" target="_blank" rel="noopener nofollow sponsored" class="feed-card">
+              <span class="native-badge">ANUNCIO</span>
+              <div class="fc-thumb"><div class="post-card-img img-gold"><span class="img-headline" style="font-size:1rem;">OFERTA</span></div></div>
+              <div class="fc-body">
+                <span class="fc-editoria">Patrocinado</span>
+                <h4>Descubre las mejores ofertas y promociones de la semana</h4>
+                <p>Las ofertas mas calientes seleccionadas para ti. Aprovecha antes que se acaben.</p>
+              </div>
+            </a>
+            <a href="lcdlf-6-temporada-completa.html" class="feed-card">
+              <div class="fc-thumb"><div class="post-card-img img-red"><span class="img-headline" style="font-size:1rem;">LCDLF 6</span></div></div>
+              <div class="fc-body">
+                <span class="fc-editoria">Guia</span>
+                <h4>La Casa de los Famosos 6: todo sobre la sexta temporada</h4>
+                <p>Estreno, los 21 participantes, premios de 350 mil dolares y la lista completa de eliminados.</p>
+              </div>
+            </a>
+            <a href="gran-hermano-generacion-dorada.html" class="feed-card">
+              <div class="fc-thumb"><div class="post-card-img img-gold"><span class="img-headline" style="font-size:1rem;">GH 2026</span></div></div>
+              <div class="fc-body">
+                <span class="fc-editoria">Guia</span>
+                <h4>Gran Hermano Generacion Dorada: guia completa de la temporada 13</h4>
+                <p>Los 28 participantes, la mecanica de placa mixta, el versus y todos los eliminados.</p>
+              </div>
+            </a>
+          </section>
+
+          <!-- CTA Direct Link Monetag -->
+          <a href="https://omg10.com/4/10967488" target="_blank" rel="noopener nofollow sponsored" class="cta-link">
+            <span class="cta-eyebrow">Patrocinado</span>
+            <span class="cta-title">Descubre las ofertas mas calientes de hoy</span>
+          </a>
+
+          <!-- ADSTERRA: Banner 728x90 vitrine pre-footer -->
+          <div class="ad-separator">Continua despues de la publicidad</div>
+          <div class="ad-banner ad-after-content">
+            <iframe src="/ads/728x90.html" width="728" height="90" scrolling="no" loading="lazy" class="ad-iframe"
+              sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
+          </div>
+          <div class="ad-separator ad-separator-bottom"></div>
+
+          <!-- ADSTERRA: Banner 468x60 antes share final -->
+          <div class="ad-banner ad-after-content">
+            <iframe src="/ads/468x60.html" width="468" height="60" scrolling="no" loading="lazy" class="ad-iframe"
+              sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
+          </div>
         </article>
-        <!-- ADSTERRA: Banner 728x90 (sandboxed) -->
-        <div class="ad-banner ad-after-content">
-          <iframe src="/ads/728x90.html" width="728" height="90" scrolling="no" loading="lazy" class="ad-iframe"
-            sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
-        </div>
       </div>
 
       <aside class="sidebar">
-        <!-- ADSTERRA: Banner 300x250 (sandboxed) -->
+        <!-- ADSTERRA: Banner 300x250 sidebar topo -->
         <div class="ad-banner ad-sidebar">
           <iframe src="/ads/300x250.html" width="300" height="250" scrolling="no" loading="lazy" class="ad-iframe"
             sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
         </div>
-        <div class="widget">
-          <h3>Mas Leidos</h3>
-          <div class="trending-item"><span class="trending-num">1</span><div><h4><a href="nazareno-eliminado-gran-hermano.html">Nazareno eliminado de GH 2026</a></h4><p class="meta">05 mayo 2026</p></div></div>
-          <div class="trending-item"><span class="trending-num">2</span><div><h4><a href="josh-lider-lcdlf-semana-11.html">Josh, lider de LCDLF 6</a></h4><p class="meta">05 mayo 2026</p></div></div>
-          <div class="trending-item"><span class="trending-num">3</span><div><h4><a href="laura-g-eliminada-lcdlf.html">Laura G eliminada</a></h4><p class="meta">21 abril 2026</p></div></div>
-          <div class="trending-item"><span class="trending-num">4</span><div><h4><a href="tamara-paganini-lider-gh.html">Tamara Paganini, lider de GH</a></h4><p class="meta">28 abril 2026</p></div></div>
-        </div>
 
-        <!-- ADSTERRA: Banner 160x300 (sandboxed) -->
+        <!-- ADSTERRA: Banner 160x300 -->
         <div class="ad-banner ad-sidebar">
           <iframe src="/ads/160x300.html" width="160" height="300" scrolling="no" loading="lazy" class="ad-iframe"
             sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
         </div>
 
-        <!-- ADSTERRA: Native Banner sidebar (sandboxed) -->
+        <div class="widget">
+          <h3>Mas Leidos</h3>
+          <div class="trending-item"><span class="trending-num">01</span><div><h4><a href="nazareno-eliminado-gran-hermano.html">Nazareno eliminado de GH 2026</a></h4><p class="meta">05 mayo 2026</p></div></div>
+          <div class="trending-item"><span class="trending-num">02</span><div><h4><a href="josh-lider-lcdlf-semana-11.html">Josh, lider de LCDLF 6</a></h4><p class="meta">05 mayo 2026</p></div></div>
+          <div class="trending-item"><span class="trending-num">03</span><div><h4><a href="triangulo-amoroso-destruye-la-casa.html">Jeni vs Sandra: triangulo brutal</a></h4><p class="meta">05 mayo 2026</p></div></div>
+          <div class="trending-item"><span class="trending-num">04</span><div><h4><a href="laura-g-eliminada-lcdlf.html">Laura G, novena eliminada</a></h4><p class="meta">21 abril 2026</p></div></div>
+          <div class="trending-item"><span class="trending-num">05</span><div><h4><a href="tamara-paganini-lider-gh.html">Tamara Paganini lider de GH</a></h4><p class="meta">28 abril 2026</p></div></div>
+          <div class="trending-item"><span class="trending-num">06</span><div><h4><a href="brian-sarmiento-eliminado-gh.html">Brian Sarmiento, fuera de GH</a></h4><p class="meta">27 abril 2026</p></div></div>
+        </div>
+
+        <!-- ADSTERRA: Banner 160x600 sidebar bottom -->
+        <div class="ad-banner ad-sidebar">
+          <iframe src="/ads/160x600.html" width="160" height="600" scrolling="no" loading="lazy" class="ad-iframe"
+            sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
+        </div>
+
+        <!-- ADSTERRA: Native Banner sidebar -->
         <div class="ad-banner ad-sidebar">
           <iframe src="/ads/adsterra-native.html" width="300" height="250" scrolling="no" loading="lazy" class="ad-iframe"
             sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
+        </div>
+
+        <div class="widget">
+          <h3>Categorias</h3>
+          <div class="tag-cloud">
+            <a href="/#lcdlf">LCDLF 6</a>
+            <a href="/#gh">Gran Hermano</a>
+            <a href="lcdlf-6-temporada-completa.html">Telemundo</a>
+            <a href="gran-hermano-generacion-dorada.html">Telefe</a>
+            <a href="/">Eliminados</a>
+            <a href="/">Polemicas</a>
+            <a href="/">Versus</a>
+          </div>
         </div>
       </aside>
     </div>
   </div>
 
-  <footer><div class="container"><div class="footer-grid"><div class="footer-col"><h3>Noticia Reality</h3><p>Tu fuente numero uno de noticias de reality shows latinos.</p></div><div class="footer-col"><h3>Secciones</h3><a href="/">Inicio</a><a href="/#lcdlf">LCDLF</a><a href="/#gh">Gran Hermano</a></div><div class="footer-col"><h3>Legal</h3><a href="/sobre.html">Nosotros</a><a href="/contato.html">Contacto</a><a href="/privacidade.html">Privacidad</a><a href="/termos.html">Terminos</a></div></div><div class="footer-bottom"><p>&copy; 2026 Noticia Reality - Todos los derechos reservados</p></div></div></footer>
+  <footer><div class="container"><div class="footer-grid"><div class="footer-col"><div class="footer-logo">NOTICIA<span>REALITY</span></div><p>Tu fuente numero uno de noticias de reality shows latinos.</p></div><div class="footer-col"><h3>Secciones</h3><a href="/">Inicio</a><a href="/#lcdlf">LCDLF</a><a href="/#gh">Gran Hermano</a></div><div class="footer-col"><h3>Legal</h3><a href="/sobre.html">Nosotros</a><a href="/contato.html">Contacto</a><a href="/privacidade.html">Privacidad</a><a href="/termos.html">Terminos</a></div></div><div class="footer-bottom"><p>&copy; 2026 Noticia Reality - Todos los derechos reservados</p></div></div></footer>
 <script src="/assets/aggressive-ads.js" defer></script>
 </body>
 </html>
@@ -467,9 +625,48 @@ def main():
     body = render_blocks(blocks)
     summary = render_summary(make_summary(blocks))
     cat_anchor = 'gh' if category_key == 'gh' else 'lcdlf'
+
+    # Gera subtitulo a partir do primeiro paragrafo (resumo curto)
+    subtitle = first_p[:200].rsplit(' ', 1)[0]
+    if len(first_p) > 200: subtitle += '...'
+
+    # Hero text grande estilo G1 (primeira palavra grande do titulo)
+    hero_words = title.split()
+    if len(hero_words) >= 4:
+        hero_text = ' '.join(hero_words[:3]).upper()
+    else:
+        hero_text = title.upper()
+    if len(hero_text) > 30:
+        hero_text = hero_text[:30]
+
+    # Tempo de leitura estimado: 200 palavras/min
+    word_count = sum(len((t).split()) for k, t in blocks)
+    reading_time = max(2, word_count // 200)
+
+    # Date ISO 8601 pra schema.org
+    today = datetime.now()
+    if args.date:
+        try:
+            for i, m in enumerate(MESES):
+                if m in args.date.lower():
+                    parts = args.date.replace(' de ', ' ').split()
+                    today = datetime(int(parts[2]), i + 1, int(parts[0]))
+                    break
+        except Exception:
+            pass
+    date_iso = today.strftime('%Y-%m-%dT%H:%M:%S')
+
+    title_url = title.replace(' ', '%20').replace('"', '')[:100]
+
     out = POST_TEMPLATE.format(
         title=html.escape(title, quote=True),
+        title_url=title_url,
         description=html.escape(description, quote=True),
+        subtitle=html.escape(subtitle, quote=True),
+        hero_text=html.escape(hero_text, quote=False),
+        reading_time=reading_time,
+        slug=slug,
+        date_iso=date_iso,
         keywords=keywords,
         tag=cat['tag'],
         eyebrow=cat['eyebrow'],
