@@ -45,29 +45,48 @@ def extract_post(html_text):
     date_m = re.search(r'<div class="post-meta">\s*<span>([^<]+)</span>', html_text)
     date = date_m.group(1).strip() if date_m else None
 
-    # Article content - everything inside <article> until <div class="share-bar"> or </article>
-    art_m = re.search(r'<article[^>]*>(.+?)(?:<div class="share-bar">|<div class="article-tags">|<div class="ad-banner|</article>)',
-                       html_text, re.DOTALL)
+    # Article content: pega tudo de <article> ate </article>
+    art_m = re.search(r'<article[^>]*>(.+?)</article>', html_text, re.DOTALL)
     if not art_m:
         return None
 
     content = art_m.group(1)
 
-    # Extract h2 and p blocks (em ordem)
+    # Remove sub-blocks que NAO sao body do artigo
+    # (estes sao re-gerados pelo template novo)
+    REMOVE_PATTERNS = [
+        r'<div class="post-hero[^"]*"[^>]*>.*?</div>',
+        r'<div class="post-meta"[^>]*>.*?</div>',
+        r'<details class="summary-box"[^>]*>.*?</details>',
+        r'<div class="article-hero[^"]*"[^>]*>.*?</div>',
+        r'<p class="caption">.*?</p>',
+        r'<p class="article-sub">.*?</p>',
+        r'<nav class="breadcrumb">.*?</nav>',
+        r'<div class="share-bar[^"]*"[^>]*>.*?</div>',
+        r'<div class="article-tags"[^>]*>.*?</div>',
+        r'<div class="ad-banner[^"]*"[^>]*>.*?</div>',
+        r'<div class="ad-separator[^"]*"[^>]*>.*?</div>',
+        r'<a [^>]*class="cta-[^"]*"[^>]*>.*?</a>',
+        r'<div class="newsletter[^"]*"[^>]*>.*?</div>\s*</div>',
+        r'<section class="related-section"[^>]*>.*?</section>',
+    ]
+    cleaned = content
+    for pat in REMOVE_PATTERNS:
+        cleaned = re.sub(pat, '', cleaned, flags=re.DOTALL)
+
+    # Extract h2 and p blocks remanescentes (que sao o body real)
     blocks = []
-    for m in re.finditer(r'<(h2|p)\b[^>]*>(.+?)</\1>', content, re.DOTALL):
+    for m in re.finditer(r'<(h2|p|blockquote)\b[^>]*>(.+?)</\1>', cleaned, re.DOTALL):
         kind = m.group(1)
+        if kind == 'blockquote':
+            kind = 'p'
         text = m.group(2).strip()
-        # Skip if its post-meta or hero (already extracted)
-        if 'post-hero' in m.group(0) or 'post-meta' in m.group(0):
-            continue
-        # Strip nested tags but keep <strong>
-        text = re.sub(r'<(?!/?strong\b)[^>]+>', '', text)
+        # Strip nested tags
+        text = re.sub(r'<[^>]+>', '', text)
         text = html_lib.unescape(text)
         text = re.sub(r'\s+', ' ', text).strip()
-        if text:
-            # Remove <strong> tags - generate-post.py vai re-aplicar bold
-            text = re.sub(r'</?strong>', '', text)
+        # Skip very short fragments
+        if text and len(text) > 15:
             blocks.append((kind, text))
 
     # Detect category

@@ -244,8 +244,42 @@ AD_728x90 = '''          <div class="ad-separator">Continua despues de la public
           </div>
           <div class="ad-separator ad-separator-bottom"></div>'''
 
-# Ciclo de ads in-content (G1-style: alterna tipos pra maximizar fill)
-AD_CYCLE = [AD_NATIVE, AD_300x250, AD_728x90, AD_NATIVE, AD_728x90]
+# CTAs clicaveis - SEMPRE aparecem (garantem receita mesmo se ad ficar branco)
+CTA_RED = '''          <a href="https://www.profitablecpmratenetwork.com/dd06dn3nu?key=bb878784d262344eb40ff3dd6b2981b3" target="_blank" rel="noopener nofollow sponsored" class="cta-banner">
+            <div class="cta-banner-text">
+              <span class="cta-eyebrow">Oferta exclusiva</span>
+              <span class="cta-title">Mira las mejores promociones de la semana</span>
+            </div>
+            <span class="cta-action">Ver ahora &rarr;</span>
+          </a>'''
+
+CTA_GOLD = '''          <a href="https://omg10.com/4/10967488" target="_blank" rel="noopener nofollow sponsored" class="cta-banner cta-banner-gold">
+            <div class="cta-banner-text">
+              <span class="cta-eyebrow">Patrocinado</span>
+              <span class="cta-title">Descubre las ofertas mas calientes de hoy</span>
+            </div>
+            <span class="cta-action">Acceder &rarr;</span>
+          </a>'''
+
+CTA_DARK = '''          <a href="https://www.profitablecpmratenetwork.com/dd06dn3nu?key=bb878784d262344eb40ff3dd6b2981b3" target="_blank" rel="noopener nofollow sponsored" class="cta-banner cta-banner-dark">
+            <div class="cta-banner-text">
+              <span class="cta-eyebrow">No te pierdas</span>
+              <span class="cta-title">Las ofertas que solo aparecen hoy</span>
+            </div>
+            <span class="cta-action">Aprovechar &rarr;</span>
+          </a>'''
+
+CTA_PURPLE = '''          <a href="https://omg10.com/4/10967488" target="_blank" rel="noopener nofollow sponsored" class="cta-banner cta-banner-purple">
+            <div class="cta-banner-text">
+              <span class="cta-eyebrow">Promocion limitada</span>
+              <span class="cta-title">Solo por hoy: precios de locura</span>
+            </div>
+            <span class="cta-action">Ver oferta &rarr;</span>
+          </a>'''
+
+# Ciclo intercalado: Ad real -> CTA -> Ad real -> CTA -> ...
+# Garante que SEMPRE tem algo clicavel mesmo se Adsterra fica branco
+AD_CYCLE = [AD_NATIVE, CTA_RED, AD_300x250, CTA_GOLD, AD_728x90, CTA_DARK, AD_NATIVE, CTA_PURPLE, AD_728x90]
 
 
 POST_TEMPLATE = '''<!DOCTYPE html>
