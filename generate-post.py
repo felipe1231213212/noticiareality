@@ -269,7 +269,7 @@ CTA_DARK = '''          <a href="https://www.profitablecpmratenetwork.com/dd06dn
             <span class="cta-action">Aprovechar &rarr;</span>
           </a>'''
 
-CTA_PURPLE = '''          <a href="https://omg10.com/4/10967488" target="_blank" rel="noopener nofollow sponsored" class="cta-banner cta-banner-purple">
+CTA_PURPLE = '''          <a href="https://motionless-bus.com/bF3/Vy0.PQ3tp-v/b/m/VsJpZPDf0/3CMLDBEp5TN/jzMm3mL/T/cawkM/TjkL2aNKDgET" target="_blank" rel="noopener nofollow sponsored" class="cta-banner cta-banner-purple">
             <div class="cta-banner-text">
               <span class="cta-eyebrow">Promocion limitada</span>
               <span class="cta-title">Solo por hoy: precios de locura</span>
