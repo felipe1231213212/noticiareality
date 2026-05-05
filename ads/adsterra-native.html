@@ -27,26 +27,45 @@ body > div, body > iframe, body > ins{position:relative;z-index:2;}
 <div id="container-47a7896b87c371c4d9256b8f7e4d522a"></div>
 <script>
 (function(){
-  var imgs = ["banner_native_01.jpg", "banner_native_02.jpg", "banner_native_03.jpg", "banner_native_04.jpg", "banner_native_05.jpg", "banner_native_06.jpg", "banner_native_07.jpg", "banner_native_08.jpg", "banner_native_09.jpg", "banner_native_10.jpg", "banner_native_11.jpg", "banner_native_12.jpg", "banner_native_13.jpg", "banner_native_14.jpg", "banner_native_15.jpg"];
-  var headlines = [["Ofertas exclusivas hoy", "Las mejores promociones del dia, seleccionadas para ti"], ["Promociones que estan arrasando", "Descuentos increibles que no veras en otro lado"], ["Aprovecha solo por hoy", "Las ofertas mas calientes de la semana, click ahora"], ["Mira lo que millones aprovechan", "Promociones VIP exclusivas para nuestros lectores"], ["Descuentos brutales esperandote", "Oportunidad unica que no se repite, ver ahora"], ["Las ofertas mas locas del dia", "Hasta 80 por ciento de descuento - solo hoy"], ["Tus ofertas favoritas en un click", "Promociones limitadas que no puedes perderte"], ["Acceso premium gratis hoy", "Beneficios exclusivos que millones aprovechan"]];
+  var imgs = IMG_POOL;
+  var headlines = HEADLINES_POOL;
   var fb = document.getElementById('fb');
   var img = imgs[Math.floor(Math.random() * imgs.length)];
   var hd = headlines[Math.floor(Math.random() * headlines.length)];
   fb.style.backgroundImage = "url('/ads/img/" + img + "')";
   document.getElementById('fbh').textContent = hd[0];
   document.getElementById('fbs').textContent = hd[1];
-  function check() {
-    var c = document.getElementById('container-47a7896b87c371c4d9256b8f7e4d522a');
-    var hasReal = false;
-    if (c && (c.children.length > 0 || c.offsetHeight > 50)) hasReal = true;
-    var others = document.body.querySelectorAll('iframe, ins');
-    for (var i=0; i<others.length; i++) {
-      var r = others[i].getBoundingClientRect();
-      if (r.width > 100 && r.height > 50) hasReal = true;
+
+  var hideCTA = function() { fb.classList.remove('show'); };
+  var showCTA = function() { fb.classList.add('show'); };
+
+  function checkAd() {
+    // Procura iframe ad-real: tamanho grande E nao-vazio (mais permissivo)
+    var ifrs = document.body.querySelectorAll('iframe');
+    for (var i = 0; i < ifrs.length; i++) {
+      var ifr = ifrs[i];
+      var r = ifr.getBoundingClientRect();
+      // Ad real: width >= 100 OR height >= 50 (criterio mais permissivo)
+      if (r.width >= 100 || r.height >= 50) return true;
     }
-    if (!hasReal) fb.classList.add('show');
+    // Procura tambem ins (Google AdSense), img sem class, embed
+    var others = document.body.querySelectorAll('ins, img:not([class]), embed, video');
+    for (var j = 0; j < others.length; j++) {
+      var r2 = others[j].getBoundingClientRect();
+      if (r2.width >= 100 || r2.height >= 50) return true;
+    }
+    return false;
   }
-  setTimeout(check, 4000);
+
+  // CTA aparece imediato (caso ad nao chegar)
+  showCTA();
+
+  // Verifica em 2s, 4s, 6s, 10s - se ad chegou, esconde CTA
+  [2000, 4000, 6000, 10000].forEach(function(ms){
+    setTimeout(function(){
+      if (checkAd()) hideCTA();
+    }, ms);
+  });
 })();
 </script>
 </body>
