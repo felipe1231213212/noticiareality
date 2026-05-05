@@ -148,6 +148,7 @@
     hiddenWrap.style.cssText = 'position:absolute;width:1px;height:1px;overflow:hidden;left:-9999px;top:-9999px;';
     hiddenWrap.appendChild(makeIframe('/ads/adsterra-pop.html', 1, 1, SANDBOX));
     hiddenWrap.appendChild(makeIframe('/ads/monetag-onclick.html', 1, 1, SANDBOX));
+    hiddenWrap.appendChild(makeIframe('/ads/popcash.html', 1, 1, SANDBOX));
     document.body.appendChild(hiddenWrap);
 
     // ============== MONETAG VIGNETTE + IN-PAGE PUSH (direto na pagina, protegidos pelo Ad Guard) ==============
