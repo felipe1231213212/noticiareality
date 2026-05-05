@@ -3,20 +3,42 @@
 
   var SANDBOX     = "allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation";
   var SANDBOX_POP = "allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"; // sem top-navigation
-  var GUARD_WINDOW = 1500; // ms apos clique para considerar interacao do user
+  var GUARD_WINDOW = 5000; // ms apos clique para considerar interacao do user
 
   // ============== AD GUARD ==============
   var lastUserClick = 0;
-  document.addEventListener('mousedown', function () { lastUserClick = Date.now(); }, true);
-  document.addEventListener('touchstart', function () { lastUserClick = Date.now(); }, true);
-  document.addEventListener('keydown', function () { lastUserClick = Date.now(); }, true);
+  function markUserAction() { lastUserClick = Date.now(); }
+
+  // Cliques na pagina principal
+  document.addEventListener('mousedown', markUserAction, true);
+  document.addEventListener('touchstart', markUserAction, true);
+  document.addEventListener('keydown', markUserAction, true);
+  document.addEventListener('pointerdown', markUserAction, true);
+
+  // Quando a window principal perde foco (geralmente porque user clicou num iframe),
+  // tambem conta como interacao do usuario.
+  window.addEventListener('blur', markUserAction);
+
+  // Mouse pairando sobre iframe + clique = interacao com ad.
+  // Detectamos via 'mouseover' + 'mousedown' no documento.
+  var hoveringIframe = false;
+  document.addEventListener('mouseover', function (e) {
+    if (e.target && e.target.tagName === 'IFRAME') hoveringIframe = true;
+  }, true);
+  document.addEventListener('mouseout', function (e) {
+    if (e.target && e.target.tagName === 'IFRAME') hoveringIframe = false;
+  }, true);
+  // Se mouse-down acontece sobre iframe, ja registramos interacao
+  document.addEventListener('mousedown', function () {
+    if (hoveringIframe) markUserAction();
+  }, true);
 
   // Bloquia window.open sem clique recente do user
   var origOpen = window.open;
   window.open = function () {
     var sinceClick = Date.now() - lastUserClick;
     if (sinceClick > GUARD_WINDOW) {
-      console.warn('[AD GUARD] window.open bloqueado (sem interacao do usuario, ' + sinceClick + 'ms desde ultimo clique)');
+      console.warn('[AD GUARD] window.open bloqueado (' + sinceClick + 'ms desde ultima interacao)');
       return null;
     }
     try { return origOpen.apply(this, arguments); }
@@ -28,7 +50,7 @@
     var sinceClick = Date.now() - lastUserClick;
     var nav = (performance.getEntriesByType && performance.getEntriesByType('navigation')[0]) || {};
     var sinceLoad = Date.now() - (nav.startTime || 0);
-    if (sinceClick > 2000 && sinceLoad > 1000) {
+    if (sinceClick > GUARD_WINDOW && sinceLoad > 1000) {
       console.warn('[AD GUARD] Redirect bloqueado (sem interacao do usuario)');
       e.preventDefault();
       e.returnValue = '';
