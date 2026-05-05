@@ -1259,6 +1259,47 @@ footer {
   font-weight: 500;
 }
 
+/* ===== ADSTERRA AD SLOTS ===== */
+.ad-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 22px 0;
+  min-height: 90px;
+  overflow: hidden;
+}
+
+.ad-banner iframe { max-width: 100%; }
+
+.ad-container {
+  display: flex;
+  justify-content: center;
+  margin: 18px auto;
+  padding: 0 16px;
+}
+
+.ad-sidebar {
+  margin: 0 0 22px;
+  min-height: 250px;
+}
+
+.ad-after-content {
+  margin: 28px 0;
+  min-height: 60px;
+}
+
+.ad-native {
+  margin: 28px 0;
+}
+
+.ad-desktop { display: flex; }
+.ad-mobile { display: none; }
+
+@media (max-width: 768px) {
+  .ad-desktop { display: none; }
+  .ad-mobile { display: flex; }
+}
+
 /* ============= RESPONSIVE - TABLET ============= */
 @media (max-width: 960px) {
   .container { padding: 0 18px; }
