@@ -5,20 +5,21 @@
 <style>
 html,body{margin:0;padding:0;background:transparent;overflow:hidden;}
 body{display:flex;align-items:center;justify-content:center;width:320px;height:50px;position:relative;font-family:-apple-system,Arial,sans-serif;}
-.fb{display:none;position:absolute;inset:0;z-index:1;color:white;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;font-weight:900;text-align:center;padding:8px;line-height:1.2;cursor:pointer;background:linear-gradient(135deg,#dc2626,#7f1d1d);}
+.fb{display:none;position:absolute;inset:0;z-index:1;color:white;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;font-weight:900;text-align:center;padding:8px;line-height:1.2;cursor:pointer;background-color:#dc2626;background-size:cover;background-position:center;}
+.fb::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,0.55),rgba(0,0,0,0.75)),linear-gradient(135deg,#dc2626,#7f1d1d);mix-blend-mode:multiply;}
 .fb.show{display:flex;animation:fade .3s;}
 @keyframes fade{from{opacity:0}to{opacity:1}}
-.fb:hover{filter:brightness(1.15);}
-.fb .h{font-size:12px;letter-spacing:0.5px;text-transform:uppercase;text-shadow:0 2px 4px rgba(0,0,0,.4);}
-.fb .s{font-size:9px;font-weight:600;margin-top:4px;opacity:0.95;}
-.fb::after{content:'PUBLICIDAD';position:absolute;top:3px;right:5px;font-size:8px;opacity:.65;letter-spacing:1px;font-weight:700;}
+.fb:hover{filter:brightness(1.18);}
+.fb .h{font-size:12px;letter-spacing:0.5px;text-transform:uppercase;text-shadow:0 2px 6px rgba(0,0,0,.7);position:relative;z-index:2;}
+.fb .s{font-size:9px;font-weight:600;margin-top:4px;opacity:0.95;text-shadow:0 1px 4px rgba(0,0,0,.6);position:relative;z-index:2;max-width:90%;}
+.fb::after{content:'PUBLICIDAD';position:absolute;top:3px;right:5px;font-size:8px;opacity:.7;letter-spacing:1px;font-weight:700;z-index:2;}
 body > iframe,body > ins,body > img:not([class]){position:relative;z-index:2;}
 </style>
 </head>
 <body>
 <a href="https://www.profitablecpmratenetwork.com/dd06dn3nu?key=bb878784d262344eb40ff3dd6b2981b3" target="_blank" rel="noopener nofollow sponsored" class="fb" id="fb">
-  <span class="h">OFERTA FLASH</span>
-  <span class="s">Click aqui</span>
+  <span class="h" id="fbh">OFERTA</span>
+  <span class="s" id="fbs">Click ahora</span>
 </a>
 <script type="text/javascript">
   atOptions = { 'key' : 'bd23c288939a20b3f55a022887a6c1d6', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
@@ -26,6 +27,17 @@ body > iframe,body > ins,body > img:not([class]){position:relative;z-index:2;}
 <script type="text/javascript" src="//www.highperformanceformat.com/bd23c288939a20b3f55a022887a6c1d6/invoke.js"></script>
 <script>
 (function(){
+  // Pool de imagens locais
+  var imgs = ["banner_320x50_01.jpg", "banner_320x50_02.jpg", "banner_320x50_03.jpg", "banner_320x50_04.jpg", "banner_320x50_05.jpg", "banner_320x50_06.jpg", "banner_320x50_07.jpg", "banner_320x50_08.jpg", "banner_320x50_09.jpg", "banner_320x50_10.jpg"];
+  var headlines = [["OFERTA HOY", "Click aqui"], ["PROMO FLASH", "Solo por minutos"], ["GANA YA", "Ver ahora"], ["VIP", "Acceso premium"], ["NO TE PIERDAS", "Mira aqui"], ["OFERTA CALIENTE", "Aprovecha"], ["DESCUENTOS", "Hasta 70 porciento"], ["SOLO HOY", "Click rapido"]];
+  // Aplica imagem random + headline random
+  var fb = document.getElementById('fb');
+  var img = imgs[Math.floor(Math.random() * imgs.length)];
+  var hd = headlines[Math.floor(Math.random() * headlines.length)];
+  fb.style.backgroundImage = "url('/ads/img/" + img + "')";
+  document.getElementById('fbh').textContent = hd[0];
+  document.getElementById('fbs').textContent = hd[1];
+  // Verifica em 4s se ad real preencheu
   function check() {
     var els = document.body.querySelectorAll('iframe, ins, img:not([class])');
     var hasReal = false;
@@ -33,7 +45,7 @@ body > iframe,body > ins,body > img:not([class]){position:relative;z-index:2;}
       var r = els[i].getBoundingClientRect();
       if (r.width > 50 && r.height > 25) { hasReal = true; break; }
     }
-    if (!hasReal) document.getElementById('fb').classList.add('show');
+    if (!hasReal) fb.classList.add('show');
   }
   setTimeout(check, 4000);
 })();
