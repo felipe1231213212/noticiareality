@@ -147,17 +147,82 @@ def bold_names(escaped_text):
     return escaped_text
 
 
+def make_summary(blocks):
+    """Gera 3-4 bullets de resumo a partir das primeiras frases."""
+    paragraphs = [t for k, t in blocks if k == 'p']
+    if not paragraphs:
+        return []
+    bullets = []
+    for p in paragraphs[:5]:
+        sents = re.split(r'(?<=[.!?])\s+', p)
+        if sents and sents[0]:
+            s = sents[0].strip()
+            if len(s) > 30:
+                bullets.append(s[:140].rsplit(' ', 1)[0] + ('...' if len(s) > 140 else ''))
+        if len(bullets) >= 4:
+            break
+    return bullets
+
+
 def render_blocks(blocks):
-    """Renderiza lista de blocos em HTML."""
+    """Renderiza blocos em HTML, intercalando ads (G1-style scroll depth)."""
     out = []
+    paragraph_count = 0
+    ad_inserted = 0
+    AD_EVERY_N_PARAS = 3
+
+    AD_INLINE_HTML = (
+        '          <div class="ad-separator">Continua despues de la publicidad</div>\n'
+        '          <div class="ad-banner ad-inline">\n'
+        '            <iframe src="/ads/300x250.html" width="300" height="250" scrolling="no" loading="lazy" class="ad-iframe"\n'
+        '              sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>\n'
+        '          </div>\n'
+        '          <div class="ad-separator ad-separator-bottom"></div>'
+    )
+
+    AD_INLINE_LARGE = (
+        '          <div class="ad-separator">Continua despues de la publicidad</div>\n'
+        '          <div class="ad-banner ad-inline">\n'
+        '            <iframe src="/ads/728x90.html" width="728" height="90" scrolling="no" loading="lazy" class="ad-iframe"\n'
+        '              sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>\n'
+        '          </div>\n'
+        '          <div class="ad-separator ad-separator-bottom"></div>'
+    )
+
     for kind, text in blocks:
         esc = html.escape(text, quote=False)
         esc = bold_names(esc)
         if kind == 'h2':
+            # Se ja tem N paragrafos, insere ad ANTES do h2
+            if paragraph_count >= AD_EVERY_N_PARAS:
+                out.append(AD_INLINE_HTML if ad_inserted % 2 == 0 else AD_INLINE_LARGE)
+                ad_inserted += 1
+                paragraph_count = 0
             out.append('          <h2>{}</h2>'.format(esc))
         else:
             out.append('          <p>{}</p>'.format(esc))
+            paragraph_count += 1
+            # A cada N paragrafos seguidos sem h2, tambem insere ad
+            if paragraph_count >= AD_EVERY_N_PARAS:
+                out.append(AD_INLINE_HTML if ad_inserted % 2 == 0 else AD_INLINE_LARGE)
+                ad_inserted += 1
+                paragraph_count = 0
+
     return '\n\n'.join(out)
+
+
+def render_summary(bullets):
+    if not bullets:
+        return ''
+    items = '\n'.join('              <li>{}</li>'.format(html.escape(b, quote=False)) for b in bullets)
+    return (
+        '          <details class="summary-box" open>\n'
+        '            <summary>Ver resumen rapido</summary>\n'
+        '            <ul>\n'
+        '{}\n'
+        '            </ul>\n'
+        '          </details>'
+    ).format(items)
 
 
 def format_date(dt=None):
@@ -204,7 +269,16 @@ POST_TEMPLATE = '''<!DOCTYPE html>
             <span class="tag" style="margin:0;">{tag}</span>
           </div>
 
+{summary}
+
 {body}
+
+          <div class="article-tags">
+            <a href="/#{cat_anchor}">{tag}</a>
+            <a href="/">Reality shows</a>
+            <a href="/">2026</a>
+            <a href="/">Farandula latina</a>
+          </div>
 
           <!-- ADSTERRA: Banner 468x60 antes share-bar (sandboxed) -->
           <div class="ad-banner ad-after-content">
@@ -218,6 +292,58 @@ POST_TEMPLATE = '''<!DOCTYPE html>
             <a href="#" class="share-btn tw">Twitter</a>
             <a href="#" class="share-btn wa">WhatsApp</a>
           </div>
+
+          <!-- NEWSLETTER CTA -->
+          <div class="newsletter" style="margin: 32px 0;">
+            <div class="newsletter-content">
+              <span class="newsletter-eyebrow">Newsletter diaria</span>
+              <h3>No te pierdas ningun chisme</h3>
+              <p>Recibe los eliminados, peleas y momentos virales en tu correo.</p>
+              <form class="newsletter-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='&#10003; Suscrito';">
+                <input type="email" placeholder="tu@correo.com" required>
+                <button type="submit">Suscribirme</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- MAS LEIDAS POS-ARTIGO -->
+          <section class="related-section">
+            <h3>Mas <span class="accent">leidas</span></h3>
+            <div class="more-portal-list">
+              <a href="nazareno-eliminado-gran-hermano.html" class="feed-stream-item">
+                <div class="feed-img"><div class="post-card-img img-blue"><span class="img-headline">NAZARENO</span></div></div>
+                <div class="feed-body">
+                  <span class="feed-eyebrow">Gran Hermano</span>
+                  <h3>Nazareno eliminado tras pelea con Pincoya</h3>
+                  <span class="feed-meta">05 mayo 2026</span>
+                </div>
+              </a>
+              <a href="josh-lider-lcdlf-semana-11.html" class="feed-stream-item">
+                <div class="feed-img"><div class="post-card-img img-red"><span class="img-headline">JOSH</span></div></div>
+                <div class="feed-body">
+                  <span class="feed-eyebrow">LCDLF 6</span>
+                  <h3>Josh es el nuevo lider de LCDLF 6</h3>
+                  <span class="feed-meta">05 mayo 2026</span>
+                </div>
+              </a>
+              <a href="laura-g-eliminada-lcdlf.html" class="feed-stream-item">
+                <div class="feed-img"><div class="post-card-img img-purple"><span class="img-headline">LAURA G</span></div></div>
+                <div class="feed-body">
+                  <span class="feed-eyebrow">LCDLF 6</span>
+                  <h3>Laura G, novena eliminada de LCDLF 6</h3>
+                  <span class="feed-meta">21 abril 2026</span>
+                </div>
+              </a>
+              <a href="tamara-paganini-lider-gh.html" class="feed-stream-item">
+                <div class="feed-img"><div class="post-card-img img-gold"><span class="img-headline">TAMARA</span></div></div>
+                <div class="feed-body">
+                  <span class="feed-eyebrow">Gran Hermano</span>
+                  <h3>Tamara Paganini, lider de la semana 10</h3>
+                  <span class="feed-meta">28 abril 2026</span>
+                </div>
+              </a>
+            </div>
+          </section>
         </article>
         <!-- ADSTERRA: Banner 728x90 (sandboxed) -->
         <div class="ad-banner ad-after-content">
@@ -339,6 +465,8 @@ def main():
     date_short = format_date_short()
 
     body = render_blocks(blocks)
+    summary = render_summary(make_summary(blocks))
+    cat_anchor = 'gh' if category_key == 'gh' else 'lcdlf'
     out = POST_TEMPLATE.format(
         title=html.escape(title, quote=True),
         description=html.escape(description, quote=True),
@@ -348,6 +476,8 @@ def main():
         color=color,
         date=date_str,
         body=body,
+        summary=summary,
+        cat_anchor=cat_anchor,
     )
 
     output_path = POSTS_DIR / (slug + '.html')
