@@ -1259,7 +1259,14 @@ footer {
   font-weight: 500;
 }
 
-/* ===== ADSTERRA AD SLOTS ===== */
+/* ===== ADSTERRA AD SLOTS (sandboxed iframes) ===== */
+.ad-iframe {
+  display: block;
+  margin: 0 auto;
+  border: 0;
+  max-width: 100%;
+}
+
 .ad-banner {
   display: flex;
   justify-content: center;
