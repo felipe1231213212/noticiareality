@@ -107,11 +107,36 @@
   <!-- ADSTERRA: Banner 728x90 desktop + 320x50 mobile -->
   <div class="container ad-container">
     <div class="ad-banner ad-desktop">
-      <iframe src="/ads/728x90.html" width="728" height="90" scrolling="no" loading="lazy" class="ad-iframe"
+      <iframe src="/ads/728x90.html" width="728" height="90" scrolling="no" loading="eager" class="ad-iframe"
         sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
     </div>
     <div class="ad-banner ad-mobile">
-      <iframe src="/ads/320x50.html" width="320" height="50" scrolling="no" loading="lazy" class="ad-iframe"
+      <iframe src="/ads/320x50.html" width="320" height="50" scrolling="no" loading="eager" class="ad-iframe"
+        sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
+    </div>
+  </div>
+
+  <!-- BLOCO ADS PREMIUM TOPO (3 banners 300x250 lado a lado, eager loading) -->
+  <div class="container">
+    <div class="ad-priority-row">
+      <div class="ad-banner-slot">
+        <iframe src="/ads/300x250.html" width="300" height="250" scrolling="no" loading="eager" class="ad-iframe"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
+      </div>
+      <div class="ad-banner-slot">
+        <iframe src="/ads/300x250.html" width="300" height="250" scrolling="no" loading="eager" class="ad-iframe"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
+      </div>
+      <div class="ad-banner-slot">
+        <iframe src="/ads/300x250.html" width="300" height="250" scrolling="no" loading="eager" class="ad-iframe"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
+      </div>
+    </div>
+
+    <!-- Native Banner full-width topo -->
+    <div class="ad-banner ad-after-content" style="margin: 18px auto;">
+      <iframe src="/ads/adsterra-native.html" width="100%" height="280" scrolling="no" loading="eager" class="ad-iframe"
+        style="max-width:760px;"
         sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
     </div>
   </div>
