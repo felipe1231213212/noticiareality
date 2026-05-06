@@ -466,6 +466,22 @@ header {
   transition: transform 0.4s ease;
 }
 
+/* Quando tem image background (aplicado via JS), gradient vira overlay escuro */
+.post-card-img[style*="background-image"]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.65) 100%);
+  z-index: 1;
+}
+
+.post-card-img[style*="background-image"] .img-headline,
+.post-card-img[style*="background-image"] .card-tag,
+.post-card-img[style*="background-image"] .card-badge-hot {
+  position: relative;
+  z-index: 2;
+}
+
 .post-card-img.img-red { background: linear-gradient(135deg, #991b1b, #dc2626 60%, #ef4444); }
 .post-card-img.img-blue { background: linear-gradient(135deg, #0c1e3a, #1e3a8a 50%, #3b82f6); }
 .post-card-img.img-green { background: linear-gradient(135deg, #064e3b, #065f46 50%, #10b981); }

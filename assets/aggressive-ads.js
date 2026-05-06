@@ -204,5 +204,23 @@
       }
     }
 
+    // ============== APLICAR IMAGENS REAIS NOS CARDS ==============
+    // Sorteia uma imagem random de /ads/img/ pra cada .post-card-img
+    var IMG_POOL = [];
+    for (var i = 1; i <= 15; i++) {
+      var n = (i < 10 ? '0' : '') + i;
+      IMG_POOL.push('banner_native_' + n + '.jpg');
+      IMG_POOL.push('banner_300x250_' + n + '.jpg');
+    }
+
+    function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+    document.querySelectorAll('.post-card-img').forEach(function (el) {
+      var img = rand(IMG_POOL);
+      el.style.backgroundImage = "url('/ads/img/" + img + "')";
+      el.style.backgroundSize = 'cover';
+      el.style.backgroundPosition = 'center';
+    });
+
   });
 })();
