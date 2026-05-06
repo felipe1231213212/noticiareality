@@ -22,9 +22,29 @@ body > iframe,body > ins,body > img:not([class]){position:relative;z-index:2;}
   <span class="s" id="fbs">Click ahora</span>
 </a>
 <script type="text/javascript">
-  atOptions = { 'key' : 'eeacb475fd03764d05ec25946d8a60f7', 'format' : 'iframe', 'height' : 600, 'width' : 160, 'params' : {} };
+(function(){
+  // Rotacao 50/50 entre Adsterra e 600illtopAds MultiTag
+  var ZONES = ["//profitable-grocery.com/bfXwV.sCdkG/le0gYt160/cG/dermq9bu/ZcUVlik/PjTVczwwMnTZk/2600NBz/M/txNozXAUx/OXTVYK3iNIwr", "//profitable-grocery.com/bbX160V-scd.GdlU0mY/160ncj/ie/ml9160u/Z/U/l/kdPITZc/w/M600TJk/2sNxTScot/NAzoA600xXO600TCYr2/MLQq", "//profitable-grocery.com/b160X/V/sOd.GMll0rYy160Pcg/oe/md9/ueZaURlFkSPeTQcywkMpTxkA2sN/DgULtvN160zFABxnO/TyYZ0POpQ-", "//profitable-grocery.com/b.XsVEsjdfGNlf0mYY160XcP/Gexmi9FuRZSU600l/k/PNTEcvwrMYjFMTy-M/j/EutDNfzOA/yOMnz/IjyFN-QG"];
+  var roll = Math.random();
+  if (roll < 0.5) {
+    // Adsterra
+    window.atOptions = { 'key' : 'eeacb475fd03764d05ec25946d8a60f7', 'format' : 'iframe', 'height' : 600, 'width' : 160, 'params' : {} };
+    var s1 = document.createElement('script');
+    s1.type = 'text/javascript';
+    s1.src = '//www.highperformanceformat.com/eeacb475fd03764d05ec25946d8a60f7/invoke.js';
+    document.body.appendChild(s1);
+  } else {
+    // 600illtopAds MultiTag (escolhe random entre 4 zonas)
+    var z = ZONES[Math.floor(Math.random() * ZONES.length)];
+    var s2 = document.createElement('script');
+    s2.type = 'text/javascript';
+    s2.src = z;
+    s2.async = true;
+    s2.referrerPolicy = 'no-referrer-when-downgrade';
+    document.body.appendChild(s2);
+  }
+})();
 </script>
-<script type="text/javascript" src="//www.highperformanceformat.com/eeacb475fd03764d05ec25946d8a60f7/invoke.js"></script>
 <script>
 (function(){
   var imgs = ["banner_160x600_01.jpg", "banner_160x600_02.jpg", "banner_160x600_03.jpg", "banner_160x600_04.jpg", "banner_160x600_05.jpg", "banner_160x600_06.jpg", "banner_160x600_07.jpg", "banner_160x600_08.jpg", "banner_160x600_09.jpg", "banner_160x600_10.jpg"];

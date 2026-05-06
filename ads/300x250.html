@@ -22,9 +22,29 @@ body > iframe,body > ins,body > img:not([class]){position:relative;z-index:2;}
   <span class="s" id="fbs">Click ahora</span>
 </a>
 <script type="text/javascript">
-  atOptions = { 'key' : '56f421252bc25889a156a22a386a874e', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
+(function(){
+  // Rotacao 50/50 entre Adsterra e 250illtopAds MultiTag
+  var ZONES = ["//profitable-grocery.com/bfXwV.sCdkG/le0gYt300/cG/dermq9bu/ZcUVlik/PjTVczwwMnTZk/2250NBz/M/txNozXAUx/OXTVYK3iNIwr", "//profitable-grocery.com/bbX300V-scd.GdlU0mY/300ncj/ie/ml9300u/Z/U/l/kdPITZc/w/M250TJk/2sNxTScot/NAzoA250xXO250TCYr2/MLQq", "//profitable-grocery.com/b300X/V/sOd.GMll0rYy300Pcg/oe/md9/ueZaURlFkSPeTQcywkMpTxkA2sN/DgULtvN300zFABxnO/TyYZ0POpQ-", "//profitable-grocery.com/b.XsVEsjdfGNlf0mYY300XcP/Gexmi9FuRZSU250l/k/PNTEcvwrMYjFMTy-M/j/EutDNfzOA/yOMnz/IjyFN-QG"];
+  var roll = Math.random();
+  if (roll < 0.5) {
+    // Adsterra
+    window.atOptions = { 'key' : '56f421252bc25889a156a22a386a874e', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
+    var s1 = document.createElement('script');
+    s1.type = 'text/javascript';
+    s1.src = '//www.highperformanceformat.com/56f421252bc25889a156a22a386a874e/invoke.js';
+    document.body.appendChild(s1);
+  } else {
+    // 250illtopAds MultiTag (escolhe random entre 4 zonas)
+    var z = ZONES[Math.floor(Math.random() * ZONES.length)];
+    var s2 = document.createElement('script');
+    s2.type = 'text/javascript';
+    s2.src = z;
+    s2.async = true;
+    s2.referrerPolicy = 'no-referrer-when-downgrade';
+    document.body.appendChild(s2);
+  }
+})();
 </script>
-<script type="text/javascript" src="//www.highperformanceformat.com/56f421252bc25889a156a22a386a874e/invoke.js"></script>
 <script>
 (function(){
   var imgs = ["banner_300x250_01.jpg", "banner_300x250_02.jpg", "banner_300x250_03.jpg", "banner_300x250_04.jpg", "banner_300x250_05.jpg", "banner_300x250_06.jpg", "banner_300x250_07.jpg", "banner_300x250_08.jpg", "banner_300x250_09.jpg", "banner_300x250_10.jpg", "banner_300x250_11.jpg", "banner_300x250_12.jpg", "banner_300x250_13.jpg", "banner_300x250_14.jpg", "banner_300x250_15.jpg"];
