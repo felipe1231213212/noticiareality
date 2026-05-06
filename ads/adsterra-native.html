@@ -66,6 +66,16 @@ body > div, body > iframe, body > ins{position:relative;z-index:2;}
       if (checkAd()) hideCTA();
     }, ms);
   });
+
+  // Reporta status pra pagina parent (postMessage)
+  function report() {
+    var filled = checkAd();
+    if (window.parent !== window) {
+      window.parent.postMessage({type:'nr_ad', slot:'Native', filled:filled, url:location.pathname}, '*');
+    }
+  }
+  setTimeout(report, 6000);
+  setTimeout(report, 14000);
 })();
 </script>
 </body>

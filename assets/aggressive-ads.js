@@ -204,6 +204,42 @@
       }
     }
 
+    // ============== AD STATS WIDGET (debug ?stats=1) ==============
+    var stats = { total: 0, filled: 0, byType: {} };
+    window.addEventListener('message', function (e) {
+      if (!e.data || e.data.type !== 'nr_ad') return;
+      stats.total++;
+      var slot = e.data.slot || 'unknown';
+      stats.byType[slot] = stats.byType[slot] || { total: 0, filled: 0 };
+      stats.byType[slot].total++;
+      if (e.data.filled) {
+        stats.filled++;
+        stats.byType[slot].filled++;
+      }
+      var pct = stats.total ? Math.round(stats.filled / stats.total * 100) : 0;
+      console.log('[AD STATS]', stats.filled + '/' + stats.total + ' ads preenchidos (' + pct + '%)');
+
+      // Atualiza widget se existir
+      var w = document.getElementById('ad-stats-widget');
+      if (w) {
+        var html = '<strong>' + stats.filled + '/' + stats.total + '</strong> ads (' + pct + '%)<br>';
+        Object.keys(stats.byType).forEach(function (k) {
+          var s = stats.byType[k];
+          html += '<small>' + k + ': ' + s.filled + '/' + s.total + '</small><br>';
+        });
+        w.innerHTML = html;
+      }
+    });
+
+    // Mostra widget apenas se URL tem ?stats=1 (debug mode)
+    if (location.search.indexOf('stats=1') !== -1) {
+      var w = document.createElement('div');
+      w.id = 'ad-stats-widget';
+      w.style.cssText = 'position:fixed;bottom:14px;left:14px;z-index:99999;background:#000;color:#fff;padding:14px 18px;border-radius:6px;font-family:monospace;font-size:12px;line-height:1.5;box-shadow:0 4px 14px rgba(0,0,0,0.4);max-width:240px;';
+      w.innerHTML = '<strong>0/0 ads</strong> <small>(carregando...)</small>';
+      document.body.appendChild(w);
+    }
+
     // ============== APLICAR IMAGENS REAIS NOS CARDS ==============
     // Sorteia uma imagem random de /ads/img/ pra cada .post-card-img
     var IMG_POOL = [];
