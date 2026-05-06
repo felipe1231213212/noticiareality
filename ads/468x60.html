@@ -6,13 +6,13 @@
 html,body{margin:0;padding:0;background:transparent;overflow:hidden;}
 body{display:flex;align-items:center;justify-content:center;width:468px;height:60px;position:relative;font-family:-apple-system,Arial,sans-serif;}
 .fb{display:none;position:absolute;inset:0;z-index:1;color:white;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;font-weight:900;text-align:center;padding:8px;line-height:1.2;cursor:pointer;background-color:#059669;background-size:cover;background-position:center;}
-.fb::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,0.55),rgba(0,0,0,0.75)),linear-gradient(135deg,#059669,#064e3b);mix-blend-mode:multiply;}
+.fb::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,0.55),rgba(0,0,0,0.75)),linear-gradient(135deg,#059669,#064e3b);mix-blend-mode:multiply;}
 .fb.show{display:flex;animation:fade .3s;}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 .fb:hover{filter:brightness(1.18);}
 .fb .h{font-size:12px;letter-spacing:0.5px;text-transform:uppercase;text-shadow:0 2px 6px rgba(0,0,0,.7);position:relative;z-index:2;}
 .fb .s{font-size:9px;font-weight:600;margin-top:4px;opacity:0.95;text-shadow:0 1px 4px rgba(0,0,0,.6);position:relative;z-index:2;max-width:90%;}
-.fb::after{content:'PUBLICIDAD';position:absolute;top:3px;right:5px;font-size:8px;opacity:.7;letter-spacing:1px;font-weight:700;z-index:2;}
+.fb::after{content:"PUBLICIDAD";position:absolute;top:3px;right:5px;font-size:8px;opacity:.7;letter-spacing:1px;font-weight:700;z-index:2;}
 body > iframe,body > ins,body > img:not([class]){position:relative;z-index:2;}
 </style>
 </head>
@@ -27,27 +27,28 @@ body > iframe,body > ins,body > img:not([class]){position:relative;z-index:2;}
 <script type="text/javascript" src="//www.highperformanceformat.com/fcc585bf82af574239d36b6be624487b/invoke.js"></script>
 <script>
 (function(){
-  // Pool de imagens locais
   var imgs = ["banner_468x60_01.jpg", "banner_468x60_02.jpg", "banner_468x60_03.jpg", "banner_468x60_04.jpg", "banner_468x60_05.jpg", "banner_468x60_06.jpg", "banner_468x60_07.jpg", "banner_468x60_08.jpg", "banner_468x60_09.jpg", "banner_468x60_10.jpg"];
   var headlines = [["OFERTA HOY", "Click aqui"], ["PROMO FLASH", "Solo por minutos"], ["GANA YA", "Ver ahora"], ["VIP", "Acceso premium"], ["NO TE PIERDAS", "Mira aqui"], ["OFERTA CALIENTE", "Aprovecha"], ["DESCUENTOS", "Hasta 70 porciento"], ["SOLO HOY", "Click rapido"]];
-  // Aplica imagem random + headline random
   var fb = document.getElementById('fb');
   var img = imgs[Math.floor(Math.random() * imgs.length)];
   var hd = headlines[Math.floor(Math.random() * headlines.length)];
   fb.style.backgroundImage = "url('/ads/img/" + img + "')";
   document.getElementById('fbh').textContent = hd[0];
   document.getElementById('fbs').textContent = hd[1];
-  // Verifica em 4s se ad real preencheu
-  function check() {
-    var els = document.body.querySelectorAll('iframe, ins, img:not([class])');
-    var hasReal = false;
+  function checkAd() {
+    var els = document.body.querySelectorAll('iframe, ins, img:not([class]), embed, video');
     for (var i = 0; i < els.length; i++) {
-      var r = els[i].getBoundingClientRect();
-      if (r.width > 50 && r.height > 25) { hasReal = true; break; }
+      var el = els[i];
+      if (el.classList && el.classList.contains('fb')) continue;
+      var r = el.getBoundingClientRect();
+      if (r.width >= 100 || r.height >= 50) return true;
     }
-    if (!hasReal) fb.classList.add('show');
+    return false;
   }
-  setTimeout(check, 4000);
+  fb.classList.add('show');
+  [1500, 3000, 5000, 8000, 12000].forEach(function(ms){
+    setTimeout(function(){ if (checkAd()) fb.classList.remove('show'); }, ms);
+  });
 })();
 </script>
 </body>
