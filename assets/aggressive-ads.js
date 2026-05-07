@@ -263,8 +263,9 @@
       document.body.appendChild(w);
     }
 
-    // ============== APLICAR IMAGENS REAIS NOS CARDS ==============
-    // Sorteia uma imagem random de /ads/img/ pra cada .post-card-img
+    // ============== APLICAR IMAGENS DE PERSONAGENS NOS CARDS ==============
+    // Detecta nome do personagem no titulo do card e usa imagem correspondente
+    var CHARS = ['caeli','celinee','curvy','fabio','horacio','jeni','josh','kenny','lorena','luis-coronel','sandra','stefano','veronica','yoridan'];
     var IMG_POOL = [];
     for (var i = 1; i <= 15; i++) {
       var n = (i < 10 ? '0' : '') + i;
@@ -274,12 +275,70 @@
 
     function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
+    function findChar(text) {
+      text = (text || '').toLowerCase();
+      // Ordena por tamanho (mais especifico primeiro)
+      var sorted = CHARS.slice().sort(function (a, b) { return b.length - a.length; });
+      for (var i = 0; i < sorted.length; i++) {
+        var search = sorted[i].replace('-', ' ');
+        if (text.indexOf(search) !== -1) return sorted[i];
+      }
+      return null;
+    }
+
     document.querySelectorAll('.post-card-img').forEach(function (el) {
-      var img = rand(IMG_POOL);
-      el.style.backgroundImage = "url('/ads/img/" + img + "')";
+      // Procura titulo no card pai
+      var card = el.closest('.feed-card, .hero-small, .post-card, .latest-item, .feed-stream-item, .hero-main');
+      var titleEl = card ? card.querySelector('h2, h3, h4, .h, .img-headline') : null;
+      var titleText = titleEl ? titleEl.textContent : '';
+      // Pega tambem o slug do link (pra match em casos onde titulo e curto)
+      var link = card && card.tagName === 'A' ? card.getAttribute('href') : null;
+      if (!link && card) {
+        var a = card.querySelector('a');
+        link = a ? a.getAttribute('href') : null;
+      }
+      var combo = titleText + ' ' + (link || '');
+
+      var char = findChar(combo);
+      if (char) {
+        el.style.backgroundImage = "url('/img/personajes/card_" + char + ".jpg')";
+      } else {
+        var img = rand(IMG_POOL);
+        el.style.backgroundImage = "url('/ads/img/" + img + "')";
+      }
       el.style.backgroundSize = 'cover';
-      el.style.backgroundPosition = 'center';
+      el.style.backgroundPosition = 'center 20%';
     });
+
+    // Aplica tambem no .hero-bg do hero principal (imagem grande)
+    var heroMain = document.querySelector('.hero-main');
+    if (heroMain) {
+      var heroH2 = heroMain.querySelector('h2');
+      var heroLink = heroMain.getAttribute('href');
+      var heroChar = findChar((heroH2 ? heroH2.textContent : '') + ' ' + (heroLink || ''));
+      if (heroChar) {
+        var heroBg = heroMain.querySelector('.hero-bg');
+        if (heroBg) {
+          heroBg.style.backgroundImage = "url('/img/personajes/hero_" + heroChar + ".jpg')";
+          heroBg.style.backgroundSize = 'cover';
+          heroBg.style.backgroundPosition = 'center 25%';
+        }
+      }
+    }
+
+    // Aplica nos .article-hero dos posts (banner gigante topo)
+    var articleHero = document.querySelector('.article-hero');
+    if (articleHero) {
+      var pageH1 = document.querySelector('h1');
+      var pageTitle = pageH1 ? pageH1.textContent : document.title;
+      var pageChar = findChar(pageTitle);
+      if (pageChar) {
+        articleHero.style.backgroundImage = "url('/img/personajes/hero_" + pageChar + ".jpg')";
+        articleHero.style.backgroundSize = 'cover';
+        articleHero.style.backgroundPosition = 'center 25%';
+        articleHero.classList.add('has-bg-image');
+      }
+    }
 
   });
 })();
