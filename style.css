@@ -1,23 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap');
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --red: #dc2626;
-  --red-dark: #991b1b;
+  --red: #c8000a;
+  --red-dark: #8b0000;
   --red-soft: #fef2f2;
-  --black: #0a0a0a;
-  --gray-900: #171717;
-  --gray-700: #404040;
-  --gray-500: #737373;
-  --gray-300: #d4d4d4;
-  --gray-200: #e5e5e5;
-  --gray-100: #f5f5f5;
-  --gray-50: #fafafa;
+  --black: #1a1a1a;
+  --gray-900: #2b2b2b;
+  --gray-700: #4a4a4a;
+  --gray-500: #767676;
+  --gray-300: #d0d0d0;
+  --gray-200: #e3e3e3;
+  --gray-100: #f0f0f0;
+  --gray-50: #f7f7f7;
   --bg: #ffffff;
   --yellow: #facc15;
-  --serif: 'Playfair Display', Georgia, serif;
-  --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Tipografia G1-style: Arial em tudo */
+  --serif: Arial, Helvetica, sans-serif;
+  --sans: Arial, Helvetica, sans-serif;
 }
 
 html { scroll-behavior: smooth; }
@@ -1644,28 +1643,29 @@ header::after {
 /* Feed card melhorado: sombra sutil + hover */
 .feed-card {
   display: flex;
-  gap: 18px;
-  padding: 20px;
-  margin-bottom: 14px;
-  background: var(--bg);
-  border: 1px solid var(--gray-200);
-  border-radius: 8px;
+  gap: 20px;
+  padding: 16px 0;
+  margin-bottom: 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--gray-200);
+  border-radius: 0;
   text-decoration: none;
   position: relative;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s;
+  transition: opacity 0.15s ease;
 }
 
 .feed-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px -8px rgba(0,0,0,0.15);
-  border-color: var(--gray-300);
+  background: var(--gray-50);
+  transform: none;
+  box-shadow: none;
 }
 
 .feed-card .fc-thumb {
   flex-shrink: 0;
-  width: 200px;
-  height: 130px;
-  border-radius: 6px;
+  width: 280px;
+  height: 180px;
+  border-radius: 4px;
   position: relative;
   overflow: hidden;
 }
@@ -1710,13 +1710,13 @@ header::after {
 }
 
 .feed-card h4 {
-  font-family: var(--serif);
-  font-size: 1.18rem;
-  font-weight: 800;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
   line-height: 1.25;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   color: var(--black);
-  letter-spacing: -0.3px;
+  letter-spacing: -0.2px;
   transition: color 0.2s;
 }
 
@@ -2008,8 +2008,8 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .feed-card { gap: 14px; padding: 14px; }
-  .feed-card .fc-thumb { width: 110px; height: 80px; }
+  .feed-card { gap: 12px; padding: 14px 0; }
+  .feed-card .fc-thumb { width: 130px; height: 90px; }
   .feed-card h4 { font-size: 1rem; }
   .feed-card p { font-size: 0.85rem; -webkit-line-clamp: 2; }
   .footer-grid { grid-template-columns: 1fr; gap: 28px; }
