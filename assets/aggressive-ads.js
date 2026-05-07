@@ -218,6 +218,19 @@
     var stats = { total: 0, filled: 0, byType: {} };
     window.addEventListener('message', function (e) {
       if (!e.data || e.data.type !== 'nr_ad') return;
+      // Hide me: esconde o iframe pai inteiro se slot ficou vazio
+      if (e.data.hide && e.source) {
+        var allIframes = document.querySelectorAll('iframe.ad-iframe');
+        for (var i = 0; i < allIframes.length; i++) {
+          if (allIframes[i].contentWindow === e.source) {
+            // Esconde o container inteiro (parent do iframe)
+            var container = allIframes[i].closest('.ad-banner, .ad-banner-slot, .ad-priority-row, #sticky-ad, #sticky-ad-mobile, #side-ad-left, #side-ad-right, #modal-ad') || allIframes[i].parentElement;
+            if (container) container.style.display = 'none';
+            else allIframes[i].style.display = 'none';
+            break;
+          }
+        }
+      }
       stats.total++;
       var slot = e.data.slot || 'unknown';
       stats.byType[slot] = stats.byType[slot] || { total: 0, filled: 0 };
