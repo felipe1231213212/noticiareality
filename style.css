@@ -1523,7 +1523,7 @@ footer {
   padding: 0 8px;
 }
 
-/* Floating side banners (only on wide screens) */
+/* Floating side banners (only on wide screens) - 300x250 stacked */
 #side-ad-left,
 #side-ad-right {
   position: fixed;
@@ -1531,10 +1531,17 @@ footer {
   transform: translateY(-50%);
   z-index: 90;
   animation: slideInSide 0.5s ease;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
 }
 
 #side-ad-left { left: 14px; }
 #side-ad-right { right: 14px; }
+
+@media (max-width: 1700px) {
+  #side-ad-left, #side-ad-right { display: none; }
+}
 
 @keyframes slideInSide {
   from { opacity: 0; }

@@ -178,26 +178,34 @@
       });
     }
 
-    // ============== FLOATING SIDE BANNERS (160x600 em telas largas) ==============
+    // ============== FLOATING SIDE BANNERS (300x250 + skyscraper em telas largas) ==============
     if (window.innerWidth >= 1500) {
-      // Lateral DIREITA
+      // Lateral DIREITA (300x250 + 300x250 empilhados = skyscraper-ish 300x510)
       if (!sessionStorage.getItem('nr_side_r_closed')) {
         var sr = document.createElement('div');
         sr.id = 'side-ad-right';
         sr.innerHTML = '<button class="side-ad-close" aria-label="Cerrar">&times;</button>';
-        sr.appendChild(makeIframe('/ads/160x600.html', 160, 600, SANDBOX));
+        sr.appendChild(makeIframe('/ads/300x250.html', 300, 250, SANDBOX));
+        var spacer1 = document.createElement('div');
+        spacer1.style.height = '8px';
+        sr.appendChild(spacer1);
+        sr.appendChild(makeIframe('/ads/adsterra-native.html', 300, 250, SANDBOX));
         document.body.appendChild(sr);
         sr.querySelector('.side-ad-close').addEventListener('click', function () {
           sr.remove();
           sessionStorage.setItem('nr_side_r_closed', '1');
         });
       }
-      // Lateral ESQUERDA (160x300 - mais discreto)
+      // Lateral ESQUERDA (300x250 - medium rectangle padrao)
       if (!sessionStorage.getItem('nr_side_l_closed')) {
         var sl = document.createElement('div');
         sl.id = 'side-ad-left';
         sl.innerHTML = '<button class="side-ad-close" aria-label="Cerrar">&times;</button>';
-        sl.appendChild(makeIframe('/ads/160x300.html', 160, 300, SANDBOX));
+        sl.appendChild(makeIframe('/ads/300x250.html', 300, 250, SANDBOX));
+        var spacer2 = document.createElement('div');
+        spacer2.style.height = '8px';
+        sl.appendChild(spacer2);
+        sl.appendChild(makeIframe('/ads/300x250.html', 300, 250, SANDBOX));
         document.body.appendChild(sl);
         sl.querySelector('.side-ad-close').addEventListener('click', function () {
           sl.remove();
