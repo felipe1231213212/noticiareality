@@ -173,7 +173,7 @@ def render_blocks(blocks):
     out = []
     paragraph_count = 0
     ad_inserted = 0
-    AD_EVERY_N_PARAS = 2
+    AD_EVERY_N_PARAS = 4
 
     for kind, text in blocks:
         esc = html.escape(text, quote=False)
