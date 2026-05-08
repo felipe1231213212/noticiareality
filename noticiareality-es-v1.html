@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
+<meta charsep="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NoticiaReality — La Casa de los Famosos 6, Gran Hermano 2026 y todos los reality shows</title>
 <meta name="description" content="Todo sobre La Casa de los Famosos 6, Gran Hermano 2026, La Voz, MasterChef y los mejores reality shows. Noticias, encuestas y chismes calientes.">
@@ -55,7 +55,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:16
 /* PROMO BAR */
 .promo-bar{background:linear-gradient(90deg,var(--hotDark),var(--hot),var(--hotDark));color:#fff;padding:8px 16px;display:flex;align-items:center;justify-content:center;gap:14px;font-size:12px;font-weight:700;box-shadow:0 1px 4px rgba(212,0,15,.2)}
 .promo-label{background:rgba(0,0,0,.32);padding:3px 10px;border-radius:3px;font-size:10px;font-weight:900;letter-spacing:1.2px;display:inline-flex;align-items:center;gap:6px}
-.promo-label::before{content:"";width:7px;height:7px;background:#fff;border-radius:50%;animation:pulse 1.2s ease-in-out infinite;box-shadow:0 0 6px rgba(255,255,255,.6)}
+.promo-label::before{content:"";width:7px;height:7px;background:#fff;border-radius:50%;animation:pulse 1.2s ease-in-oct infinite;box-shadow:0 0 6px rgba(255,255,255,.6)}
 .promo-text{font-weight:600;letter-spacing:.2px}
 .promo-cta{background:#fff;color:var(--hot);padding:5px 14px;border-radius:14px;text-decoration:none;font-size:11px;font-weight:900;letter-spacing:.5px;transition:transform .15s,box-shadow .15s;box-shadow:0 2px 6px rgba(0,0,0,.15)}
 .promo-cta:hover{transform:scale(1.04);box-shadow:0 3px 10px rgba(0,0,0,.2)}
@@ -101,7 +101,7 @@ nav a.active::before{content:"";position:absolute;left:0;right:0;top:0;bottom:0;
 /* ─── TICKER ─── */
 .ticker-wrap{background:linear-gradient(90deg,var(--hotDark) 0%,var(--hot) 50%,var(--hotDark) 100%);display:flex;align-items:center;height:34px;overflow:hidden;box-shadow:0 2px 8px rgba(212,0,15,.2)}
 .ticker-label{background:rgba(0,0,0,.3);padding:0 14px;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:1.2px;color:#fff;white-space:nowrap;height:100%;display:flex;align-items:center;flex-shrink:0;gap:6px}
-.ticker-label::before{content:"";display:inline-block;width:7px;height:7px;background:#fff;border-radius:50%;animation:pulse 1.2s ease-in-out infinite}
+.ticker-label::before{content:"";display:inline-block;width:7px;height:7px;background:#fff;border-radius:50%;animation:pulse 1.2s ease-in-oct infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
 .ticker-scroll{overflow:hidden;flex:1}
 .ticker-inner{display:inline-block;white-space:nowrap;animation:tick 50s linear infinite;font-size:12px;color:#fff;font-weight:700;padding-left:100%}
@@ -469,7 +469,7 @@ footer p{font-size:12px;line-height:1.6}
 .live-chat-bubble{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--hot),var(--hot2));color:#fff;font-size:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:var(--shadow-lg);transition:transform .25s;position:relative;border:none;font-family:inherit}
 .live-chat-bubble:hover{transform:scale(1.08)}
 .live-chat-bubble .lc-dot{position:absolute;top:6px;right:6px;width:14px;height:14px;background:#21d600;border:2px solid #fff;border-radius:50%}
-.live-chat-bubble .lc-badge{position:absolute;top:-4px;left:-4px;background:#fff;color:var(--hot);font-size:10px;font-weight:900;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid var(--hot);animation:pulse 1.5s ease-in-out infinite}
+.live-chat-bubble .lc-badge{position:absolute;top:-4px;left:-4px;background:#fff;color:var(--hot);font-size:10px;font-weight:900;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid var(--hot);animation:pulse 1.5s ease-in-oct infinite}
 .live-chat-window{position:absolute;bottom:75px;right:0;width:320px;background:var(--surface);border-radius:14px;box-shadow:var(--shadow-xl);overflow:hidden;display:none;animation:popIn .3s ease}
 .live-chat-window.open{display:block}
 .lc-header{background:linear-gradient(135deg,var(--hot),var(--hot2));color:#fff;padding:14px 16px;display:flex;align-items:center;gap:10px}
@@ -486,7 +486,7 @@ footer p{font-size:12px;line-height:1.6}
 .lc-msg.you .lc-bubble{background:var(--hot);color:#fff;border-bottom-right-radius:4px}
 .lc-bubble{max-width:75%;padding:10px 13px;border-radius:14px;font-size:13px;line-height:1.4;box-shadow:var(--shadow-sm)}
 .lc-typing{display:flex;gap:3px;padding:4px}
-.lc-typing span{width:7px;height:7px;background:var(--text3);border-radius:50%;animation:typing 1.2s ease-in-out infinite}
+.lc-typing span{width:7px;height:7px;background:var(--text3);border-radius:50%;animation:typing 1.2s ease-in-oct infinite}
 .lc-typing span:nth-child(2){animation-suy:.2s}
 .lc-typing span:nth-child(3){animation-suy:.4s}
 @keyframes typing{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-5px);opacity:1}}
@@ -766,21 +766,20 @@ footer p{font-size:12px;line-height:1.6}
 html,body{overflow-x:hidden;max-width:100%}
 img,iframe,video{max-width:100%}
 </style>
-<style>
-.ad-iframe { border: 0; display: block; max-width: 100%; }
-.ad-leaderboard-real, .ad-billboard-real { display: flex; justify-content: center; align-items: center; min-height: 90px; }
-.ad-push-real { margin: 10px 0; }
-.ad-native-real iframe { width: 100% !important; max-width: 100%; }
-</style>
-<meta name="ppck-ver" content="9931d17a3b1c21344020d07c46017b04" />
-<meta name="099d4b5738edf4bc17a0a1cf571bca50b03dc3ec" content="099d4b5738edf4bc17a0a1cf571bca50b03dc3ec" />
-<meta name="admaven-placement" content="Bqjs6pjY9">
 </head>
 <body>
 
 <!-- ━━━ STICKY TOP LEADERBOARD (aparece após scroll 300px) ━━━ -->
 <div class="sticky-top-ad" id="stickyTop">
-  <div class="sticky-top-inner" style="height:auto;padding:0;"><iframe src="/ads/728x90.html" width="728" height="90" scrolling="no" loading="lazy" class="ad-iframe" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe></div>
+  <div class="sticky-top-inner" onclick="window.open('#','_blank')">
+    <span class="sticky-top-label">Anuncio</span>
+    <span class="stl-ico">🎰</span>
+    <div class="stl-text">
+      <h5>BÔNUS DE $500 USD — só hoy!</h5>
+      <p>Casino com retiro rápido via PIX · 18+</p>
+    </div>
+    <div class="stl-cta">OBTENER AHORA</div>
+  </div>
   <button class="sticky-top-close" onclick="document.getElementById('stickyTop').classList.remove('show');stickyTopClosed=true">✕</button>
 </div>
 
@@ -823,14 +822,26 @@ img,iframe,video{max-width:100%}
       </span>
     </a>
     <div class="ad-leaderboard">
-      <div class="ad-leaderboard-real"><iframe src="/ads/728x90.html" width="728" height="90" scrolling="no" loading="lazy" class="ad-iframe" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe></div>
+      <div class="ad-fake leader-728 shimmer" onclick="window.open('#','_blank')">
+        <span class="ad-label-tag">Anuncio</span>
+        <div class="ad-icon">🎰</div>
+        <div class="ad-copy">
+          <h4>GANA $500 USD DE BONO en el mejor casino online</h4>
+          <p>Más de 3 millones de jugadores activos · Retiro inmediato</p>
+        </div>
+        <div class="ad-cta-btn">JUGAR GRATIS →</div>
+      </div>
     </div>
   </div>
 </header>
 
 <!-- ━━━ SUB-LEADERBOARD VERDE ━━━ -->
 <div class="sub-leaderboard-zone">
-  <div class="ad-leaderboard-real" style="max-width:728px;width:100%;"><iframe src="/ads/728x90.html" width="728" height="90" scrolling="no" loading="lazy" class="ad-iframe" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe></div>
+  <div class="ad-fake" style="max-width:728px;width:100%;height:62px;background:linear-gradient(90deg,#003300,#006622,#003300);border-radius:4px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;cursor:pointer;box-shadow:var(--shadow-sm)" onclick="window.open('#','_blank')">
+    <div style="display:flex;align-items:center;gap:11px">
+      <span style="font-size:30px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.3))">💰</span>
+      <div>
+        <div style="color:#ffd700;font-size:14px;font-weight:900">GANA HASTA $5.000 USD CADA SEMANA</div>
         <div style="color:rgba(255,255,255,.65);font-size:11px">Participación gratuita · Sorteo cada viernes</div>
       </div>
     </div>
@@ -973,7 +984,17 @@ img,iframe,video{max-width:100%}
   </div>
 
   <!-- NATIVE -->
-  <div class="ad-native-real" style="margin:14px 0;"><iframe src="/ads/adsterra-native.html" width="100" height="280" scrolling="no" loading="lazy" class="ad-iframe" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe></div>
+  <div class="ad-native" onclick="window.open('#','_blank')">
+    <div class="sp-tag">Patrocinado</div>
+    <div class="ad-native-inner">
+      <div class="ad-thumb-sq g6">💄</div>
+      <div class="ad-native-copy">
+        <h4>Este creme clareia manchas em 7 dias — dermatologistas estão impressionados</h4>
+        <p>Produto aprovado pela COFEPRIS está esgotando em farmácias. Mira onde comprar antes que acabe.</p>
+        <span class="cta-link">VER PRODUTO →</span>
+      </div>
+    </div>
+  </div>
 
   <div class="related-box">
     <div class="rel-title">📌 Lee también</div>
@@ -983,7 +1004,17 @@ img,iframe,video{max-width:100%}
   </div>
 
   <!-- ★ NOVO: BILLBOARD AD GIGANTE ★ -->
-  <div class="ad-billboard-real"><iframe src="/ads/728x90.html" width="728" height="90" scrolling="no" loading="lazy" class="ad-iframe" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe></div>
+  <div class="ad-billboard" style="background:linear-gradient(135deg,#0d0d1a 0%,#1a0533 60%,#4a0080 100%)" onclick="window.open('#','_blank')">
+    <span class="bb-label">Anuncio</span>
+    <div class="bb-blob" style="width:240px;height:240px;top:-80px;right:-60px"></div>
+    <div class="bb-blob" style="width:160px;height:160px;bottom:-50px;left:-30px"></div>
+    <div class="bb-ico">🎰</div>
+    <div class="bb-text">
+      <h3>Casino com depósito de R$ 1 e bono de $500 USD</h3>
+      <p>Mais de 2.000 juegos · Retiro inmediato en 5 minutos · Funciona en el celular</p>
+    </div>
+    <div class="bb-cta">JOGAR GRATIS →</div>
+  </div>
 
   <!-- ENQUETE -->
   <div class="poll-box">
@@ -1049,7 +1080,17 @@ img,iframe,video{max-width:100%}
   </div>
 
   <!-- NATIVE -->
-  <div class="ad-native-real" style="margin:14px 0;"><iframe src="/ads/adsterra-native.html" width="100" height="280" scrolling="no" loading="lazy" class="ad-iframe" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe></div>
+  <div class="ad-native" onclick="window.open('#','_blank')" style="border-left-color:var(--purple)">
+    <div class="sp-tag">Anuncio</div>
+    <div class="ad-native-inner">
+      <div class="ad-thumb-sq g8">🎮</div>
+      <div class="ad-native-copy">
+        <h4>Novel juego de reality show virtual paga premios reales para os vencedores</h4>
+        <p>Vota, elimina y participa de nominaciones online con jugadores de toda Latinoamérica. Totalmente gratis.</p>
+        <span class="cta-link">JOGAR AHORA →</span>
+      </div>
+    </div>
+  </div>
 
   <!-- LISTA -->
   <h2 class="sec-title">📺 Últimas del día</h2>
@@ -1114,10 +1155,30 @@ img,iframe,video{max-width:100%}
   </div>
 
   <!-- ★ BILLBOARD 2 ★ -->
-  <div class="ad-billboard-real"><iframe src="/ads/728x90.html" width="728" height="90" scrolling="no" loading="lazy" class="ad-iframe" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe></div>
+  <div class="ad-billboard" style="background:linear-gradient(135deg,#0a2a00 0%,#1a5520 50%,#2d7a30 100%)" onclick="window.open('#','_blank')">
+    <span class="bb-label">Publicidad</span>
+    <div class="bb-blob" style="width:200px;height:200px;top:-60px;left:-40px"></div>
+    <div class="bb-blob" style="width:140px;height:140px;bottom:-40px;right:-30px"></div>
+    <div class="bb-ico">💰</div>
+    <div class="bb-text">
+      <h3>Préstamo de até $50.000 USD com aprobación en 5 minutos</h3>
+      <p>Sem consulta ao SPC · Parcelas que cabem no bolso · Dinero en la cuenta no mesmo dia</p>
+    </div>
+    <div class="bb-cta">SIMULAR →</div>
+  </div>
 
   <!-- NATIVE -->
-  <div class="ad-native-real" style="margin:14px 0;"><iframe src="/ads/adsterra-native.html" width="100" height="280" scrolling="no" loading="lazy" class="ad-iframe" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe></div>
+  <div class="ad-native" onclick="window.open('#','_blank')" style="border-left-color:var(--teal)">
+    <div class="sp-tag">Patrocinado</div>
+    <div class="ad-native-inner">
+      <div class="ad-thumb-sq g5">🏠</div>
+      <div class="ad-native-copy">
+        <h4>Financiamiento con tasa cero: cumple el sueño de la casa propia sin enganche</h4>
+        <p>Programa habitacional atende famílias de baixa renda en toda Latinoamérica. Vagas limitadas.</p>
+        <span class="cta-link">SIMULAR AHORA →</span>
+      </div>
+    </div>
+  </div>
 
   <!-- CHISMES -->
   <h2 class="sec-title">💬 Chismes & Detrás de cámaras</h2>
@@ -1262,7 +1323,16 @@ img,iframe,video{max-width:100%}
   </div>
 
   <!-- ★ BILLBOARD 3 ★ -->
-  <div class="ad-billboard-real"><iframe src="/ads/728x90.html" width="728" height="90" scrolling="no" loading="lazy" class="ad-iframe" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe></div>
+  <div class="ad-billboard" style="background:linear-gradient(135deg,#3a0030 0%,#7b1fa2 60%,#c2185b 100%)" onclick="window.open('#','_blank')">
+    <span class="bb-label">Anuncio</span>
+    <div class="bb-blob" style="width:220px;height:220px;top:-70px;right:-40px"></div>
+    <div class="bb-ico">📺</div>
+    <div class="bb-text">
+      <h3>Assista o La Casa 24 horas sin cortes — 7 dias gratis</h3>
+      <p>Cámaras en vivo · Todos os participantes · Funciona em cualquiera dispositivo</p>
+    </div>
+    <div class="bb-cta">ASSISTIR →</div>
+  </div>
 
   <!-- VIDA PÓS -->
   <h2 class="sec-title">🌟 Vida post-reality</h2>
@@ -1416,13 +1486,29 @@ img,iframe,video{max-width:100%}
 
   <!-- 1 - 300x250 verde concurso -->
   <div class="ad-wrap"><div class="ad-wrap-label">Publicidad</div><div class="ad-border">
-    <div style="width:300px;height:250px;"><iframe src="/ads/300x250.html" width="300" height="250" scrolling="no" loading="lazy" class="ad-iframe" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe></div>
+    <div class="ad-fake ad-rect250 shimmer" onclick="window.open('#','_blank')">
+      <div class="ad-rect250-inner" style="background:linear-gradient(160deg,#003300 0%,#005500 50%,#007700 100%)">
+        <div class="blob" style="width:180px;height:180px;top:-60px;right:-60px"></div>
+        <div class="blob" style="width:120px;height:120px;bottom:-40px;left:-40px"></div>
+        <div style="font-size:46px;position:relative;z-index:1">💰</div>
+        <h3 style="font-size:20px">CONCORRA A<br><span style="color:#ffd700;font-size:30px">$5.000 USD</span></h3>
+        <p>Participación gratuita<br>Sorteio toda semana</p>
+        <div class="cta-pill">PARTICIPAR GRATIS</div>
+      </div>
     </div>
   </div></div>
 
   <!-- 2 - 300x250 casino -->
   <div class="ad-wrap"><div class="ad-wrap-label">Publicidad</div><div class="ad-border">
-    <div style="width:300px;height:250px;"><iframe src="/ads/300x250.html" width="300" height="250" scrolling="no" loading="lazy" class="ad-iframe" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe></div>
+    <div class="ad-fake ad-rect250 shimmer" onclick="window.open('#','_blank')">
+      <div class="ad-rect250-inner" style="background:linear-gradient(160deg,#4a0000 0%,#8b0000 50%,#c62828 100%)">
+        <div class="blob" style="width:160px;height:160px;top:-50px;left:-50px"></div>
+        <div class="blob" style="width:100px;height:100px;bottom:-30px;right:-30px"></div>
+        <div style="font-size:46px;position:relative;z-index:1">🎰</div>
+        <h3>Casino Online<br><span style="color:#ffd700">BÔNUS $500 USD</span></h3>
+        <p>Sin depósito mínimo<br>Retiro em até 24h</p>
+        <div class="cta-pill">JOGAR GRATIS</div>
+      </div>
     </div>
   </div></div>
 
@@ -1440,7 +1526,14 @@ img,iframe,video{max-width:100%}
 
   <!-- 3 - 300x250 streaming -->
   <div class="ad-wrap"><div class="ad-wrap-label">Publicidad</div><div class="ad-border">
-    <div style="width:300px;height:250px;"><iframe src="/ads/300x250.html" width="300" height="250" scrolling="no" loading="lazy" class="ad-iframe" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe></div>
+    <div class="ad-fake ad-rect250 shimmer" onclick="window.open('#','_blank')">
+      <div class="ad-rect250-inner" style="background:linear-gradient(160deg,#1a0030 0%,#4a1580 50%,#7b1fa2 100%)">
+        <div class="blob" style="width:200px;height:200px;top:-80px;right:-80px"></div>
+        <div style="font-size:46px;position:relative;z-index:1">🎬</div>
+        <h3>Assista Reality<br><span style="color:#f9a825">SEM CORTES</span></h3>
+        <p>Cámaras 24h · En vivo<br>7 dias gratis</p>
+        <div class="cta-pill" style="background:#f9a825;color:#1a0030">ASSINAR GRATIS</div>
+      </div>
     </div>
   </div></div>
 
@@ -1456,19 +1549,43 @@ img,iframe,video{max-width:100%}
 
   <!-- 4 - 300x250 ganancia extra -->
   <div class="ad-wrap"><div class="ad-wrap-label">Publicidad</div><div class="ad-border">
-    <div style="width:300px;height:250px;"><iframe src="/ads/300x250.html" width="300" height="250" scrolling="no" loading="lazy" class="ad-iframe" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe></div>
+    <div class="ad-fake ad-rect250 shimmer" onclick="window.open('#','_blank')">
+      <div class="ad-rect250-inner" style="background:linear-gradient(160deg,#bf360c 0%,#dd2c00 50%,#ff5722 100%)">
+        <div class="blob" style="width:180px;height:180px;top:-60px;left:-60px"></div>
+        <div style="font-size:46px;position:relative;z-index:1">📱</div>
+        <h3>Renda Extra<br><span style="color:#ffd700">$200 USD/dia</span></h3>
+        <p>Direto do celular<br>Sin experiencia</p>
+        <div class="cta-pill">QUERO COMEÇAR</div>
+      </div>
     </div>
   </div></div>
 
   <!-- 5 - HALF PAGE 300x600 -->
   <div class="ad-wrap"><div class="ad-wrap-label">Publicidad</div><div class="ad-border">
-    <div style="width:300px;display:flex;flex-direction:column;gap:10px;"><iframe src="/ads/300x250.html" width="300" height="250" scrolling="no" loading="lazy" class="ad-iframe" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe><iframe src="/ads/300x250.html" width="300" height="250" scrolling="no" loading="lazy" class="ad-iframe" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe></div>
+    <div class="ad-fake ad-halfpage shimmer" onclick="window.open('#','_blank')">
+      <div class="ad-halfpage-inner" style="background:linear-gradient(180deg,#0d0d1a 0%,#1a3a6b 40%,#0d3060 70%,#061830 100%)">
+        <div class="blob" style="width:250px;height:250px;top:-80px;right:-80px"></div>
+        <div class="blob" style="width:180px;height:180px;bottom:-60px;left:-60px"></div>
+        <div class="top-badge">⚡ Oferta exclusiva</div>
+        <div class="main-visual">🏦</div>
+        <h2>Conta Digital<br><span style="color:#ffd700">com $100 USD</span><br>de volta</h2>
+        <div class="sub">Nubank · Inter · C6 Bank<br>Abra gratis en 5 minutos<br>Sin burocracia</div>
+        <button class="big-cta">ABRIR CONTA GRATIS</button>
+        <div class="fine">Sujeito a aprobación · Sem anualidad</div>
+      </div>
     </div>
   </div></div>
 
   <!-- 6 - 300x250 apuestas -->
   <div class="ad-wrap"><div class="ad-wrap-label">Publicidad</div><div class="ad-border">
-    <div style="width:300px;height:250px;"><iframe src="/ads/300x250.html" width="300" height="250" scrolling="no" loading="lazy" class="ad-iframe" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe></div>
+    <div class="ad-fake ad-rect250 shimmer" onclick="window.open('#','_blank')">
+      <div class="ad-rect250-inner" style="background:linear-gradient(160deg,#0d0d1a 0%,#1a237e 50%,#283593 100%)">
+        <div class="blob" style="width:180px;height:180px;top:-60px;right:-60px"></div>
+        <div style="font-size:46px;position:relative;z-index:1">⚽</div>
+        <h3>APOSTE NO SEU TIME<br><span style="color:#ffd700">+$200 USD BÔNUS</span></h3>
+        <p>Registro en 30s · 18+<br>Retiro rápido via PIX</p>
+        <div class="cta-pill">APOSTAR AHORA</div>
+      </div>
     </div>
   </div></div>
 
@@ -1482,7 +1599,14 @@ img,iframe,video{max-width:100%}
 
   <!-- 7 - 300x250 juegos -->
   <div class="ad-wrap"><div class="ad-wrap-label">Publicidad</div><div class="ad-border">
-    <div style="width:300px;height:250px;"><iframe src="/ads/300x250.html" width="300" height="250" scrolling="no" loading="lazy" class="ad-iframe" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe></div>
+    <div class="ad-fake ad-rect250 shimmer" onclick="window.open('#','_blank')">
+      <div class="ad-rect250-inner" style="background:linear-gradient(160deg,#001f1c 0%,#004d40 50%,#00897b 100%)">
+        <div class="blob" style="width:180px;height:180px;top:-60px;left:-50px"></div>
+        <div style="font-size:46px;position:relative;z-index:1">🎮</div>
+        <h3>JOGOS GRATIS<br><span style="color:#ffd700">SEM DOWNLOAD</span></h3>
+        <p>Mais de 500 juegos<br>Direto no navegador</p>
+        <div class="cta-pill">JOGAR JÁ</div>
+      </div>
     </div>
   </div></div>
 
@@ -1510,12 +1634,31 @@ img,iframe,video{max-width:100%}
 </footer>
 
 <!-- FLOATING POPUP -->
-<!-- float pop gerenciado por aggressive-ads.js -->
+<div class="float-pop" id="floatPop">
+  <span class="float-pop-label">Anuncio</span>
+  <button class="float-pop-close" onclick="document.getElementById('floatPop').classList.add('hidden')">✕</button>
+  <div class="float-pop-img">🎁</div>
+  <div class="float-pop-body">
+    <h4>$100 USD gratis para ti apostar — só hoy!</h4>
+    <p>Regístrate en 30 segundos y gana bono para usar en juegos do La Casa.</p>
+    <button class="float-pop-cta" onclick="window.open('#','_blank')">RECLAMAR AHORA →</button>
+  </div>
+</div>
 
 <button class="back-top" id="bTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <!-- STICKY BOTTOM -->
-<!-- sticky bottom ad gerenciado por aggressive-ads.js -->
+<div class="sticky-bottom-ad" id="stickyAd">
+  <span class="sticky-ad-label">Anuncio</span>
+  <button class="close-sticky" onclick="document.getElementById('stickyAd').style.display='none'">✕</button>
+  <div class="sticky-banner-inner" onclick="window.open('#','_blank')">
+    <div class="s-icon">🎁</div>
+    <div class="s-text">
+      <h5>Ganhe $50 USD gratis no seu primeiro depósito</h5>
+      <p>Oferta válida por tiempo limitado · Sin burocracia</p>
+    </div>
+    <div class="s-cta">OBTENER AHORA</div>
+  </div>
 </div>
 
 <!-- INTERSTITIAL -->
@@ -1655,7 +1798,7 @@ const fmtBillboard=i=>{
     {bg:'linear-gradient(135deg,#001f00 0%,#1a4d1a 60%,#2d7a30 100%)',ico:'🎁',h:'Sorteio mensal de $10.000 USD entre todos os cadastrados',p:'Participación 100% gratuita · Resultado en vivo en el canal',cta:'PARTICIPAR'},
   ];
   const a=ads[i%ads.length];
-  return `<div class="ad-billboard-real"><iframe src="/ads/728x90.html" width="728" height="90" scrolling="no" loading="lazy" class="ad-iframe" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe></div>`;
+  return `<div class="ad-billboard" style="background:${a.bg}" onclick="window.open('#','_blank')"><span class="bb-label">Anuncio</span><div class="bb-blob" style="width:220px;height:220px;top:-70px;right:-50px"></div><div class="bb-blob" style="width:140px;height:140px;bottom:-40px;left:-30px"></div><div class="bb-ico">${a.ico}</div><div class="bb-text"><h3>${a.h}</h3><p>${a.p}</p></div><div class="bb-cta">${a.cta} →</div></div>`;
 };
 
 const fmtNative=i=>{
@@ -1666,7 +1809,7 @@ const fmtNative=i=>{
     {ico:'☕',color:'#bf360c',h:'Bebida termogénica quema grasa mientras duermes — médicos lo recomiendan',p:'Receta natural aprobada por la COFEPRIS. Resultados visibles en la primera semana.',cta:'VER MÁS →'},
   ];
   const a=ads[i%ads.length];
-  return `<div class="ad-native-real" style="margin:14px 0;"><iframe src="/ads/adsterra-native.html" width="100" height="280" scrolling="no" loading="lazy" class="ad-iframe" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe></div>`;
+  return `<div class="ad-native" onclick="window.open('#','_blank')" style="border-left-color:${a.color}"><div class="sp-tag">Patrocinado</div><div class="ad-native-inner"><div class="ad-thumb-sq" style="background:${a.color}">${a.ico}</div><div class="ad-native-copy"><h4>${a.h}</h4><p>${a.p}</p><span class="cta-link" style="color:${a.color}">${a.cta}</span></div></div></div>`;
 };
 
 const fmtPush=i=>{
@@ -1769,7 +1912,15 @@ const sidebarHalfPagePool = [
 const fmtSidebarRect = (i)=>{
   const a = sidebarAdPool[i % sidebarAdPool.length];
   return `<div class="ad-wrap"><div class="ad-wrap-label">Publicidad</div><div class="ad-border">
-    <div style="width:300px;height:250px;"><iframe src="/ads/300x250.html" width="300" height="250" scrolling="no" loading="lazy" class="ad-iframe" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe></div>
+    <div class="ad-fake ad-rect250 shimmer" onclick="window.open('#','_blank')">
+      <div class="ad-rect250-inner" style="background:${a.bg}">
+        <div class="blob" style="width:180px;height:180px;top:-60px;right:-60px"></div>
+        <div class="blob" style="width:120px;height:120px;bottom:-40px;left:-40px"></div>
+        <div style="font-size:46px;position:relative;z-index:1">${a.ico}</div>
+        <h3>${a.h1}<br><span style="color:#ffd700;font-size:24px">${a.h2}</span></h3>
+        <p>${a.p}</p>
+        <div class="cta-pill" style="background:${a.ctaColor};color:${a.ctaText}">${a.cta}</div>
+      </div>
     </div>
   </div></div>`;
 };
@@ -1777,7 +1928,17 @@ const fmtSidebarRect = (i)=>{
 const fmtSidebarHalfPage = (i)=>{
   const a = sidebarHalfPagePool[i % sidebarHalfPagePool.length];
   return `<div class="ad-wrap"><div class="ad-wrap-label">Publicidad</div><div class="ad-border">
-    <div style="width:300px;display:flex;flex-direction:column;gap:10px;"><iframe src="/ads/300x250.html" width="300" height="250" scrolling="no" loading="lazy" class="ad-iframe" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe><iframe src="/ads/300x250.html" width="300" height="250" scrolling="no" loading="lazy" class="ad-iframe" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe></div>
+    <div class="ad-fake ad-halfpage shimmer" onclick="window.open('#','_blank')">
+      <div class="ad-halfpage-inner" style="background:${a.bg}">
+        <div class="blob" style="width:250px;height:250px;top:-80px;right:-80px"></div>
+        <div class="blob" style="width:180px;height:180px;bottom:-60px;left:-60px"></div>
+        <div class="top-badge">${a.badge}</div>
+        <div class="main-visual">${a.ico}</div>
+        <h2>${a.h}</h2>
+        <div class="sub">${a.sub}</div>
+        <button class="big-cta" style="background:${a.ctaBg};color:${a.ctaText}">${a.cta}</button>
+        <div class="fine">Sujeito a termos · Promoción limitada</div>
+      </div>
     </div>
   </div></div>`;
 };
@@ -2036,7 +2197,7 @@ function lcSend(){
 setTimeout(()=>{
   if(!sessionStorage.getItem('lc_seen')){
     const badge = document.getElementById('lcBadge');
-    if(badge) badge.style.animation = 'pulse 1.5s ease-in-out infinite';
+    if(badge) badge.style.animation = 'pulse 1.5s ease-in-oct infinite';
     sessionStorage.setItem('lc_seen','1');
   }
 }, 25000);
@@ -2188,6 +2349,5 @@ function galleryPrev(){
 })();
 </script>
 
-<script src="/assets/aggressive-ads.js" defer></script>
 </body>
 </html>
