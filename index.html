@@ -1028,6 +1028,9 @@ img,iframe,video{max-width:100%}
   </div>
 
   <!-- MAIS QUENTES -->
+  <!-- 728x90 inline extra (entre seções) -->
+  <div style="margin:24px 0"><iframe src="/ads/728x90-clean.html" style="width:728px;max-width:100%;height:90px;border:0;background:transparent;display:block;margin:0 auto" scrolling="no" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe></div>
+
   <h2 class="sec-title">🔥 Más calientes ahora</h2>
   <div class="art-grid">
     <a href="#" class="art-card">
@@ -1120,7 +1123,7 @@ img,iframe,video{max-width:100%}
   </div>
 
   <!-- ★ BILLBOARD 2 ★ -->
-  <div style="margin:24px 0"><iframe src="/ads/468x60-clean.html" style="width:468px;max-width:100%;height:60px;border:0;background:transparent;display:block;margin:0 auto" scrolling="no" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe></div>
+  <div style="margin:24px 0"><iframe src="/ads/728x90-clean.html" style="width:728px;max-width:100%;height:90px;border:0;background:transparent;display:block;margin:0 auto" scrolling="no" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe></div>
 
   <!-- NATIVE -->
   <div class="ad-native" onclick="window.adClick&&window.adClick()||window.open('https://omg10.com/4/10967488','_blank','noopener')" style="border-left-color:var(--teal)">
@@ -1482,6 +1485,11 @@ img,iframe,video{max-width:100%}
     <iframe src="/ads/300x250-v3.html" style="width:300px;max-width:100%;height:250px;border:0;background:transparent;display:block;margin:0 auto" scrolling="no" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
   </div></div>
 
+  <!-- 7a - 160x300 vertical compacto (formato extra) -->
+  <div class="ad-wrap"><div class="ad-wrap-label">Publicidad</div><div class="ad-border">
+    <iframe src="/ads/160x300-clean.html" style="width:160px;max-width:100%;height:300px;border:0;background:transparent;display:block;margin:0 auto" scrolling="no" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+  </div></div>
+
   <!-- TAGS -->
   <div class="sw">
     <div class="sw-title">🏷️ Temas quentes</div>
@@ -1830,9 +1838,11 @@ function loadMoreSidebarAds(force){
   // Carrega 1 rectangle por vez (granular — así a sidebar nunca passa muito do main)
   let html = fmtSidebarRect(sidebarAdsLoaded);
 
-  // Cada 4 rectángulos, inyecta un Half Page (variación visual)
+  // Mix de formatos: cada 4 rectangulos -> 160x600 halfpage; cada 3 -> 160x300 vertical
   if(sidebarAdsLoaded > 0 && sidebarAdsLoaded % 4 === 0){
     html += fmtSidebarHalfPage(Math.floor(sidebarAdsLoaded / 4));
+  } else if(sidebarAdsLoaded > 0 && sidebarAdsLoaded % 3 === 0){
+    html += `<div class="ad-wrap"><div class="ad-wrap-label">Publicidad</div><div class="ad-border" style="padding:6px;display:flex;justify-content:center"><iframe src="/ads/160x300-clean.html" style="width:160px;height:300px;max-width:100%;border:0;background:transparent;display:block" scrolling="no" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe></div></div>`;
   }
 
   target.insertAdjacentHTML('beforeend', html);
