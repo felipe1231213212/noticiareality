@@ -116,13 +116,28 @@
     </div>
   </div>
 
-  <!-- BLOCO ADS TOPO: 1 banner 300x250 unico (mais provavel de preencher) -->
+  <!-- BLOCO ADS PREMIUM TOPO (3 banners 300x250 lado a lado, eager loading) -->
   <div class="container">
     <div class="ad-priority-row">
       <div class="ad-banner-slot">
         <iframe src="/ads/300x250.html" width="300" height="250" scrolling="no" loading="eager" class="ad-iframe"
           sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
       </div>
+      <div class="ad-banner-slot">
+        <iframe src="/ads/300x250.html" width="300" height="250" scrolling="no" loading="eager" class="ad-iframe"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
+      </div>
+      <div class="ad-banner-slot">
+        <iframe src="/ads/300x250.html" width="300" height="250" scrolling="no" loading="eager" class="ad-iframe"
+          sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
+      </div>
+    </div>
+
+    <!-- Native Banner full-width topo -->
+    <div class="ad-banner ad-after-content" style="margin: 18px auto;">
+      <iframe src="/ads/adsterra-native.html" width="100%" height="280" scrolling="no" loading="eager" class="ad-iframe"
+        style="max-width:760px;"
+        sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
     </div>
   </div>
 
@@ -744,7 +759,16 @@
             <p>La historica jugadora gana la prueba mas potente. Pincoya anuncia reconciliacion en pleno directo.</p>
             <span class="meta" style="font-size:0.78rem;color:var(--gray-500);margin-top:6px;display:block;">28 abril 2026 &bull; 4 min</span>
           </div>
-        </a><a href="posts/gran-hermano-generacion-dorada.html" class="feed-card">
+        </a>
+        <div class="ad-separator">Continua despues de la publicidad</div>
+        <div class="ad-banner ad-after-content">
+          <iframe src="/ads/728x90.html" width="728" height="90" scrolling="no" loading="lazy" class="ad-iframe"
+            sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
+        </div>
+        <div class="ad-separator ad-separator-bottom"></div>
+
+
+        <a href="posts/gran-hermano-generacion-dorada.html" class="feed-card">
           <div class="fc-thumb"><div class="post-card-img img-gold"><span class="img-headline" style="font-size:1rem;">GH 2026<br>GUIA</span></div></div>
           <div class="fc-body">
             <span class="fc-editoria">Guia</span>
@@ -836,32 +860,6 @@
             sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
         </div>
 
-        <!-- WIDGET: TOP DA SEMANA -->
-        <div class="widget">
-          <h3>Top de la <span style="color:var(--red);">semana</span></h3>
-          <a href="posts/nazareno-eliminado-gran-hermano.html" class="trending-item" style="text-decoration:none;color:inherit;">
-            <span class="trending-num">01</span>
-            <div>
-              <h4>Nazareno Pompei eliminado de Gran Hermano</h4>
-              <p class="meta">Lunes &bull; 5 min</p>
-            </div>
-          </a>
-          <a href="posts/josh-lider-lcdlf-semana-11.html" class="trending-item" style="text-decoration:none;color:inherit;">
-            <span class="trending-num">02</span>
-            <div>
-              <h4>Josh es el nuevo lider de LCDLF 6</h4>
-              <p class="meta">Martes &bull; 4 min</p>
-            </div>
-          </a>
-          <a href="posts/triangulo-amoroso-destruye-la-casa.html" class="trending-item" style="text-decoration:none;color:inherit;">
-            <span class="trending-num">03</span>
-            <div>
-              <h4>Triangulo amoroso destruye la casa</h4>
-              <p class="meta">Miercoles &bull; 3 min</p>
-            </div>
-          </a>
-        </div>
-
         <!-- MAIS LEIDOS -->
         <div class="widget">
           <h3>Mas leidas</h3>
@@ -931,46 +929,16 @@
           </div>
         </div>
 
+        <!-- ADSTERRA: Banner 160x300 -->
+        <div class="ad-banner ad-sidebar">
+          <iframe src="/ads/160x300.html" width="160" height="300" scrolling="no" loading="lazy" class="ad-iframe"
+            sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
+        </div>
+
         <!-- ADSTERRA: Native sidebar -->
         <div class="ad-banner ad-sidebar">
           <iframe src="/ads/adsterra-native.html" width="300" height="250" scrolling="no" loading="lazy" class="ad-iframe"
             sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"></iframe>
-        </div>
-
-        <!-- WIDGET: AGENDA REALITY -->
-        <div class="widget">
-          <h3>En la <span style="color:var(--red);">casa</span></h3>
-          <div style="padding:10px 0;border-bottom:1px solid var(--gray-100);">
-            <strong style="color:var(--red);font-size:0.78rem;">LCDLF 6</strong><br>
-            <span style="font-size:0.92rem;">Eliminacion en vivo - Lunes 21h</span>
-          </div>
-          <div style="padding:10px 0;border-bottom:1px solid var(--gray-100);">
-            <strong style="color:var(--red);font-size:0.78rem;">GRAN HERMANO</strong><br>
-            <span style="font-size:0.92rem;">Gala de salvacion - Domingo 22h</span>
-          </div>
-          <div style="padding:10px 0;">
-            <strong style="color:var(--red);font-size:0.78rem;">EN VIVO 24H</strong><br>
-            <span style="font-size:0.92rem;">Stream directo de la casa</span>
-          </div>
-        </div>
-
-        <!-- WIDGET: SOCIAIS -->
-        <div class="widget">
-          <h3>Siguenos en <span style="color:var(--red);">redes</span></h3>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-            <a href="https://www.youtube.com/@lacasadelosfamositos" target="_blank" rel="noopener" style="background:#ff0000;color:white;padding:14px 8px;border-radius:6px;text-align:center;text-decoration:none;font-weight:700;font-size:0.85rem;">
-              YouTube<br><span style="font-size:0.7rem;opacity:0.9;">Ver canal</span>
-            </a>
-            <a href="#" style="background:#1877f2;color:white;padding:14px 8px;border-radius:6px;text-align:center;text-decoration:none;font-weight:700;font-size:0.85rem;">
-              Facebook<br><span style="font-size:0.7rem;opacity:0.9;">Seguir</span>
-            </a>
-            <a href="#" style="background:#1da1f2;color:white;padding:14px 8px;border-radius:6px;text-align:center;text-decoration:none;font-weight:700;font-size:0.85rem;">
-              Twitter<br><span style="font-size:0.7rem;opacity:0.9;">Seguir</span>
-            </a>
-            <a href="#" style="background:#e4405f;color:white;padding:14px 8px;border-radius:6px;text-align:center;text-decoration:none;font-weight:700;font-size:0.85rem;">
-              Instagram<br><span style="font-size:0.7rem;opacity:0.9;">Seguir</span>
-            </a>
-          </div>
         </div>
 
       </aside>

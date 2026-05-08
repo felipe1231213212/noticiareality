@@ -178,34 +178,26 @@
       });
     }
 
-    // ============== FLOATING SIDE BANNERS (300x250 + skyscraper em telas largas) ==============
+    // ============== FLOATING SIDE BANNERS (160x600 em telas largas) ==============
     if (window.innerWidth >= 1500) {
-      // Lateral DIREITA (300x250 + 300x250 empilhados = skyscraper-ish 300x510)
+      // Lateral DIREITA
       if (!sessionStorage.getItem('nr_side_r_closed')) {
         var sr = document.createElement('div');
         sr.id = 'side-ad-right';
         sr.innerHTML = '<button class="side-ad-close" aria-label="Cerrar">&times;</button>';
-        sr.appendChild(makeIframe('/ads/300x250.html', 300, 250, SANDBOX));
-        var spacer1 = document.createElement('div');
-        spacer1.style.height = '8px';
-        sr.appendChild(spacer1);
-        sr.appendChild(makeIframe('/ads/adsterra-native.html', 300, 250, SANDBOX));
+        sr.appendChild(makeIframe('/ads/160x600.html', 160, 600, SANDBOX));
         document.body.appendChild(sr);
         sr.querySelector('.side-ad-close').addEventListener('click', function () {
           sr.remove();
           sessionStorage.setItem('nr_side_r_closed', '1');
         });
       }
-      // Lateral ESQUERDA (300x250 - medium rectangle padrao)
+      // Lateral ESQUERDA (160x300 - mais discreto)
       if (!sessionStorage.getItem('nr_side_l_closed')) {
         var sl = document.createElement('div');
         sl.id = 'side-ad-left';
         sl.innerHTML = '<button class="side-ad-close" aria-label="Cerrar">&times;</button>';
-        sl.appendChild(makeIframe('/ads/300x250.html', 300, 250, SANDBOX));
-        var spacer2 = document.createElement('div');
-        spacer2.style.height = '8px';
-        sl.appendChild(spacer2);
-        sl.appendChild(makeIframe('/ads/300x250.html', 300, 250, SANDBOX));
+        sl.appendChild(makeIframe('/ads/160x300.html', 160, 300, SANDBOX));
         document.body.appendChild(sl);
         sl.querySelector('.side-ad-close').addEventListener('click', function () {
           sl.remove();
@@ -218,19 +210,6 @@
     var stats = { total: 0, filled: 0, byType: {} };
     window.addEventListener('message', function (e) {
       if (!e.data || e.data.type !== 'nr_ad') return;
-      // Hide me: esconde o iframe pai inteiro se slot ficou vazio
-      if (e.data.hide && e.source) {
-        var allIframes = document.querySelectorAll('iframe.ad-iframe');
-        for (var i = 0; i < allIframes.length; i++) {
-          if (allIframes[i].contentWindow === e.source) {
-            // Esconde o container inteiro (parent do iframe)
-            var container = allIframes[i].closest('.ad-banner, .ad-banner-slot, .ad-priority-row, #sticky-ad, #sticky-ad-mobile, #side-ad-left, #side-ad-right, #modal-ad') || allIframes[i].parentElement;
-            if (container) container.style.display = 'none';
-            else allIframes[i].style.display = 'none';
-            break;
-          }
-        }
-      }
       stats.total++;
       var slot = e.data.slot || 'unknown';
       stats.byType[slot] = stats.byType[slot] || { total: 0, filled: 0 };
@@ -263,9 +242,8 @@
       document.body.appendChild(w);
     }
 
-    // ============== APLICAR IMAGENS DE PERSONAGENS NOS CARDS ==============
-    // Detecta nome do personagem no titulo do card e usa imagem correspondente
-    var CHARS = ['caeli','celinee','curvy','fabio','horacio','jeni','josh','kenny','lorena','luis-coronel','sandra','stefano','veronica','yoridan'];
+    // ============== APLICAR IMAGENS REAIS NOS CARDS ==============
+    // Sorteia uma imagem random de /ads/img/ pra cada .post-card-img
     var IMG_POOL = [];
     for (var i = 1; i <= 15; i++) {
       var n = (i < 10 ? '0' : '') + i;
@@ -275,70 +253,12 @@
 
     function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
-    function findChar(text) {
-      text = (text || '').toLowerCase();
-      // Ordena por tamanho (mais especifico primeiro)
-      var sorted = CHARS.slice().sort(function (a, b) { return b.length - a.length; });
-      for (var i = 0; i < sorted.length; i++) {
-        var search = sorted[i].replace('-', ' ');
-        if (text.indexOf(search) !== -1) return sorted[i];
-      }
-      return null;
-    }
-
     document.querySelectorAll('.post-card-img').forEach(function (el) {
-      // Procura titulo no card pai
-      var card = el.closest('.feed-card, .hero-small, .post-card, .latest-item, .feed-stream-item, .hero-main');
-      var titleEl = card ? card.querySelector('h2, h3, h4, .h, .img-headline') : null;
-      var titleText = titleEl ? titleEl.textContent : '';
-      // Pega tambem o slug do link (pra match em casos onde titulo e curto)
-      var link = card && card.tagName === 'A' ? card.getAttribute('href') : null;
-      if (!link && card) {
-        var a = card.querySelector('a');
-        link = a ? a.getAttribute('href') : null;
-      }
-      var combo = titleText + ' ' + (link || '');
-
-      var char = findChar(combo);
-      if (char) {
-        el.style.backgroundImage = "url('/img/personajes/card_" + char + ".jpg')";
-      } else {
-        var img = rand(IMG_POOL);
-        el.style.backgroundImage = "url('/ads/img/" + img + "')";
-      }
+      var img = rand(IMG_POOL);
+      el.style.backgroundImage = "url('/ads/img/" + img + "')";
       el.style.backgroundSize = 'cover';
-      el.style.backgroundPosition = 'center 20%';
+      el.style.backgroundPosition = 'center';
     });
-
-    // Aplica tambem no .hero-bg do hero principal (imagem grande)
-    var heroMain = document.querySelector('.hero-main');
-    if (heroMain) {
-      var heroH2 = heroMain.querySelector('h2');
-      var heroLink = heroMain.getAttribute('href');
-      var heroChar = findChar((heroH2 ? heroH2.textContent : '') + ' ' + (heroLink || ''));
-      if (heroChar) {
-        var heroBg = heroMain.querySelector('.hero-bg');
-        if (heroBg) {
-          heroBg.style.backgroundImage = "url('/img/personajes/hero_" + heroChar + ".jpg')";
-          heroBg.style.backgroundSize = 'cover';
-          heroBg.style.backgroundPosition = 'center 25%';
-        }
-      }
-    }
-
-    // Aplica nos .article-hero dos posts (banner gigante topo)
-    var articleHero = document.querySelector('.article-hero');
-    if (articleHero) {
-      var pageH1 = document.querySelector('h1');
-      var pageTitle = pageH1 ? pageH1.textContent : document.title;
-      var pageChar = findChar(pageTitle);
-      if (pageChar) {
-        articleHero.style.backgroundImage = "url('/img/personajes/hero_" + pageChar + ".jpg')";
-        articleHero.style.backgroundSize = 'cover';
-        articleHero.style.backgroundPosition = 'center 25%';
-        articleHero.classList.add('has-bg-image');
-      }
-    }
 
   });
 })();

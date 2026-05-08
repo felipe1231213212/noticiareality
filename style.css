@@ -1523,7 +1523,7 @@ footer {
   padding: 0 8px;
 }
 
-/* Floating side banners (only on wide screens) - 300x250 stacked */
+/* Floating side banners (only on wide screens) */
 #side-ad-left,
 #side-ad-right {
   position: fixed;
@@ -1531,17 +1531,10 @@ footer {
   transform: translateY(-50%);
   z-index: 90;
   animation: slideInSide 0.5s ease;
-  width: 300px;
-  display: flex;
-  flex-direction: column;
 }
 
 #side-ad-left { left: 14px; }
 #side-ad-right { right: 14px; }
-
-@media (max-width: 1700px) {
-  #side-ad-left, #side-ad-right { display: none; }
-}
 
 @keyframes slideInSide {
   from { opacity: 0; }
@@ -2113,7 +2106,7 @@ footer {
 .article-hero {
   position: relative;
   width: 100%;
-  height: 380px;
+  height: 360px;
   border-radius: 6px;
   overflow: hidden;
   margin-bottom: 14px;
@@ -2121,23 +2114,6 @@ footer {
   align-items: flex-end;
   padding: 28px;
   color: white;
-  background-size: cover;
-  background-position: center 25%;
-}
-
-.article-hero.has-bg-image::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.85) 100%);
-  z-index: 1;
-}
-
-.article-hero.has-bg-image .article-hero-text,
-.article-hero.has-bg-image .post-hero-tag,
-.article-hero.has-bg-image .post-hero-eyebrow {
-  position: relative;
-  z-index: 2;
 }
 
 .article-hero::before {
