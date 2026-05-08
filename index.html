@@ -1432,7 +1432,7 @@ img,iframe,video{max-width:100%}
 
   <!-- 1 - 300x250 verde concurso -->
   <div class="ad-wrap"><div class="ad-wrap-label">Publicidad</div><div class="ad-border">
-    <iframe src="/ads/300x250-clean.html" style="width:300px;max-width:100%;height:250px;border:0;background:transparent;display:block;margin:0 auto" scrolling="no" sandbox="allow-scripts allow-same-origin"></iframe>
+    <iframe src="/ads/300x250-v4.html" style="width:300px;max-width:100%;height:250px;border:0;background:transparent;display:block;margin:0 auto" scrolling="no" sandbox="allow-scripts allow-same-origin"></iframe>
   </div></div>
 
   <!-- 2 - 300x250 casino -->
@@ -1454,7 +1454,7 @@ img,iframe,video{max-width:100%}
 
   <!-- 3 - 300x250 streaming -->
   <div class="ad-wrap"><div class="ad-wrap-label">Publicidad</div><div class="ad-border">
-    <iframe src="/ads/300x250-clean.html" style="width:300px;max-width:100%;height:250px;border:0;background:transparent;display:block;margin:0 auto" scrolling="no" sandbox="allow-scripts allow-same-origin"></iframe>
+    <iframe src="/ads/300x250-v5.html" style="width:300px;max-width:100%;height:250px;border:0;background:transparent;display:block;margin:0 auto" scrolling="no" sandbox="allow-scripts allow-same-origin"></iframe>
   </div></div>
 
   <!-- NEWSLETTER -->
@@ -1469,7 +1469,7 @@ img,iframe,video{max-width:100%}
 
   <!-- 4 - 300x250 ganancia extra -->
   <div class="ad-wrap"><div class="ad-wrap-label">Publicidad</div><div class="ad-border">
-    <iframe src="/ads/300x250-clean.html" style="width:300px;max-width:100%;height:250px;border:0;background:transparent;display:block;margin:0 auto" scrolling="no" sandbox="allow-scripts allow-same-origin"></iframe>
+    <iframe src="/ads/300x250-v2.html" style="width:300px;max-width:100%;height:250px;border:0;background:transparent;display:block;margin:0 auto" scrolling="no" sandbox="allow-scripts allow-same-origin"></iframe>
   </div></div>
 
   <!-- 5 - HALF PAGE 300x600 -->
@@ -1479,7 +1479,7 @@ img,iframe,video{max-width:100%}
 
   <!-- 6 - 300x250 apuestas -->
   <div class="ad-wrap"><div class="ad-wrap-label">Publicidad</div><div class="ad-border">
-    <iframe src="/ads/300x250-clean.html" style="width:300px;max-width:100%;height:250px;border:0;background:transparent;display:block;margin:0 auto" scrolling="no" sandbox="allow-scripts allow-same-origin"></iframe>
+    <iframe src="/ads/300x250-v3.html" style="width:300px;max-width:100%;height:250px;border:0;background:transparent;display:block;margin:0 auto" scrolling="no" sandbox="allow-scripts allow-same-origin"></iframe>
   </div></div>
 
   <!-- TAGS -->
@@ -1791,7 +1791,10 @@ const sidebarHalfPagePool = [
 ];
 
 const fmtSidebarRect = (i)=>{
-  return `<div class="ad-wrap"><div class="ad-wrap-label">Publicidad</div><div class="ad-border" style="padding:6px;display:flex;justify-content:center"><iframe src="/ads/300x250-clean.html" style="width:300px;height:250px;max-width:100%;border:0;background:transparent;display:block" scrolling="no" sandbox="allow-scripts allow-same-origin"></iframe></div></div>`;
+  // Rotaciona entre 5 variantes de cor: vermelho casino, dourado tarjeta, azul apuestas, verde dinheiro, roxo streaming
+  const variants = ['/ads/300x250-clean.html','/ads/300x250-v2.html','/ads/300x250-v3.html','/ads/300x250-v4.html','/ads/300x250-v5.html'];
+  const src = variants[i % variants.length];
+  return `<div class="ad-wrap"><div class="ad-wrap-label">Publicidad</div><div class="ad-border" style="padding:6px;display:flex;justify-content:center"><iframe src="${src}" style="width:300px;height:250px;max-width:100%;border:0;background:transparent;display:block" scrolling="no" sandbox="allow-scripts allow-same-origin"></iframe></div></div>`;
 };
 
 const fmtSidebarHalfPage = (i)=>{

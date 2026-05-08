@@ -3,8 +3,10 @@
 html,body{margin:0;padding:0;background:transparent;overflow:hidden;font-family:Arial,sans-serif}
 body{position:relative;width:160px;height:600px}
 @keyframes fade{from{opacity:0}to{opacity:1}}
-
-.fb{display:none;position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:space-around;padding:14px 8px;cursor:pointer;color:#fff;text-decoration:none;text-align:center;background:linear-gradient(180deg,#064e3b 0%,#059669 50%,#10b981 100%)}
+@keyframes shimmer{0%{left:-60%}100%{left:160%}}
+.fb{display:none;position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:space-around;padding:14px 8px;cursor:pointer;color:#fff;text-decoration:none;text-align:center;background:linear-gradient(180deg,#064e3b 0%,#059669 50%,#10b981 100%);overflow:hidden}
+.fb::after{content:"";position:absolute;top:0;left:-60%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);animation:shimmer 2.6s infinite;pointer-events:none}
+.fb > *{position:relative;z-index:1}
 .fb.show{display:flex;animation:fade .4s}
 .fb .ic{font-size:36px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35))}
 .fb .h{font-size:26px;font-weight:900;line-height:1.15;text-shadow:0 2px 6px rgba(0,0,0,.3)}
