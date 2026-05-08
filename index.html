@@ -2245,6 +2245,10 @@ window.adClick=function(){
   ];
   window.open(links[Math.floor(Math.random()*links.length)],'_blank','noopener,noreferrer');
 };
+// Escuta clicks nos fallback CTAs dos iframes /ads/*-clean.html (sandbox bloqueia window.open dentro do iframe, entao o filho posta mensagem pro parent abrir o link)
+window.addEventListener('message', function(e){
+  if (e.data && e.data.type === 'nr_ad_click') window.adClick();
+});
 </script>
 
 </body>
