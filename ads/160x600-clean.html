@@ -1,5 +1,58 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><style>html,body{margin:0;padding:0;background:transparent;overflow:hidden}body{width:160px;height:600px;display:flex;align-items:center;justify-content:center}</style></head><body>
+<html><head><meta charset="UTF-8"><style>
+html,body{margin:0;padding:0;background:transparent;overflow:hidden;font-family:Arial,sans-serif}
+body{position:relative;width:160px;height:600px}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+.fb{display:none;position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:space-around;padding:14px 8px;cursor:pointer;color:#fff;text-decoration:none;text-align:center;background:linear-gradient(180deg,#064e3b 0%,#059669 50%,#10b981 100%)}
+.fb.show{display:flex;animation:fade .4s}
+.fb .ic{font-size:36px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35))}
+.fb .h{font-size:26px;font-weight:900;line-height:1.15;text-shadow:0 2px 6px rgba(0,0,0,.3)}
+.fb .s{font-size:11px;opacity:.92;line-height:1.4}
+.fb .btn{background:#fcd34d;color:#064e3b;padding:9px 14px;border-radius:18px;font-weight:900;font-size:11px;text-transform:uppercase;width:90%;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.fb:hover{filter:brightness(1.06)}
+body > iframe, body > ins, body > div:not(.fb){position:relative;z-index:2}
+</style></head><body>
+<a class="fb" id="fb">
+  <span class="ic">💰</span>
+  <span class="h">GANA<br>$5.000</span>
+  <span class="s">Sorteo<br>SEMANAL<br>GRATIS</span>
+  <span class="btn">PARTICIPAR</span>
+</a>
 <script type="text/javascript">atOptions={'key':'eeacb475fd03764d05ec25946d8a60f7','format':'iframe','height':600,'width':160,'params':{}};</script>
 <script type="text/javascript" src="//www.highperformanceformat.com/eeacb475fd03764d05ec25946d8a60f7/invoke.js"></script>
+<script>
+(function(){
+  var fb = document.getElementById('fb');
+  fb.addEventListener('click', function(e){
+    e.preventDefault();
+    if (window.parent !== window) {
+      window.parent.postMessage({type:'nr_ad_click', slot:'160x600'}, '*');
+    }
+  });
+  function checkAdFilled(){
+    var subs = document.body.querySelectorAll('iframe, ins, img:not([class])');
+    for (var i=0;i<subs.length;i++){
+      var el = subs[i];
+      var r = el.getBoundingClientRect();
+      if (r.width >= 50 && r.height >= 30) return true;
+    }
+    return false;
+  }
+  setTimeout(function(){
+    if (!checkAdFilled()) {
+      fb.classList.add('show');
+      // notifica o parent que mostramos house ad
+      if (window.parent !== window) {
+        window.parent.postMessage({type:'nr_house_ad', slot:'160x600'}, '*');
+      }
+    } else {
+      // notifica o parent que ad real fillou
+      if (window.parent !== window) {
+        window.parent.postMessage({type:'nr_ad_filled', slot:'160x600'}, '*');
+      }
+    }
+  }, 4000);
+})();
+</script>
 </body></html>

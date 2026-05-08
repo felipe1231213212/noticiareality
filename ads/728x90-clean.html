@@ -1,5 +1,56 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><style>html,body{margin:0;padding:0;background:transparent;overflow:hidden}body{width:728px;height:90px;display:flex;align-items:center;justify-content:center}</style></head><body>
+<html><head><meta charset="UTF-8"><style>
+html,body{margin:0;padding:0;background:transparent;overflow:hidden;font-family:Arial,sans-serif}
+body{position:relative;width:728px;height:90px}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+.fb{display:none;position:absolute;inset:0;flex-direction:row;align-items:center;justify-content:space-between;padding:0 18px;cursor:pointer;color:#fff;text-decoration:none;text-align:center;background:linear-gradient(135deg,#d97706 0%,#92400e 50%,#7c2d12 100%)}
+.fb.show{display:flex;animation:fade .4s}
+.fb .h{font-size:18px;font-weight:900;letter-spacing:.5px;flex-shrink:0}
+.fb .s{font-size:11px;opacity:.85;flex:1;padding:0 12px;text-align:left}
+.fb .btn{background:#fff;color:#92400e;padding:8px 18px;border-radius:4px;font-weight:900;font-size:11px;flex-shrink:0;text-transform:uppercase}
+.fb:hover{filter:brightness(1.08)}
+body > iframe, body > ins, body > div:not(.fb){position:relative;z-index:2}
+</style></head><body>
+<a class="fb" id="fb">
+  <span class="h">OFERTA RELÁMPAGO</span>
+  <span class="s">Hasta 80% OFF · Solo hoy</span>
+  <span class="btn">VER OFERTAS</span>
+</a>
 <script type="text/javascript">atOptions={'key':'174ed04218520564d5cabc34f9089b01','format':'iframe','height':90,'width':728,'params':{}};</script>
 <script type="text/javascript" src="//www.highperformanceformat.com/174ed04218520564d5cabc34f9089b01/invoke.js"></script>
+<script>
+(function(){
+  var fb = document.getElementById('fb');
+  fb.addEventListener('click', function(e){
+    e.preventDefault();
+    if (window.parent !== window) {
+      window.parent.postMessage({type:'nr_ad_click', slot:'728x90'}, '*');
+    }
+  });
+  function checkAdFilled(){
+    var subs = document.body.querySelectorAll('iframe, ins, img:not([class])');
+    for (var i=0;i<subs.length;i++){
+      var el = subs[i];
+      var r = el.getBoundingClientRect();
+      if (r.width >= 50 && r.height >= 30) return true;
+    }
+    return false;
+  }
+  setTimeout(function(){
+    if (!checkAdFilled()) {
+      fb.classList.add('show');
+      // notifica o parent que mostramos house ad
+      if (window.parent !== window) {
+        window.parent.postMessage({type:'nr_house_ad', slot:'728x90'}, '*');
+      }
+    } else {
+      // notifica o parent que ad real fillou
+      if (window.parent !== window) {
+        window.parent.postMessage({type:'nr_ad_filled', slot:'728x90'}, '*');
+      }
+    }
+  }, 4000);
+})();
+</script>
 </body></html>

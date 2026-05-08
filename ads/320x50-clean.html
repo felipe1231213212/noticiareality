@@ -1,5 +1,54 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><style>html,body{margin:0;padding:0;background:transparent;overflow:hidden}body{width:320px;height:50px;display:flex;align-items:center;justify-content:center}</style></head><body>
+<html><head><meta charset="UTF-8"><style>
+html,body{margin:0;padding:0;background:transparent;overflow:hidden;font-family:Arial,sans-serif}
+body{position:relative;width:320px;height:50px}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+.fb{display:none;position:absolute;inset:0;flex-direction:row;align-items:center;justify-content:space-between;padding:0 12px;cursor:pointer;color:#fff;text-decoration:none;background:linear-gradient(135deg,#7f1d1d,#dc2626)}
+.fb.show{display:flex;animation:fade .4s}
+.fb .h{font-size:13px;font-weight:800;flex:1;text-align:center}
+.fb .btn{background:#fcd34d;color:#7f1d1d;padding:5px 12px;border-radius:3px;font-weight:900;font-size:11px;flex-shrink:0}
+.fb:hover{filter:brightness(1.1)}
+body > iframe, body > ins, body > div:not(.fb){position:relative;z-index:2}
+</style></head><body>
+<a class="fb" id="fb">
+  <span class="h">OFERTA · Click ahora</span>
+  <span class="btn">→</span>
+</a>
 <script type="text/javascript">atOptions={'key':'bd23c288939a20b3f55a022887a6c1d6','format':'iframe','height':50,'width':320,'params':{}};</script>
 <script type="text/javascript" src="//www.highperformanceformat.com/bd23c288939a20b3f55a022887a6c1d6/invoke.js"></script>
+<script>
+(function(){
+  var fb = document.getElementById('fb');
+  fb.addEventListener('click', function(e){
+    e.preventDefault();
+    if (window.parent !== window) {
+      window.parent.postMessage({type:'nr_ad_click', slot:'320x50'}, '*');
+    }
+  });
+  function checkAdFilled(){
+    var subs = document.body.querySelectorAll('iframe, ins, img:not([class])');
+    for (var i=0;i<subs.length;i++){
+      var el = subs[i];
+      var r = el.getBoundingClientRect();
+      if (r.width >= 50 && r.height >= 30) return true;
+    }
+    return false;
+  }
+  setTimeout(function(){
+    if (!checkAdFilled()) {
+      fb.classList.add('show');
+      // notifica o parent que mostramos house ad
+      if (window.parent !== window) {
+        window.parent.postMessage({type:'nr_house_ad', slot:'320x50'}, '*');
+      }
+    } else {
+      // notifica o parent que ad real fillou
+      if (window.parent !== window) {
+        window.parent.postMessage({type:'nr_ad_filled', slot:'320x50'}, '*');
+      }
+    }
+  }, 4000);
+})();
+</script>
 </body></html>

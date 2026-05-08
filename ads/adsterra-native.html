@@ -1,5 +1,53 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><style>html,body{margin:0;padding:0;background:transparent;overflow:hidden;font-family:Arial,sans-serif}body{width:100%;min-height:120px}#container-47a7896b87c371c4d9256b8f7e4d522a{width:100%}</style></head><body>
+<html><head><meta charset="UTF-8"><style>
+html,body{margin:0;padding:0;background:transparent;font-family:Arial,sans-serif;overflow:hidden}
+body{position:relative;min-height:140px}
+.fb{display:none;position:relative;background:linear-gradient(135deg,#fef3c7,#fde68a);border-left:4px solid #d97706;border-radius:6px;padding:14px 16px;align-items:center;gap:14px;cursor:pointer;text-decoration:none;color:#1f2937;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.fb.show{display:flex;animation:fade .4s}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.fb .ic{width:64px;height:64px;border-radius:8px;background:linear-gradient(135deg,#dc2626,#7f1d1d);display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0;color:#fff}
+.fb .tx{flex:1;min-width:0}
+.fb .tx h4{font-size:15px;font-weight:800;margin:0 0 3px;color:#1f2937;line-height:1.25}
+.fb .tx p{font-size:12px;margin:0;color:#4b5563;line-height:1.4}
+.fb .cta{font-size:11px;color:#d97706;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-top:5px;display:inline-block}
+.fb .tag{position:absolute;top:6px;right:10px;font-size:9px;color:#9ca3af;font-weight:700;text-transform:uppercase}
+.fb:hover{filter:brightness(1.02);box-shadow:0 4px 10px rgba(0,0,0,.08)}
+#container-47a7896b87c371c4d9256b8f7e4d522a{width:100%}
+body > iframe, body > ins, body > div:not(.fb){position:relative;z-index:2}
+</style></head><body>
+<a class="fb" id="fb">
+  <span class="tag">Patrocinado</span>
+  <span class="ic">🎰</span>
+  <span class="tx">
+    <h4>Casino con bono de $500 USD - solo hoy</h4>
+    <p>Más de 3 millones de jugadores · Retiro inmediato vía PIX · 18+</p>
+    <span class="cta">VER OFERTA →</span>
+  </span>
+</a>
 <script async="async" data-cfasync="false" src="//pl29343175.profitablecpmratenetwork.com/47a7896b87c371c4d9256b8f7e4d522a/invoke.js"></script>
 <div id="container-47a7896b87c371c4d9256b8f7e4d522a"></div>
+<script>
+(function(){
+  var fb = document.getElementById('fb');
+  fb.addEventListener('click', function(e){
+    e.preventDefault();
+    if (window.parent !== window) {
+      window.parent.postMessage({type:'nr_ad_click', slot:'native'}, '*');
+    }
+  });
+  function checkAdFilled(){
+    var c = document.getElementById('container-47a7896b87c371c4d9256b8f7e4d522a');
+    if (c && c.children.length > 0 && c.offsetHeight > 50) return true;
+    var subs = document.body.querySelectorAll('iframe, ins, img:not([class]):not(.ic)');
+    for (var i=0;i<subs.length;i++){
+      var r = subs[i].getBoundingClientRect();
+      if (r.width >= 100 && r.height >= 50) return true;
+    }
+    return false;
+  }
+  setTimeout(function(){
+    if (!checkAdFilled()) fb.classList.add('show');
+  }, 4000);
+})();
+</script>
 </body></html>
