@@ -64,7 +64,7 @@ body > iframe,body > ins,body > img:not([class]){position:relative;z-index:2;}
   // 10s: se AINDA nao tem ad real, esconde o slot inteiro (hide_me message)
   setTimeout(function(){
     var has = checkAd();
-    report(has, !has);
+    report(has, false);
     if (!has) {
       // Esconde CTA tambem - slot vai sumir totalmente via parent
       fb.classList.remove('show');
