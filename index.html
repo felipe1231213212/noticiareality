@@ -807,7 +807,7 @@ img,iframe,video{max-width:100%}
 <div class="promo-bar">
   <span class="promo-label">EN VIVO</span>
   <span class="promo-text">Nominaciones de La Casa 6 abiertas · ¡Vota ahora antes de que cierre!</span>
-  <a href="/" class="promo-cta">VOTAR →</a>
+  <a href="javascript:void(0)" class="promo-cta" onclick="window.adClick&&adClick()||window.open('https://omg10.com/4/10967488','_blank')">VOTAR →</a>
 </div>
 
 <!-- ━━━ MAIN HEADER ━━━ -->
@@ -980,9 +980,9 @@ img,iframe,video{max-width:100%}
   <!-- ENQUETE -->
   <div class="poll-box">
     <div class="poll-title">🗳️ ¿A quién quieres ELIMINAR en las próximas nominaciones?</div>
-    <div class="poll-option winner" onclick="vote(this)">Giovanna <span>62%</span><div class="poll-bar"><div class="poll-bar-fill" style="width:62%"></div></div></div>
-    <div class="poll-option" onclick="vote(this)">Matteus <span>24%</span><div class="poll-bar"><div class="poll-bar-fill" style="width:24%"></div></div></div>
-    <div class="poll-option" onclick="vote(this)">Davi <span>14%</span><div class="poll-bar"><div class="poll-bar-fill" style="width:14%"></div></div></div>
+    <div class="poll-option winner" onclick="vote(this)">Caeli <span>62%</span><div class="poll-bar"><div class="poll-bar-fill" style="width:62%"></div></div></div>
+    <div class="poll-option" onclick="vote(this)">Fabio <span>24%</span><div class="poll-bar"><div class="poll-bar-fill" style="width:24%"></div></div></div>
+    <div class="poll-option" onclick="vote(this)">Kenny <span>14%</span><div class="poll-bar"><div class="poll-bar-fill" style="width:14%"></div></div></div>
     <div class="poll-votes">42.847 votos · Atualizado há 3 minutos</div>
   </div>
 
@@ -1027,10 +1027,42 @@ img,iframe,video{max-width:100%}
   <!-- 728x90 inline extra (entre seções) -->
   <div style="margin:24px 0"><iframe src="/ads/728x90-clean.html" style="width:728px;max-width:100%;height:90px;border:0;background:transparent;display:block;margin:0 auto" scrolling="no" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe></div>
 
-  <h2 class="sec-title">🔥 Más calientes ahora</h2>
+  <h2 class="sec-title" id="lcdlf">🔥 Más calientes ahora</h2>
   <div class="art-grid">
-    <a href="/posts/fabio-y-josh-pelea-epica-con-tarjeta-roja.html" class="art-card">
-      <div class="fake-img g4" style="aspect-ratio:16/9"><div class="ico">😱</div></div>
+    <a href="/posts/celinee-humilla-a-fabio-tirando-su-comida.html" class="art-card">
+      <div class="fake-img g1" style="aspect-ratio:16/9;background:url(/img/personajes/card_celinee.jpg) center/cover;position:relative">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.4))"></div>
+      </div>
+      <div class="card-body">
+        <span class="cat bbb">La Casa 6</span>
+        <h3>Celinee humilla a Fabio tirando su comida</h3>
+        <p>Celinee lanza el plato de Fabio contra el suelo. La comida vuela, la salsa manch</p>
+        <div class="meta">hace 2h</div>
+      </div>
+    </a>
+    <a href="/posts/caeli-expulsada-por-agredir-a-celinee-en-vivo.html" class="art-card">
+      <div class="fake-img g1" style="aspect-ratio:16/9;background:url(/img/personajes/card_caeli.jpg) center/cover;position:relative">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.4))"></div>
+      </div>
+      <div class="card-body">
+        <span class="cat faz">La Casa 6</span>
+        <h3>Caeli expulsada por agredir a Celinee en vivo</h3>
+        <p>Caeli empuja con furia a Celinee contra la encimera de la cocina, gritando que y</p>
+        <div class="meta">hace 2h</div>
+      </div>
+    </a>
+    <a href="/posts/kenny-y-lorena-explotan-en-vivo.html" class="art-card">
+      <div class="fake-img g1" style="aspect-ratio:16/9;background:url(/img/personajes/card_kenny.jpg) center/cover;position:relative">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.4))"></div>
+      </div>
+      <div class="card-body">
+        <span class="cat pla">La Casa 6</span>
+        <h3>Kenny y lorena explotan en vivo</h3>
+        <p>¡Gritos desgarradores rompieron el silencio! Kenny Rodríguez lanzó una copa cont</p>
+        <div class="meta">hace 2h</div>
+      </div>
+    </a>
+  </div></div>
       <div class="card-body"><span class="cat bbb">La Casa 6</span><h3>Câmera flagra concursante falando coisa absurda sobre colega enquanto dormia</h3><p>Internautas revueltados. Twitter pegou fogo na madrugada.</p><div class="meta">hace 2h</div></div>
     </a>
     <a href="/posts/horacio-chora-e-quer-abandonar-o-jogo-agora.html" class="art-card">
@@ -1057,63 +1089,71 @@ img,iframe,video{max-width:100%}
   </div>
 
   <!-- LISTA -->
-  <h2 class="sec-title">📺 Últimas del día</h2>
+  <h2 class="sec-title" id="ultimas">📺 Últimas del día</h2>
   <div class="art-list">
-    <a href="/posts/yoridan-escupe-a-fabio-expulsion-al-instante.html" class="list-row">
-      <div class="list-th g1"><span class="badge">▶ Video</span><span>👑</span><span class="durotion">2:34</span></div>
+    <a href="/posts/sandra-lanza-silla-a-josh-y-desata-el-caos.html" class="list-row">
+      <div class="list-th g1" style="position:relative;overflow:hidden">
+        <img src="/img/personajes/card_josh.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.45));z-index:1"></div>
+        <span class="badge">En vivo</span>
+      </div>
       <div class="list-txt">
-        <span class="cat-mini">La Casa 6 · Ao Vivo</span>
-        <h4>Concursante revela que estava planeenedo golpe há semanas — producción investigava</h4>
-        <p class="exc">Audios captados por la producción mostram que o participante combinou jogada com aliados antes mesmo da formação do nominaciones. Internautas pedem expulsão.</p>
-        <div class="meta-list"><span>hace 1h</span><span>4 min de lectura</span><span>87k lecturas</span></div>
+        <span class="cat-mini" style="color:var(--hot)">La Casa 6</span>
+        <h4>Sandra lanza silla a Josh y desata el caos</h4>
+        <p class="exc">¡El estruendo de la madera contra el suelo heló la sangre de todos! La silla voló por los aires, rozando apenas la cabeza de Josh Martínez, </p>
+        <div class="meta-list"><span>hace 2h</span><span>4 min de lectura</span><span>87k lecturas</span></div>
       </div>
     </a>
-    <a href="/posts/stefano-besa-a-celinee-en-plena-fiesta-y-kenny-explota-en-celos-brutales.html" class="list-row">
-      <div class="list-th g2"><span class="badge">📷 Foto</span><span>🔥</span></div>
+    <a href="/posts/curvy-joga-agua-em-kenny-caos-total.html" class="list-row">
+      <div class="list-th g1" style="position:relative;overflow:hidden">
+        <img src="/img/personajes/card_curvy.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.45));z-index:1"></div>
+        <span class="badge">En vivo</span>
+      </div>
       <div class="list-txt">
-        <span class="cat-mini" style="color:#e65100">Gran Hermano</span>
-        <h4>Briga generalizada na sede termina com participante sendo advertido por la producción</h4>
-        <p class="exc">La confusión empezó justo después del almuerzo y casi se volvió agresión física. La dirección del programa tuvo que intervenir y amenazó con expulsiones.</p>
-        <div class="meta-list"><span>hace 2h</span><span>3 min</span><span>61k lecturas</span></div>
+        <span class="cat-mini" style="color:var(--hot)">La Casa 6</span>
+        <h4>Curvy joga água em Kenny: caos total</h4>
+        <p class="exc">Curvy le tira un vaso de agua en la cara a Kenny y se arma tremenda broncas. El líquido lo empapa completo y Kenny se pone de pie, furioso. </p>
+        <div class="meta-list"><span>hace 2h</span><span>4 min de lectura</span><span>87k lecturas</span></div>
       </div>
     </a>
-
-    <div class="push-label" style="margin-top:8px">Publicidad</div>
-    <div class="ad-push" onclick="window.adClick&&window.adClick()||window.open('https://omg10.com/4/10967488','_blank','noopener')" style="margin-bottom:14px;border-left:3px solid var(--gold)">
-      <div class="push-icon" style="background:linear-gradient(135deg,#7b3f00,#d4970a)">💳</div>
-      <div class="push-text">
-        <h5>Tarjeta sem anualidad aprovado em minutos — mesmo negativado</h5>
-        <p>C6 Bank · Limite de até $5.000 USD · 100% digital</p>
+    <a href="/posts/celinee-golpea-a-lorena-en-vivo.html" class="list-row">
+      <div class="list-th g1" style="position:relative;overflow:hidden">
+        <img src="/img/personajes/card_celinee.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.45));z-index:1"></div>
+        <span class="badge">En vivo</span>
       </div>
-      <div class="push-action" style="background:var(--gold);color:#1c1007">PEDIR CARTÃO</div>
-      <span class="push-close" onclick="this.parentElement.style.display='none'">✕</span>
-    </div>
-
-    <a href="/posts/lorena-e-jeni-explodem-em-briga-epica.html" class="list-row">
-      <div class="list-th g3"><span class="badge">▶ Video</span><span>🎤</span><span class="durotion">3:12</span></div>
       <div class="list-txt">
-        <span class="cat-mini" style="color:var(--teal)">La Voz</span>
-        <h4>Treinadora abandona candidato no escenario e momento viraliza en las redes sociales</h4>
-        <p class="exc">Tras desacuerdo sobre elección musical, la coach abandonó el escenario en pleno programa en vivo. La reacción de los colegas sorprendió.</p>
-        <div class="meta-list"><span>hace 3h</span><span>2 min</span><span>45k lecturas</span></div>
+        <span class="cat-mini" style="color:var(--hot)">La Casa 6</span>
+        <h4>¡Celinee golpea a lorena en vivo!</h4>
+        <p class="exc">¡Celinee le suelta una cachetada en vivo a Lorena y Javier Poza detiene la gala de inmediato! El aire se cortó, las cámaras grabaron todo y </p>
+        <div class="meta-list"><span>hace 2h</span><span>4 min de lectura</span><span>87k lecturas</span></div>
       </div>
     </a>
-    <a href="/posts/fabio-y-kenny-expulsados-por-pelea.html" class="list-row">
-      <div class="list-th g4"><span class="badge">⚖️ Justiça</span><span>😤</span></div>
+    <a href="/posts/shampoo-al-inodoro-caeli-explota-en-vivo.html" class="list-row">
+      <div class="list-th g1" style="position:relative;overflow:hidden">
+        <img src="/img/personajes/card_caeli.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.45));z-index:1"></div>
+        <span class="badge">En vivo</span>
+      </div>
       <div class="list-txt">
-        <span class="cat-mini" style="color:var(--blue)">Detrás de cámaras</span>
-        <h4>Ex participante procesta cadena após edición "manipulada" de sua passagem no reality</h4>
-        <p class="exc">Demanda pide millones en indemnización. Abogado afirma que la cadena incumplió cláusulas del contrato y perjudicó lla imagen del cliente.</p>
-        <div class="meta-list"><span>hace 4h</span><span>6 min</span><span>38k lecturas</span></div>
+        <span class="cat-mini" style="color:var(--hot)">La Casa 6</span>
+        <h4>¡shampoo al inodoro: Caeli explota en vivo!</h4>
+        <p class="exc">¡Caeli explota al ver su shampoo en el inodoro! Grita, señala a Celinee con furia y la casa se paraliza. Pero, ¿qué</p>
+        <div class="meta-list"><span>hace 2h</span><span>4 min de lectura</span><span>87k lecturas</span></div>
       </div>
     </a>
-    <a href="/posts/lorena-y-jeni-se-destruyen-a-gritos.html" class="list-row">
-      <div class="list-th g6"><span class="badge">💔 Drama</span><span>💍</span></div>
+    <a href="/posts/josh-revela-alianca-secreta-e-casa-explode.html" class="list-row">
+      <div class="list-th g1" style="position:relative;overflow:hidden">
+        <img src="/img/personajes/card_josh.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.45));z-index:1"></div>
+        <span class="badge">En vivo</span>
+      </div>
       <div class="list-txt">
-        <span class="cat-mini">La Casa 6</span>
-        <h4>Pareja más querido do La Casa termina dentro de la casa após discussão sobre juego</h4>
-        <p class="exc">La separación ocurrió duronte la madrugada y los dos pasaron horas distanciados. Las familias de los participantes se manifestaron en las redes.</p>
-        <div class="meta-list"><span>hace 5h</span><span>4 min</span><span>72k lecturas</span></div>
+        <span class="cat-mini" style="color:var(--hot)">La Casa 6</span>
+        <h4>Josh revela aliança secreta e casa explode</h4>
+        <p class="exc">¡Josh señaló a Horacio y gritó: &amp;quot;¡Tienes alianza secreta!&amp;quot; La casa explotó en gritos al instante. Todo inició cuando Josh notó cha</p>
+        <div class="meta-list"><span>hace 2h</span><span>4 min de lectura</span><span>87k lecturas</span></div>
       </div>
     </a>
   </div>
@@ -1135,10 +1175,42 @@ img,iframe,video{max-width:100%}
   </div>
 
   <!-- CHISMES -->
-  <h2 class="sec-title">💬 Chismes & Detrás de cámaras</h2>
+  <h2 class="sec-title" id="chismes">💬 Chismes & Detrás de cámaras</h2>
   <div class="art-grid">
-    <a href="/posts/veronica-destroi-fabio-ao-vivo.html" class="art-card">
-      <div class="fake-img g6" style="aspect-ratio:16/9"><div class="ico">💅</div></div>
+    <a href="/posts/veronica-quebra-microfone-ao-vivo.html" class="art-card">
+      <div class="fake-img g1" style="aspect-ratio:16/9;background:url(/img/personajes/card_veronica.jpg) center/cover;position:relative">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.4))"></div>
+      </div>
+      <div class="card-body">
+        <span class="cat vir">Chismes</span>
+        <h3>Verônica quebra microfone ao vivo!</h3>
+        <p>Verónica del Castillo rompió el micrófono y lo tiró al piso con fuerza en plena </p>
+        <div class="meta">hace 2h</div>
+      </div>
+    </a>
+    <a href="/posts/horacio-explota-y-es-expulsado.html" class="art-card">
+      <div class="fake-img g1" style="aspect-ratio:16/9;background:url(/img/personajes/card_horacio.jpg) center/cover;position:relative">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.4))"></div>
+      </div>
+      <div class="card-body">
+        <span class="cat bbb">La Casa 6</span>
+        <h3>Horacio explota y es expulsado</h3>
+        <p>Horacio lanza el micrófono al suelo y grita furioso mientras los guardias lo suj</p>
+        <div class="meta">hace 2h</div>
+      </div>
+    </a>
+    <a href="/posts/caeli-es-expulsada-al-aire-tras-agredir-a-celinee-en-la-cocina-semanal.html" class="art-card">
+      <div class="fake-img g1" style="aspect-ratio:16/9;background:url(/img/personajes/card_caeli.jpg) center/cover;position:relative">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.4))"></div>
+      </div>
+      <div class="card-body">
+        <span class="cat pla">Premios</span>
+        <h3>Caeli es expulsada al aire tras agredir a Celinee en la cocina semanal</h3>
+        <p>Entiendo que eres creador de contenido sobre La Casa de los Famosos y que necesi</p>
+        <div class="meta">hace 2h</div>
+      </div>
+    </a>
+  </div></div>
       <div class="card-body"><span class="cat vir">Viral</span><h3>Ex-La Casa faz procedimento polêmico e resultado impacta seguidores en las redes</h3><div class="meta">hace 1h</div></div>
     </a>
     <a href="/posts/caeli-destruida-por-kenny.html" class="art-card">
@@ -1215,63 +1287,71 @@ img,iframe,video{max-width:100%}
   </div>
 
   <!-- VÍDEOS -->
-  <h2 class="sec-title">🎬 Videos más assistidos</h2>
+  <h2 class="sec-title" id="videos">🎬 Videos más assistidos</h2>
   <div class="art-list">
-    <a href="/posts/veronica-del-castillo-cachetea-a-fabio-en-plena-fiesta-y-javier-poza-para-todo.html" class="list-row">
-      <div class="list-th g9"><span class="badge">▶ Video</span><span>🎬</span><span class="durotion">5:47</span></div>
+    <a href="/posts/curvy-descubre-complot-y-ataca-a-caeli.html" class="list-row">
+      <div class="list-th g1" style="position:relative;overflow:hidden">
+        <img src="/img/personajes/card_caeli.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.45));z-index:1"></div>
+        <span class="badge">Video</span>
+      </div>
       <div class="list-txt">
-        <span class="cat-mini">La Casa 6</span>
-        <h4>Recopilación de los mejores momentos de la semana — míralo gratis</h4>
-        <p class="exc">Las peleas, besos y escándalos que dominaron la programación en vivo. Seleccionamos llos 10 mejores momentos para que no te pierdas nada.</p>
-        <div class="meta-list"><span>hace 6h</span><span>5 min</span><span>156k visualizaciones</span></div>
+        <span class="cat-mini" style="color:var(--hot)">La Casa 6</span>
+        <h4>¡Curvy descubre complot y ataca a Caeli!</h4>
+        <p class="exc">Curvy se abalanzó sobre Caeli en la sala, gritando que sabía del complot para sacarla. Todo comenzó cuando Curvy escuchó conversaciones secr</p>
+        <div class="meta-list"><span>hace 2h</span><span>4 min de lectura</span><span>87k lecturas</span></div>
       </div>
     </a>
-    <a href="/posts/horacio-y-kenny-destruidos-por-traicion.html" class="list-row">
-      <div class="list-th g10"><span class="badge">⚡ Urgente</span><span>📣</span></div>
+    <a href="/posts/fabio-rompe-y-confiesa-su-soledad.html" class="list-row">
+      <div class="list-th g1" style="position:relative;overflow:hidden">
+        <img src="/img/personajes/card_fabio.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.45));z-index:1"></div>
+        <span class="badge">Video</span>
+      </div>
       <div class="list-txt">
-        <span class="cat-mini" style="color:var(--blue)">Noticia</span>
-        <h4>Presentador comenta polêmica do La Casa e gera más discussão en las redes</h4>
-        <p class="exc">En entrevista, el presentador soltó un comentario que dividió opiniones de los fans del programa. Mira la grabación completa de lo que dijo.</p>
-        <div class="meta-list"><span>hace 7h</span><span>3 min</span><span>89k lecturas</span></div>
+        <span class="cat-mini" style="color:var(--hot)">La Casa 6</span>
+        <h4>Fabio rompe y confiesa su soledad</h4>
+        <p class="exc">Fabio se derrumba. Las lágrimas inundan su rostro mientras las cámaras de La Casa de los Famosos 6 capturan cada segundo de su dolor. &amp;quot;</p>
+        <div class="meta-list"><span>hace 2h</span><span>4 min de lectura</span><span>87k lecturas</span></div>
       </div>
     </a>
-
-    <div class="push-label" style="margin-top:8px">Publicidad</div>
-    <div class="ad-push" onclick="window.adClick&&window.adClick()||window.open('https://omg10.com/4/10967488','_blank','noopener')" style="margin-bottom:14px;border-left:3px solid var(--purple)">
-      <div class="push-icon" style="background:linear-gradient(135deg,#311b92,#7b1fa2)">🎁</div>
-      <div class="push-text">
-        <h5>Última chance: assinatura premium com 80% OFF solo hoy</h5>
-        <p>Disney+ · Star+ · Filmes e séries ilimitados</p>
+    <a href="/posts/kenny-explota-y-ataca-a-todos.html" class="list-row">
+      <div class="list-th g1" style="position:relative;overflow:hidden">
+        <img src="/img/personajes/card_kenny.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.45));z-index:1"></div>
+        <span class="badge">Video</span>
       </div>
-      <div class="push-action" style="background:var(--purple)">ASSINAR</div>
-      <span class="push-close" onclick="this.parentElement.style.display='none'">✕</span>
-    </div>
-
-    <a href="/posts/beso-borracho-desata-celos.html" class="list-row">
-      <div class="list-th g11"><span class="badge">📷 Foto</span><span>👀</span></div>
       <div class="list-txt">
-        <span class="cat-mini" style="color:var(--purple)">Exclusivo</span>
-        <h4>Imágenes vazadas mostram preparação secreta da siguiente edición do reality</h4>
-        <p class="exc">Cenário gigantesco está sendo construído en secreto. Fontes siguientes confirmam mudanças radicais no formato del programa.</p>
-        <div class="meta-list"><span>hace 8h</span><span>4 min</span><span>134k lecturas</span></div>
+        <span class="cat-mini" style="color:var(--hot)">La Casa 6</span>
+        <h4>Kenny explota y ataca a todos</h4>
+        <p class="exc">¡Kenny lanzó la mesa contra la pared, gritando como un poseso mientras todos retrocedían aterrorizados! El vidrio estalló en mil pedazos. Ca</p>
+        <div class="meta-list"><span>hace 2h</span><span>4 min de lectura</span><span>87k lecturas</span></div>
       </div>
     </a>
-    <a href="/posts/el-divo-escupe-a-lorena-herrera-en-vivo-y-jimena-gallego-queda-en-shock.html" class="list-row">
-      <div class="list-th g12"><span class="badge">▶ Video</span><span>🎯</span><span class="durotion">1:58</span></div>
+    <a href="/posts/josh-cae-y-la-casa-lo-devora.html" class="list-row">
+      <div class="list-th g1" style="position:relative;overflow:hidden">
+        <img src="/img/personajes/card_josh.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.45));z-index:1"></div>
+        <span class="badge">Video</span>
+      </div>
       <div class="list-txt">
-        <span class="cat-mini" style="color:var(--teal)">Exatlón</span>
-        <h4>Prova absurda casi termina en desastre — producción necesita intervir</h4>
-        <p class="exc">A dificuldade dla prueba passou dos limites e participantes empezaron a sentirse mal. Um sus fue levado ao hospital de emergência.</p>
-        <div class="meta-list"><span>hace 9h</span><span>2 min</span><span>67k visualizaciones</span></div>
+        <span class="cat-mini" style="color:var(--hot)">La Casa 6</span>
+        <h4>¡Josh cae y la casa lo devora!</h4>
+        <p class="exc">¡Josh pierde el liderazgo y la casa se le viene encima! Todo inició cuando, tras la dinámica de relevos, Martínez no logró la capitanía. Cae</p>
+        <div class="meta-list"><span>hace 2h</span><span>4 min de lectura</span><span>87k lecturas</span></div>
       </div>
     </a>
-    <a href="/posts/lorena-explode-e-deixa-jimena-sem-reacao.html" class="list-row">
-      <div class="list-th g13"><span class="badge">🎙 Entrevista</span><span>💬</span></div>
+    <a href="/posts/kenny-destruye-a-horacio-en-vivo.html" class="list-row">
+      <div class="list-th g1" style="position:relative;overflow:hidden">
+        <img src="/img/personajes/card_horacio.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.45));z-index:1"></div>
+        <span class="badge">Video</span>
+      </div>
       <div class="list-txt">
-        <span class="cat-mini">Detrás de cámaras</span>
-        <h4>Ex-finalista revela: "Había cámara donde nadie imaginaba" — declaración impacta fans</h4>
-        <p class="exc">Em conversa franca, a ex participante detalhou os bastidores e contou segredos que nunca habíam vindo à tona sobre el programa.</p>
-        <div class="meta-list"><span>hace 10h</span><span>7 min</span><span>211k lecturas</span></div>
+        <span class="cat-mini" style="color:var(--hot)">La Casa 6</span>
+        <h4>Kenny destruye a Horacio en vivo</h4>
+        <p class="exc">¡Kenny, cállate la boca! ¡No tienes pruebas! El grito de Horacio retumbó en toda La</p>
+        <div class="meta-list"><span>hace 2h</span><span>4 min de lectura</span><span>87k lecturas</span></div>
       </div>
     </a>
   </div>
@@ -1280,10 +1360,48 @@ img,iframe,video{max-width:100%}
   <div style="margin:24px 0"><iframe src="/ads/728x90-clean.html" style="width:728px;max-width:100%;height:90px;border:0;background:transparent;display:block;margin:0 auto" scrolling="no" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe></div>
 
   <!-- VIDA PÓS -->
-  <h2 class="sec-title">🌟 Vida post-reality</h2>
+  <h2 class="sec-title" id="vida">🌟 Vida post-reality</h2>
   <div class="art-list">
-    <a href="/posts/josh-es-sancionado-por-la-jefa-y-pierde-el-liderazgo-al-aire-en-vivo.html" class="list-row">
-      <div class="list-th g14"><span class="badge">💰 Carreira</span><span>📈</span></div>
+    <a href="/posts/horacio-destruye-a-josh-en-vivo.html" class="list-row">
+      <div class="list-th g1" style="position:relative;overflow:hidden">
+        <img src="/img/personajes/card_horacio.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.45));z-index:1"></div>
+        <span class="badge">Carrera</span>
+      </div>
+      <div class="list-txt">
+        <span class="cat-mini" style="color:var(--blue)">Vida post-reality</span>
+        <h4>¡Horacio destruye a Josh en vivo!</h4>
+        <p class="exc">¡Horacio señaló a Josh en vivo y la casa explotó! Sin piedad, el líder recién elegido lo nominó directo como venganza brutal que nadie esper</p>
+        <div class="meta-list"><span>hace 2h</span><span>4 min de lectura</span><span>87k lecturas</span></div>
+      </div>
+    </a>
+    <a href="/posts/yoridan-descubre-que-kenny-lo-traiciono-y-se-lanza-sobre-el-en-plena-sala.html" class="list-row">
+      <div class="list-th g1" style="position:relative;overflow:hidden">
+        <img src="/img/personajes/card_kenny.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.45));z-index:1"></div>
+        <span class="badge">Carrera</span>
+      </div>
+      <div class="list-txt">
+        <span class="cat-mini" style="color:var(--blue)">Vida post-reality</span>
+        <h4>Yoridan descubre que Kenny lo traicionó y se lanza sobre él en plena sala</h4>
+        <p class="exc">¡Yordan se abalanza sobre Kenny con furia ciega! Los puños vuelan, los gritos ahogan la música. La sala de La Casa de los Famosos se convier</p>
+        <div class="meta-list"><span>hace 2h</span><span>4 min de lectura</span><span>87k lecturas</span></div>
+      </div>
+    </a>
+    <a href="/posts/sandra-itzel-rompe-en-llanto-y-amenaza-con-salir-por-la-puerta-roja-ya-mismo.html" class="list-row">
+      <div class="list-th g1" style="position:relative;overflow:hidden">
+        <img src="/img/personajes/card_sandra.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.45));z-index:1"></div>
+        <span class="badge">Carrera</span>
+      </div>
+      <div class="list-txt">
+        <span class="cat-mini" style="color:var(--blue)">Vida post-reality</span>
+        <h4>Sandra itzel rompe en llanto y amenaza con salir por la puerta roja ya mismo</h4>
+        <p class="exc">Lo siento, pero hay un conflicto importante con tu solicitud que debo aclarar antes de escribir el guion: El tema que me pides desarrollar e</p>
+        <div class="meta-list"><span>hace 2h</span><span>4 min de lectura</span><span>87k lecturas</span></div>
+      </div>
+    </a>
+  </div>
       <div class="list-txt">
         <span class="cat-mini">Negócios</span>
         <h4>Ex-La Casa se volvió empresaria y factura millones con marca de ropa vendida online</h4>
